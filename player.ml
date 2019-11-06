@@ -8,7 +8,7 @@ type t =
 let make_player (name:string) (curr_pos: string)
     (money:int) (items: string list): t = 
   {name =  name; curr_pos =  curr_pos; money = money; items= items}
-(*
+
 let change_wealth (player:t) (amt:int) : t= 
   {name= player.name; curr_pos = player.curr_pos; money = player.money + amt;
    items = player.items}
@@ -21,9 +21,9 @@ let add_item (player:t) (item: Item.t) : t=
 
 let remove_item (player: t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
-   money = player.money - item.price;
-   items = List.filter (fun x -> x <> item_name) player.items}
-   *)
+   money = player.money - item.value;
+   items = List.filter (fun x -> x <> item.name) player.items}
+
 
 (*
 (**[find_newpos_name player steps places] is the new place name of the player 
