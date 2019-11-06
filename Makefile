@@ -1,4 +1,4 @@
-MODULES=player
+MODULES=player bank country item place
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
