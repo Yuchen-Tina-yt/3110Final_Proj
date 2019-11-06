@@ -4,6 +4,12 @@ type t = {
   exchange_fee: float; 
 }
 
+let make_country crncy ex_rate ex_fee = {
+  currency = crncy;
+  exchange_rate = ex_rate;
+  exchange_fee = ex_fee;
+}
+
 let currency_in country =
   country.currency
 
