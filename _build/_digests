@@ -1,0 +1,7 @@
+"Resource: /Users/nkother/Documents/CU/CU2019Fall/CS3110/final_proj/3110Final_Proj/test.byte": "\180\203+t\012*\139\187KK\133\138\224h\217\r"
+"Resource: /Users/nkother/Documents/CU/CU2019Fall/CS3110/final_proj/3110Final_Proj/player.mli": ">F\254\151\197\244\165\173g\175\196#\148q\226\147"
+"Rule: ocaml dependencies mli (%=player )": "\216\201\129\191x\189v&\152u\150\243\208qK "
+"Rule: ocaml: ml & cmi -> cmo (%=player )": "\\/\149\027\157Q\227\173\0077\231\169\006r\253\207"
+"Rule: ocaml dependencies ml (%=player )": "\017\163v0\233}Q\1943\1636\030\173\248\194h"
+"Rule: ocaml: mli -> cmi (%=player )": "\029\0029 \206\131T#\158\221\150@\2153x\255"
+"Resource: /Users/nkother/Documents/CU/CU2019Fall/CS3110/final_proj/3110Final_Proj/player.ml": "tX\166\023A*\020\020:N\177\023X\030j\154"

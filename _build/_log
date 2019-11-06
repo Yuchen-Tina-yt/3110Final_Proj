@@ -1,0 +1,10 @@
+### Starting build.
+# Target: player.mli.depends, tags: { package(ANSITerminal), extension:mli, file:player.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package ANSITerminal -modules player.mli > player.mli.depends # cached
+# Target: player.cmi, tags: { package(ANSITerminal), byte, compile, extension:mli, file:player.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package ANSITerminal -o player.cmi player.mli # cached
+# Target: player.ml.depends, tags: { package(ANSITerminal), extension:ml, file:player.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package ANSITerminal -modules player.ml > player.ml.depends # cached
+# Target: player.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package ANSITerminal -o player.cmo player.ml # cached
+# Compilation successful.
