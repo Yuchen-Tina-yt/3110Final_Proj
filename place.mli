@@ -1,11 +1,13 @@
 (**This module represents the data for places in a game*)
 
 (**The abstract type represented the place *)
-type t 
+type t = {name:string; country: string; value: float; owner: Player.t option; 
+          num_houses: int; rent_payment: int option; pass_payment: int option}
 
 (**[make_place name country value owner num_houses rent_payment pass_payment]
    makes the type t given some parameters*)
-val make_place: string->string->float->Player.t option->int->int option->int option->t 
+val make_place: string->string->float->Player.t option->int->int option->
+  int option->t 
 
 (**[change ownership t player] returns a new type t with an updated  owner*)
 val change_ownership : t -> Player.t option-> t 

@@ -1,5 +1,5 @@
 
-type t = {name: string; value: int}
+type t = {item_name: string; item_value: int}
 
 let make_item name value = 
-  {name = name; value = value}
+  {item_name = name; item_value = value}

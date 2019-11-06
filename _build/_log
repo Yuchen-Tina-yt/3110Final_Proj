@@ -2,19 +2,19 @@
 # Target: player.mli.depends, tags: { package(ANSITerminal), extension:mli, file:player.mli, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package ANSITerminal -modules player.mli > player.mli.depends # cached
 # Target: item.mli.depends, tags: { package(ANSITerminal), extension:mli, file:item.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package ANSITerminal -modules item.mli > item.mli.depends
+ocamlfind ocamldep -package ANSITerminal -modules item.mli > item.mli.depends # cached
 # Target: item.cmi, tags: { package(ANSITerminal), byte, compile, extension:mli, file:item.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package ANSITerminal -o item.cmi item.mli
+ocamlfind ocamlc -c -package ANSITerminal -o item.cmi item.mli # cached
 # Target: player.cmi, tags: { package(ANSITerminal), byte, compile, extension:mli, file:player.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package ANSITerminal -o player.cmi player.mli
+ocamlfind ocamlc -c -package ANSITerminal -o player.cmi player.mli # cached
 # Target: player.ml.depends, tags: { package(ANSITerminal), extension:ml, file:player.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package ANSITerminal -modules player.ml > player.ml.depends # cached
 # Target: place.mli.depends, tags: { package(ANSITerminal), extension:mli, file:place.mli, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package ANSITerminal -modules place.mli > place.mli.depends # cached
 # Target: place.cmi, tags: { package(ANSITerminal), byte, compile, extension:mli, file:place.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package ANSITerminal -o place.cmi place.mli
+ocamlfind ocamlc -c -package ANSITerminal -o place.cmi place.mli # cached
 # Target: player.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package ANSITerminal -o player.cmo player.ml
+ocamlfind ocamlc -c -package ANSITerminal -o player.cmo player.ml # cached
 # Target: bank.mli.depends, tags: { package(ANSITerminal), extension:mli, file:bank.mli, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package ANSITerminal -modules bank.mli > bank.mli.depends # cached
 # Target: bank.cmi, tags: { package(ANSITerminal), byte, compile, extension:mli, file:bank.mli, interf, ocaml, quiet, traverse }
@@ -34,9 +34,9 @@ ocamlfind ocamlc -c -package ANSITerminal -o country.cmo country.ml # cached
 # Target: item.ml.depends, tags: { package(ANSITerminal), extension:ml, file:item.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package ANSITerminal -modules item.ml > item.ml.depends # cached
 # Target: item.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:item.cmo, file:item.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package ANSITerminal -o item.cmo item.ml
+ocamlfind ocamlc -c -package ANSITerminal -o item.cmo item.ml # cached
 # Target: place.ml.depends, tags: { package(ANSITerminal), extension:ml, file:place.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package ANSITerminal -modules place.ml > place.ml.depends # cached
 # Target: place.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:place.cmo, file:place.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package ANSITerminal -o place.cmo place.ml
+ocamlfind ocamlc -c -package ANSITerminal -o place.cmo place.ml # cached
 # Compilation successful.

@@ -16,13 +16,13 @@ let change_wealth (player:t) (amt:int) : t=
 
 let add_item (player:t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
-   money = player.money + item.value;
-   items = item.name :: player.items}
+   money = player.money + item.item_value;
+   items = item.item_name :: player.items}
 
 let remove_item (player: t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
-   money = player.money - item.value;
-   items = List.filter (fun x -> x <> item.name) player.items}
+   money = player.money - item.item_value;
+   items = List.filter (fun x -> x <> item.item_name) player.items}
 
 
 (*
