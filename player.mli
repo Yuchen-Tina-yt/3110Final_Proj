@@ -2,6 +2,9 @@
 (** The abstract type of values representing the player *)
 type t 
 
+(** [make_player name curr_pos money items] is the player who has the 
+    attributes name name, curr_pos curr_pos, money money, and items items *)
+val make_player: string -> string -> int -> string list
 
 (**[change_wealth player amt] is the player after changing the player's wealth.*)
 val change_wealth: t -> int -> t

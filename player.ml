@@ -4,6 +4,10 @@ type t =
   {name: string; curr_pos: string; money: int; items: string list}
 
 
+let make_player (name:string) (curr_pos: string)
+    (money:int) (items: string list): t = 
+  {name =  name; curr_pos =  curr_pos; money = money; items= items}
+
 let change_wealth (player:t) (amt:int) : t= 
   {name= player.name; curr_pos = player.curr_pos; money = player.money + amt;
    items = player.items}
