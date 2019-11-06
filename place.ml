@@ -1,9 +1,11 @@
-open Place 
-
 module Place = struct 
 
   type t = {name:string; country: string; value: float; owner: Player option; 
             num_houses: int; rent_payment: int option; pass_payment: int option}
+  let make_place name country value owner num_houses rent_payment pass_payment =
+    {name = name; counter = country; value = value; owner = owner; 
+     num_houses = num_houses; rent_payment = rent_payment;
+     pass_payment=pass_payment}
 
   let change_ownership t player =
     {name= t.name; country =t.country; value=t.value; owner=player; 
