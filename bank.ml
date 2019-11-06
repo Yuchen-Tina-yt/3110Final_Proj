@@ -8,6 +8,12 @@ type bank = {
 
 exception UnknownBank of bank
 
+let make_bank reserve circulation = 
+  {
+    reserve = reserve;
+    circulation = circulation;
+  }
+
 let deposit money bank = 
   {
     reserve = bank.reserve + money;

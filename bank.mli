@@ -14,6 +14,8 @@ type bank
 (** Raised when an unknown bank is encountered. *)
 exception UnknownBank of bank
 
+(** [make_bank reserve circulation] creates a bank.*)
+val make_bank : int -> int -> bank
 
 (** [deposit money bank] deposits the money into the bank.*)
 val deposit : money -> bank -> bank 
