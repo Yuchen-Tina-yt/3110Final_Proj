@@ -22,10 +22,10 @@ let get_curr_player (state:t) players : Player.t =
 
 
 let make_state = 
-  let player1 = Player.make_player "Shoe" 0 1000. [] in 
-  let player2 = Player.make_player "Car" 0 1000. [] in 
-  let player3 = Player.make_player "Hat" 0 1000. [] in
-  let player4 = Player.make_player "Wheelbarrow" 0 1000. [] in
+  let player1 = Player.make_player "Shoe" 0 1000. [] 0 in 
+  let player2 = Player.make_player "Car" 0 1000. [] 1 in 
+  let player3 = Player.make_player "Hat" 0 1000. [] 2 in
+  let player4 = Player.make_player "Wheelbarrow" 0 1000. [] 4 in
   let player_array = [|player1; player2; player3; player4|] in 
 
   let place1 = Place.make_place "place1" 1 100. None 0 None None in 

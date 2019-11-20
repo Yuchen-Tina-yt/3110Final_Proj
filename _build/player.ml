@@ -1,32 +1,35 @@
 open Item
 
 type t = 
-  {name: string; curr_pos: int; money: float; items: string list}
+  {name: string; curr_pos: int; money: float; items: string list; id: int}
 
 
 let make_player (name:string) (curr_pos: int)
-    (money:float) (items: string list): t = 
-  {name =  name; curr_pos =  curr_pos; money = money; items= items}
+    (money:float) (items: string list) (id: int ): t = 
+  {name =  name; curr_pos =  curr_pos; money = money; items= items; id = id}
 
 let change_wealth (player:t) (amt:float) : t= 
   {name= player.name; curr_pos = player.curr_pos; money = player.money +. amt;
-   items = player.items}
+   items = player.items; id = player.id}
 
 
 let add_item (player:t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
    money = player.money +. item.item_value;
-   items = item.item_name :: player.items}
+   items = item.item_name :: player.items; id = player.id}
 
 let remove_item (player: t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
    money = player.money -.   item.item_value;
-   items = List.filter (fun x -> x <> item.item_name) player.items}
+   items = List.filter (fun x -> x <> item.item_name) player.items; id = player.id}
 
 let move_player (player: t) (step: int ) = 
   {name = player.name; curr_pos = player.curr_pos + step; 
    money = player.money; 
-   items = player.items}
+   items = player.items; id = player.id }
+
+let get_id (player:t) = 
+  player.id
 
 
 (*

@@ -1,11 +1,10 @@
-
 (** The abstract type of values representing the player *)
 type t = 
-  {name: string; curr_pos: int; money: float; items: string list}
+  {name: string; curr_pos: int; money: float; items: string list; id: int }
 
 (** [make_player name curr_pos money items] is the player who has the 
     attributes name name, curr_pos curr_pos, money money, and items items *)
-val make_player: string -> int -> float -> string list ->t
+val make_player: string -> int -> float -> string list->int ->t
 
 
 (**[change_wealth player amt] is the player after changing the player's wealth.*)
@@ -23,8 +22,12 @@ val remove_item: t -> Item.t -> t
 
 val move_player: t-> int -> t 
 
+val get_id: t-> int 
+
 (*
 (**[move_pos player steps places] is the player after moving number of steps 
    of steps from the player's current position on the map *)
 val move_pos: t -> int -> Places.places_lst -> t
 *)
+
+
