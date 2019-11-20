@@ -13,8 +13,8 @@ let make_country crncy ex_rate ex_fee = {
 let currency_in country =
   country.currency
 
-let exchange_amount_for country usd_amount =
-  usd_amount *. country.exchange_rate
+let exchange_amount_for country native_amount =
+  native_amount /. country.exchange_rate
 
 let exchange_fee_for country usd_amount =
   usd_amount *. country.exchange_fee

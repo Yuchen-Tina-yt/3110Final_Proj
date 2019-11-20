@@ -22,10 +22,10 @@ let get_curr_player (state:t) players : Player.t =
 
 
 let make_state = 
-  let player1 = Player.make_player "Shoe" 0 1000. [] in 
-  let player2 = Player.make_player "Car" 0 1000. [] in 
-  let player3 = Player.make_player "Hat" 0 1000. [] in
-  let player4 = Player.make_player "Wheelbarrow" 0 1000. [] in
+  let player1 = Player.make_player "Shoe" 0 1000. [] 0 in 
+  let player2 = Player.make_player "Car" 0 1000. [] 1 in 
+  let player3 = Player.make_player "Hat" 0 1000. [] 2  in
+  let player4 = Player.make_player "Wheelbarrow" 0 1000. [] 3 in
   let player_array = [|player1; player2; player3; player4|] in 
 
   let place1 = Place.make_place "place1" 1 100. None 0 None None in 
@@ -68,8 +68,16 @@ let move_player state =
   let step = (Random.int 6) + 1 in 
   let player_int = state.current_player in 
   let player = state.players.(player_int) in 
-  state.players.(player_int) <- Player.move_player player step  
+  state.players.(player_int) <- Player.move_player player step 
 
+let remove_op player =
+  match player with 
+  | None -> failwith "No one owns the property"
+  |Some i ->i  
+let get_land_owner state pos = 
+  let place = state.places.(pos) in 
+  let owner = Place.get_owner place in 
+  remove_op owner 
 (** [purchase state] is the function to purchase the land
     Add foreign currency functionality. Use helper function*)
 let purchase state = 
@@ -84,8 +92,25 @@ let purchase state =
   state.bank <- bank'; 
   state.places.(player.curr_pos) <- place'
 
+(**Make owner of land richer *)
 let rent state = 
-  failwith ""
+  let player_i = state.current_player in 
+  let player = state.players.(player_i) in 
+  let place = state.places.(player.curr_pos) in 
+  let rent = Place.get_rent place in 
+  let country_i = Place.get_country place in 
+  let country = state.countries.(country_i) in 
+  let dollar_amt = Country.exchange_amount_for country rent in 
+  let fee = Country.exchange_fee_for country dollar_amt in 
+  let owner = get_land_owner state player.curr_pos in 
+  let bank' = Bank.deposit fee state.bank in 
+  let player' = Player.change_wealth player (-.(rent+.fee)) in 
+  let owner_i = Player.get_id owner in 
+  let owner' = Player.change_wealth owner dollar_amt in 
+  state.players.(owner_i) <- owner';  
+  state.players.(player_i) <- player'; 
+  state.bank <- bank'
+
 
 (**Victor
    The cost to develop land is 5% of land and increase rent by 3%*)

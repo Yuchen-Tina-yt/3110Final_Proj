@@ -20,3 +20,10 @@ let change_land_value t new_val =
                               t.rent_payment; pass_payment=t.pass_payment}
 let get_value t =
   t.value
+
+let get_rent t =
+  t.value 
+let get_country t =
+  t.country
+let get_owner t =
+  t.owner

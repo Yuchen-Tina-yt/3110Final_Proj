@@ -16,3 +16,9 @@ val change_ownership : t -> Player.t option-> t
 val change_land_value: t-> float-> t 
 
 val get_value: t -> float
+
+val get_rent: t -> float
+
+val get_country: t -> int 
+
+val get_owner: t -> Player.t option
