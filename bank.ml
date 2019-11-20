@@ -1,12 +1,10 @@
 
-type money = int
-
-type bank = {
-  reserve: money;
-  circulation: money;
+type t = {
+  reserve: float;
+  circulation: float;
 }
 
-exception UnknownBank of bank
+exception UnknownBank of t 
 
 let make_bank reserve circulation = 
   {
@@ -16,13 +14,13 @@ let make_bank reserve circulation =
 
 let deposit money bank = 
   {
-    reserve = bank.reserve + money;
-    circulation = bank.circulation - money;
+    reserve = bank.reserve +. money;
+    circulation = bank.circulation -. money;
   }  
 
 let withdraw money bank = 
   {
-    reserve = bank.reserve - money;
-    circulation = bank.circulation + money;
+    reserve = bank.reserve -. money;
+    circulation = bank.circulation +. money;
   }  
 

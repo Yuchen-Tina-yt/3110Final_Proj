@@ -6,22 +6,21 @@
 *)
 
 (** [money] represents the money in USD *)
-type money
 
-(** [bank] represents a bank *)
-type bank
+(** [t] represents a bank *)
+type t
 
 (** Raised when an unknown bank is encountered. *)
-exception UnknownBank of bank
+exception UnknownBank of t
 
 (** [make_bank reserve circulation] creates a bank.*)
-val make_bank : int -> int -> bank
+val make_bank : float -> float -> t
 
 (** [deposit money bank] deposits the money into the bank.*)
-val deposit : money -> bank -> bank 
+val deposit : float -> t -> t
 
 (** [withdraw money bank] withdraws the money into the bank.*)
-val withdraw : money -> bank -> bank 
+val withdraw : float -> t -> t 
 
 
 
