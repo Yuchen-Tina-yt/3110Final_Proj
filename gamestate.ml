@@ -12,6 +12,15 @@ type t = {
   mutable current_player: int;
 }
 
+(**[player_] *)
+let player_arr (state:t) : Player.t array = state.players
+
+let places_arr (state: t ) = state.places
+
+let get_curr_player (state:t) players : Player.t = 
+  Array.get players state.current_player
+
+
 let make_state = 
   let player1 = Player.make_player "Shoe" 0 1000. [] in 
   let player2 = Player.make_player "Car" 0 1000. [] in 

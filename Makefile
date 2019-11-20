@@ -1,9 +1,9 @@
-MODULES=player bank country item place gamestate gameengine
+MODULES=player bank country item place gamestate gameengine command
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
 TEST=test.byte
-MAIN=main.byte
+GAMEENGINE=gameengine.byte
 OCAMLBUILD=ocamlbuild -use-ocamlfind
 
 default: build
@@ -16,7 +16,7 @@ test:
 	$(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST)
 
 play:
-	$(OCAMLBUILD) $(MAIN) && ./$(MAIN)
+	$(OCAMLBUILD) $(GAMEENGINE) && ./$(GAMEENGINE)
 
 check:
 	bash checkenv.sh && bash checktypes.sh

@@ -1,4 +1,3 @@
-open Place
 open Item
 
 type t = 
