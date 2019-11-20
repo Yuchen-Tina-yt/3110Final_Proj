@@ -1,4 +1,4 @@
-MODULES=player bank country item place
+MODULES=player bank country item place gamestate gameengine
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)

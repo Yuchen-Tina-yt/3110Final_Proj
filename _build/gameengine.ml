@@ -5,5 +5,3 @@ open Country
 open Bank 
 open Gamestate
 exception Illegal 
-
-

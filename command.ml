@@ -32,10 +32,10 @@ let ismalformed (lst : string list) : string list =
   match lst with 
   |[] -> lst
   |h :: t -> if (h <> "roll" && h <> "build" && h <> "score" && h <> "quit"
-                 && h <> "take" && h <> "sell" && h <> "inventory" ) 
+                 && h <> "sell" && h <> "inventory" ) 
              || (h = "roll" && t <> []) || (h = "quit" && t <> []) || 
              (h = "score" && t <> []) || (h = "inventory" && t <> [])||
-             (h = "build" && t = []) || (h = "take" && t = [])
+             (h = "build" && t = []) 
              || (h = "sell" && t = []) 
     then raise (Malformed)
     else lst
@@ -48,7 +48,6 @@ let to_command (lst : string list) : command =
     else if h = "score" then Score
     else if h = "quit" then Quit 
     else if h = "build" then Build t
-    else if h = "take" then Take t
     else if h = "sell" then Sell t
     else if h = "inventory" then Inventory
     else raise (Malformed)
