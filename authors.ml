@@ -1,4 +1,4 @@
 (* TODO: set the value below.  There should be one element
    of the list per author of the submission.  Order does
    not matter. *)
-let hours_worked = [3; 3; 3; 3]
+let hours_worked = [5; 4; 3; 3]

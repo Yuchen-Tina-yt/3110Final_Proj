@@ -36,7 +36,8 @@ let make_state =
   let place15 = Place.make_place "place15" 1 100. None 0 None None in 
   let place16 = Place.make_place "place16" 1 100.  None 0 None None in 
   let place_array = [|place1; place2; place3; place4; place5; place6; place7;
-                      place8; place9; place10; place11; place12; place13; place14; place15; 
+                      place8; place9; place10; place11; place12; place13; 
+                      place14; place15; 
                       place16|] in 
 
   let bank = Bank.make_bank 100000. 4000. in 
@@ -60,7 +61,8 @@ let move_player state =
   let player = state.players.(player_int) in 
   state.players.(player_int) <- Player.move_player player step  
 
-(**Add foreign currency functionality. Use helper function*)
+(** [purchase state] is the function to purchase the land
+    Add foreign currency functionality. Use helper function*)
 let purchase state = 
   let player_int = state.current_player in 
   let player = state.players.(player_int) in 

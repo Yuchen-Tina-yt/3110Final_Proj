@@ -1,0 +1,61 @@
+type object_phrase = string list
+
+type command = 
+  | Roll
+  | Build of object_phrase
+  | Score
+  | Quit
+  | Sell of object_phrase
+  | Inventory
+
+exception Empty
+
+exception Malformed
+
+(**[parse_strtolst str] helper function of parse 
+   is parsed stringlist of string str*)
+let parse_strtolst (str:string) :string list = 
+  match str with 
+  |"" -> raise(Empty)
+  |_-> (String.split_on_char ' ' str)
+
+(**[paarse_space lst acc] helper function of parse 
+   is string list with space and empty string elts eliminated*)
+let rec parse_space (lst: string list) (acc:string list) = 
+  match lst with 
+  |[] -> acc
+  |h :: t -> if h = "" then parse_space t acc
+    else parse_space t (h::acc)
+
+(**[ismalformed lst] helper function of parse *)
+let ismalformed (lst : string list) : string list =
+  match lst with 
+  |[] -> lst
+  |h :: t -> if (h <> "roll" && h <> "build" && h <> "score" && h <> "quit"
+                 && h <> "take" && h <> "sell" && h <> "inventory" ) 
+             || (h = "roll" && t <> []) || (h = "quit" && t <> []) || 
+             (h = "score" && t <> []) || (h = "inventory" && t <> [])||
+             (h = "build" && t = []) || (h = "take" && t = [])
+             || (h = "sell" && t = []) 
+    then raise (Malformed)
+    else lst
+
+let to_command (lst : string list) : command = 
+  match lst with 
+  |[] -> raise(Empty)
+  | h :: t -> if h = "roll" 
+    then Roll
+    else if h = "score" then Score
+    else if h = "quit" then Quit 
+    else if h = "build" then Build t
+    else if h = "take" then Take t
+    else if h = "sell" then Sell t
+    else if h = "inventory" then Inventory
+    else raise (Malformed)
+
+
+let parse str =
+  if ((str |> parse_strtolst |> parse_space []) = []) then raise (Empty)
+  (*else if (str |> parse_strtolst |> parse_space[] = ["score"]  )*)
+  else
+    parse_space (parse_strtolst str) [] |> List.rev|> ismalformed |> to_command
