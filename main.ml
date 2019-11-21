@@ -43,9 +43,19 @@ let rec explore st : unit =
     try 
       (let command = parse (read_line () ) in
        match command with 
-       | Purchase ->  begin print_endline 
-             "Congrats, you successfully purchased this land!\n";
-           purchase st;
+       | Purchase ->  begin 
+           try begin 
+             purchase st; 
+             print_endline "Congrats, you successfully purchased this land!\n";
+           end
+           with Failure msg -> print_endline msg;
+         end
+       | Develop -> begin
+           try begin
+             develop_land st;
+             print_endline "Congrats, you have successfully developed this land!\n";
+           end
+           with Failure msg -> print_endline msg;
          end
        | Quit -> (print_endline "Goodbye, game terminates!\n";
                   Stdlib.exit 0)

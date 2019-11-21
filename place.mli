@@ -5,7 +5,7 @@ type t
 
 (**[make_place name country value rent_payment pass_payment]
    makes the type t given some parameters*)
-val make_place: string->int->float->float option->float option->t 
+val make_place: string->int->float->float->float->t 
 
 val get_ownership : t -> int
 
@@ -14,6 +14,10 @@ val change_ownership : t -> int -> t
 
 (**[change_land_value t new_val] returns a new type t with updated vale *)
 val change_land_value: t-> float-> t 
+
+val change_rent: t -> float -> t
+
+val get_rent: t -> float
 
 val get_value: t -> float
 

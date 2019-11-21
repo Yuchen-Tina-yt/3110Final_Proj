@@ -5,6 +5,7 @@ type command =
   | Money
   | Quit
   | Purchase
+  | Develop
   | End
 
 exception Empty
@@ -31,11 +32,11 @@ let ismalformed (lst : string list) : string list =
   match lst with 
   |[] -> lst
   |h :: t -> if (h <> "roll" &&  h <> "money" && h <> "quit"&& h <> "purchase"
-                 && h <> "end"
+                 && h <> "end" && h <> "develop"
                 ) 
              || (h = "roll" && t <> []) || (h = "quit" && t <> []) || 
              (h = "money" && t <> []|| (h = "purchase" && t <> [])
-              || (h = "end" && t <> [])) 
+              || (h = "end" && t <> []) || (h = "develop" && t <> [])) 
     then raise (Malformed)
     else lst
 
@@ -47,6 +48,7 @@ let to_command (lst : string list) : command =
     else if h = "money" then Money
     else if h = "quit" then Quit 
     else if h = "purchase" then Purchase 
+    else if h = "develop" then Develop
     else if h = "end" then End
     (* else if h = "build" then Build t*)
     (*else if h = "sell" then Sell t
