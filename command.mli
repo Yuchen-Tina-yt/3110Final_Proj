@@ -5,6 +5,7 @@ type command =
   | Purchase
   | Develop
   | End
+  | Rent
 
 exception Empty
 

@@ -8,6 +8,8 @@ val purchase : t -> unit
 
 val develop_land : t -> unit
 
+val rent : t -> unit
+
 val turn : t -> unit
 
 val player_arr: t -> Player.t array

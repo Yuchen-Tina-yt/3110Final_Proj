@@ -72,6 +72,8 @@ let rec explore st : unit =
            print_float (get_player_money player); print_endline ""; 
            explore st end
        | End ->  print_endline "Your turn ends.";
+       | Rent -> rent st ; print_endline 
+           "Congrats, you have successfully rent this land!\n";
 
       )
     with | Malformed -> (print_endline "error: command Malformed."; 
