@@ -15,13 +15,13 @@ let change_wealth (player:t) (amt:float) : t=
 
 let add_item (player:t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
-   money = player.money +. item.item_value;
-   items = item.item_name :: player.items; id = player.id}
+   money = player.money +. get_item_value item;
+   items = get_item_name item :: player.items; id = player.id}
 
 let remove_item (player: t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
-   money = player.money -.   item.item_value;
-   items = List.filter (fun x -> x <> item.item_name) player.items; id = player.id}
+   money = player.money -. get_item_value item;
+   items = List.filter (fun x -> x <> get_item_name item) player.items; id = player.id}
 
 let move_player (player: t) (step: int ) = 
   {name = player.name; curr_pos = player.curr_pos + step; 
@@ -30,6 +30,15 @@ let move_player (player: t) (step: int ) =
 
 let get_id (player:t) = 
   player.id
+
+let get_curr_pos player =
+  player.curr_pos
+
+let get_player_name player =
+  player.name
+
+let get_player_money player =
+  player.money
 
 
 (*

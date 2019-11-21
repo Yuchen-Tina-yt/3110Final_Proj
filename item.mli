@@ -1,5 +1,9 @@
 (**This module represents items in the game*)
-type t = {item_name: string; item_value: float}
+type t
 
 (**constructor of items *)
 val make_item :  string -> float ->t
+
+val get_item_name: t -> string
+
+val get_item_value: t -> float

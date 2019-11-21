@@ -1,6 +1,5 @@
 (** The abstract type of values representing the player *)
-type t = 
-  {name: string; curr_pos: int; money: float; items: string list; id: int }
+type t
 
 (** [make_player name curr_pos money items] is the player who has the 
     attributes name name, curr_pos curr_pos, money money, and items items *)
@@ -23,6 +22,12 @@ val remove_item: t -> Item.t -> t
 val move_player: t-> int -> t 
 
 val get_id: t-> int 
+
+val get_curr_pos: t -> int
+
+val get_player_name: t -> string
+
+val get_player_money: t -> float
 
 (*
 (**[move_pos player steps places] is the player after moving number of steps 

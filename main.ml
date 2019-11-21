@@ -18,13 +18,13 @@ let welcome state =
   let places_arr = places_arr(state) in 
   let player_arr3 = player_arr state in 
   let player = (get_curr_player state player_arr3) in 
-  let place = (Array.get places_arr (player.curr_pos)) in 
-  print_endline player.name;
+  let place = (Array.get places_arr (get_curr_pos player)) in 
+  print_endline (get_player_name player);
   print_string "You are at place ";
-  print_endline place.name
+  print_endline (get_place_name place)
 
 let winornot player : bool = 
-  if player.money > 1500.0 then true else false
+  if (get_player_money player) > 1500.0 then true else false
 
 let rec explore st : unit =
   let player_arr1 = player_arr st in 
@@ -53,13 +53,13 @@ let rec explore st : unit =
          let places_arr = places_arr(st) in 
          let player_arr3 = player_arr st in 
          let player = (get_curr_player st player_arr3) in 
-         let place = (Array.get places_arr (player.curr_pos)) in
+         let place = (Array.get places_arr (get_curr_pos player)) in
          print_string "You are at place ";
-         print_endline place.name;
+         print_endline (get_place_name place);
          explore st
        | Money  -> begin let player_arr2 = player_arr st in 
            let player = (get_curr_player st player_arr2) in 
-           print_float (player.money); print_endline ""; 
+           print_float (get_player_money player); print_endline ""; 
            explore st end
        | End ->  print_endline "Your turn ends.";
 
