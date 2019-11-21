@@ -34,10 +34,11 @@ let rec explore st : unit =
         Stdlib.exit 0)
   else(
     print_endline 
-      "To purchase this land, enter purchase; \n
+      "       To purchase this land, enter purchase; \n
        to roll the die, enter roll; \n 
        to see your money, enter money; \n
-       to quit game, enter quit.\n";
+       to quit game, enter quit.\n
+       to end your turn, enter end\n";
     print_string  "> ";
     try 
       (let command = parse (read_line () ) in
@@ -60,13 +61,14 @@ let rec explore st : unit =
            let player = (get_curr_player st player_arr2) in 
            print_float (player.money); print_endline ""; 
            explore st end
+       | End ->  print_endline "Your turn ends.";
 
       )
-    with |Malformed -> (print_endline "error: command Malformed."; 
-                        explore st)
+    with | Malformed -> (print_endline "error: command Malformed."; 
+                         explore st)
 
-         |Empty -> (print_endline "error: command is Empty."; 
-                    explore st ))
+         | Empty -> (print_endline "error: command is Empty."; 
+                     explore st ))
 
 
 (** [play_game f] starts the adventure in file [f]. *)
