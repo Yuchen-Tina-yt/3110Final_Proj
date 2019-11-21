@@ -3,7 +3,9 @@ type command =
   | Money
   | Quit
   | Purchase
+  | Develop
   | End
+
 exception Empty
 
 exception Malformed

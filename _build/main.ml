@@ -42,6 +42,7 @@ let rec explore st : unit =
   else(
     print_endline 
       "       To purchase this land, enter purchase; \n 
+       to develop your land, enter develop.\n
        to see your money, enter money; \n
        to quit game, enter quit.\n
        to end your turn, enter end\n";
@@ -50,9 +51,19 @@ let rec explore st : unit =
       (let command = parse (read_line () ) in
        match command with 
        | Purchase ->  begin 
-           print_endline 
-             "Congrats, you successfully purchased this land!\n";
-           purchase st;
+           try begin 
+             purchase st; 
+             print_endline "Congrats, you successfully purchased this land!\n";
+           end
+           with Failure msg -> print_endline msg;
+         end
+       | Develop -> begin
+           try begin
+             develop_land st;
+             print_endline 
+               "Congrats, you have successfully developed this land!\n";
+           end
+           with Failure msg -> print_endline msg; explore st
          end
        | Quit -> (print_endline "Goodbye, game terminates!\n";
                   Stdlib.exit 0)

@@ -6,6 +6,8 @@ val move_player : t -> unit
 
 val purchase : t -> unit
 
+val develop_land : t -> unit
+
 val turn : t -> unit
 
 val player_arr: t -> Player.t array
