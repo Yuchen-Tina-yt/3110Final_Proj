@@ -1,7 +1,6 @@
 type object_phrase = string list
 
 type command = 
-  | Roll
   | Money
   | Quit
   | Purchase
@@ -26,25 +25,27 @@ let rec parse_space (lst: string list) (acc:string list) =
   |h :: t -> if h = "" then parse_space t acc
     else parse_space t (h::acc)
 
-(**[ismalformed lst] helper function of parse *)
+(**[ismalformed lst] helper function of parse, is the string list if the
+   command is not malformed, raise the error Malformed if it is malformed*)
 let ismalformed (lst : string list) : string list =
   match lst with 
   |[] -> lst
-  |h :: t -> if (h <> "roll" &&  h <> "money" && h <> "quit"&& h <> "purchase"
-                 && h <> "end"
+  |h :: t -> if ( h <> "money" && h <> "quit"&& h <> "purchase"
+                  && h <> "end"
                 ) 
-             || (h = "roll" && t <> []) || (h = "quit" && t <> []) || 
+             || (h = "quit" && t <> []) || 
              (h = "money" && t <> []|| (h = "purchase" && t <> [])
               || (h = "end" && t <> [])) 
     then raise (Malformed)
     else lst
 
+(**[to_command lst]
+   Make the string list of user inputs to a command *)
 let to_command (lst : string list) : command = 
   match lst with 
   |[] -> raise(Empty)
-  | h :: t -> if h = "roll" 
-    then Roll
-    else if h = "money" then Money
+  | h :: t -> 
+    if h = "money" then Money
     else if h = "quit" then Quit 
     else if h = "purchase" then Purchase 
     else if h = "end" then End

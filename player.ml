@@ -21,7 +21,8 @@ let add_item (player:t) (item: Item.t) : t=
 let remove_item (player: t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
    money = player.money -. get_item_value item;
-   items = List.filter (fun x -> x <> get_item_name item) player.items; id = player.id}
+   items = List.filter 
+       (fun x -> x <> get_item_name item) player.items; id = player.id}
 
 let move_player (player: t) (step: int ) = 
   {name = player.name; curr_pos = player.curr_pos + step; 
