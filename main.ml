@@ -53,7 +53,8 @@ let rec explore st : unit =
        | Purchase ->  begin 
            try begin 
              purchase st; 
-             print_endline "Congrats, you successfully purchased this land!\n";
+             print_endline "Congrats, you successfully purchased this land! Your
+             turn will now end. You can develop the land in the next round.\n";
            end
            with Failure msg -> print_endline msg;
          end
