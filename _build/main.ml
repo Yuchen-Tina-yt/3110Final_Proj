@@ -103,6 +103,7 @@ let roll st =
 let rec play_game state : unit =
   welcome state ;
   roll state;
+  rent state;
   explore state;
   turn state;
   play_game state

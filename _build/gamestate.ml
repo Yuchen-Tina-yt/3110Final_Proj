@@ -103,15 +103,17 @@ let rent state =
   let curr_player = state.players.(curr_player_id) in 
   let place = state.places.(get_curr_pos curr_player) in 
   let owner_id = Place.get_ownership place in
-  if not ((owner_id = curr_player_id) && (owner_id = -1)) then
+  if ((owner_id = -1)|| (owner_id = curr_player_id) ) then ()
+  else
     let rent = Place.get_rent place in
     let paid_player = state.players.(owner_id) in
-    let curr_player' = Player.change_wealth curr_player ((Player.get_player_money curr_player) -. rent) in
-    let paid_player' = Player.change_wealth paid_player ((Player.get_player_money paid_player) +. rent) in
+    let curr_player' = Player.change_wealth curr_player 
+        ((Player.get_player_money curr_player) -. rent) in
+    let paid_player' = Player.change_wealth paid_player 
+        ((Player.get_player_money paid_player) +. rent) in
     state.players.(curr_player_id) <- curr_player';
-    state.players.(owner_id) <- paid_player';
-  else
-    ()
+    state.players.(owner_id) <- paid_player'
+
 
 (** The cost to develop land is 5% of land and increase rent by 5%*)
 let develop_land state = 
