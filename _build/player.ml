@@ -25,7 +25,8 @@ let remove_item (player: t) (item: Item.t) : t=
        (fun x -> x <> get_item_name item) player.items; id = player.id}
 
 let move_player (player: t) (step: int ) = 
-  {name = player.name; curr_pos = player.curr_pos + step; 
+  let step' = ((player.curr_pos + step + 1) mod 16) in    
+  {name = player.name; curr_pos = step'; 
    money = player.money; 
    items = player.items; id = player.id }
 

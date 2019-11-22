@@ -86,7 +86,17 @@ let purchase state =
     state.bank <- bank'; 
     state.places.(get_curr_pos player) <- place'
   else
-    failwith "Someone already owns this place."
+    (* failwith "Someone already owns this place." *)
+    let cur_owner_int = Place.get_ownership place in 
+    let owner = state.players.(cur_owner_int) in 
+    let place_1 = Place.change_ownership place player_index in 
+    let place_value = Place.get_value place in 
+    let player_1 = Player.change_wealth player (-. place_value) in 
+    let owner' = Player.change_wealth owner (+. place_value) in 
+    state.places.(get_curr_pos player) <- place_1; 
+    state.players.(player_index)<- player_1; 
+    state.players.(cur_owner_int) <- owner' 
+
 
 let rent state = 
   let curr_player_id = state.current_player in 
@@ -115,16 +125,20 @@ let develop_land state =
     let player' = Player.change_wealth player (-. (0.05 *. place_value)) in 
     let place' = Place.change_ownership place (player_index)in 
     let place'' = Place.change_rent place' (1.05 *. (Place.get_rent place')) in
+    let place''' = Place.change_land_value place'' 
+        (1.05 *. (Place.get_value place'')) in 
     let bank' = Bank.deposit (0.05 *. place_value) state.bank in 
     state.players.(player_index) <- player';
     state.bank <- bank';
-    state.places.(get_curr_pos player) <- place'';
+    state.places.(get_curr_pos player) <- place''';
   else
     failwith "You don't own this place."
 
 let turn state = 
-  state.current_player <- ((state.current_player +1) mod 4 )
+  print_endline (string_of_int state.current_player); 
+  state.current_player <- ((state.current_player+1) mod 4 )
 
-(**developing land and changing the land value *)
+
+
 
 
