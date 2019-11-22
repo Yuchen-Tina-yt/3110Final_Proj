@@ -35,7 +35,7 @@ let make_state =
   let place5 = Place.make_place "place5" 1 100. 15. 15. in 
   let place6 = Place.make_place "place6" 1 100. 15. 15. in 
   let place7 = Place.make_place "place7" 1 100. 15. 15. in 
-  let place8 = Place.make_place "Place18" 1 100. 15. 15. in 
+  let place8 = Place.make_place "Place8" 1 100. 15. 15. in 
   let place9 = Place.make_place "place9" 1 100. 15. 15. in 
   let place10 = Place.make_place "place10" 1 100. 15. 15. in 
   let place11 = Place.make_place "place11" 1 100. 15. 15. in 
@@ -108,9 +108,9 @@ let rent state =
     let rent = Place.get_rent place in
     let paid_player = state.players.(owner_id) in
     let curr_player' = Player.change_wealth curr_player 
-        ((Player.get_player_money curr_player) -. rent) in
+        ( -.rent) in
     let paid_player' = Player.change_wealth paid_player 
-        ((Player.get_player_money paid_player) +. rent) in
+        (+. rent) in
     state.players.(curr_player_id) <- curr_player';
     state.players.(owner_id) <- paid_player'
 
@@ -137,7 +137,7 @@ let develop_land state =
     failwith "You don't own this place."
 
 let turn state = 
-  print_endline (string_of_int state.current_player); 
+  (*print_endline (string_of_int state.current_player); *)
   state.current_player <- ((state.current_player+1) mod 4 )
 
 

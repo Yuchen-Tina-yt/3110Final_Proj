@@ -137,7 +137,7 @@ let develop_land state =
     failwith "You don't own this place."
 
 let turn state = 
-  print_endline (string_of_int state.current_player); 
+  (*print_endline (string_of_int state.current_player); *)
   state.current_player <- ((state.current_player+1) mod 4 )
 
 
