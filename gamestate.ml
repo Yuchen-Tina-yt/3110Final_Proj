@@ -68,7 +68,7 @@ let move_player state =
   let step = (Random.int 6) + 1 in 
   let player_int = state.current_player in 
   let player = state.players.(player_int) in 
-  state.players.(player_int) <- Player.move_player player step  
+  state.players.(player_int) <- Player.move_player' player step  
 
 (** [purchase state] is the function to purchase the land
     Add foreign currency functionality. Use helper function*)
@@ -112,7 +112,24 @@ let rent state =
     let paid_player' = Player.change_wealth paid_player 
         (+. rent) in
     state.players.(curr_player_id) <- curr_player';
-    state.players.(owner_id) <- paid_player'
+    state.players.(owner_id) <- paid_player';
+
+    print_string"You land on Player ";
+    print_string (Player.get_player_name paid_player);
+    print_string"'s land. You need to pay a rent of ";
+    print_float rent;
+    print_string"0 USD.";
+    print_endline"";
+    print_string"Money of Player ";
+    print_string (Player.get_player_name paid_player');
+    print_string"is: ";
+    print_float (Player.get_player_money paid_player');
+    print_endline"";
+    print_string"Money of Player ";
+    print_string (Player.get_player_name curr_player');
+    print_string"is: ";
+    print_float (Player.get_player_money curr_player');
+    print_endline""
 
 
 (** The cost to develop land is 5% of land and increase rent by 5%*)

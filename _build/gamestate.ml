@@ -35,7 +35,7 @@ let make_state =
   let place5 = Place.make_place "place5" 1 100. 15. 15. in 
   let place6 = Place.make_place "place6" 1 100. 15. 15. in 
   let place7 = Place.make_place "place7" 1 100. 15. 15. in 
-  let place8 = Place.make_place "Place18" 1 100. 15. 15. in 
+  let place8 = Place.make_place "Place8" 1 100. 15. 15. in 
   let place9 = Place.make_place "place9" 1 100. 15. 15. in 
   let place10 = Place.make_place "place10" 1 100. 15. 15. in 
   let place11 = Place.make_place "place11" 1 100. 15. 15. in 
@@ -68,7 +68,7 @@ let move_player state =
   let step = (Random.int 6) + 1 in 
   let player_int = state.current_player in 
   let player = state.players.(player_int) in 
-  state.players.(player_int) <- Player.move_player player step  
+  state.players.(player_int) <- Player.move_player' player step  
 
 (** [purchase state] is the function to purchase the land
     Add foreign currency functionality. Use helper function*)
@@ -108,11 +108,28 @@ let rent state =
     let rent = Place.get_rent place in
     let paid_player = state.players.(owner_id) in
     let curr_player' = Player.change_wealth curr_player 
-        ((Player.get_player_money curr_player) -. rent) in
+        ( -.rent) in
     let paid_player' = Player.change_wealth paid_player 
-        ((Player.get_player_money paid_player) +. rent) in
+        (+. rent) in
     state.players.(curr_player_id) <- curr_player';
-    state.players.(owner_id) <- paid_player'
+    state.players.(owner_id) <- paid_player';
+
+    print_string"You land on Player ";
+    print_string (Player.get_player_name paid_player);
+    print_string"'s land. You need to pay a rent of ";
+    print_float rent;
+    print_string"0 USD.";
+    print_endline"";
+    print_string"Money of Player ";
+    print_string (Player.get_player_name paid_player');
+    print_string"is: ";
+    print_float (Player.get_player_money paid_player');
+    print_endline"";
+    print_string"Money of Player ";
+    print_string (Player.get_player_name curr_player');
+    print_string"is: ";
+    print_float (Player.get_player_money curr_player');
+    print_endline""
 
 
 (** The cost to develop land is 5% of land and increase rent by 5%*)

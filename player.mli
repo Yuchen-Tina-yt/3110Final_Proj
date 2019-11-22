@@ -19,7 +19,7 @@ val add_item: t -> Item.t -> t
    from the player;s items list *)
 val remove_item: t -> Item.t -> t
 
-val move_player: t-> int -> t 
+val move_player': t-> int -> t 
 
 val get_id: t-> int 
 
