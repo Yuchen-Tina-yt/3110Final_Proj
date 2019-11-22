@@ -122,12 +122,12 @@ let rent state =
     print_endline"";
     print_string"Money of Player ";
     print_string (Player.get_player_name paid_player');
-    print_string"is: ";
+    print_string" is: ";
     print_float (Player.get_player_money paid_player');
     print_endline"";
     print_string"Money of Player ";
     print_string (Player.get_player_name curr_player');
-    print_string"is: ";
+    print_string" is: ";
     print_float (Player.get_player_money curr_player');
     print_endline""
 
