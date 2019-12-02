@@ -12,13 +12,10 @@ type t = {
   mutable current_player: int;
 }
 
-(**[player_] *)
-let player_arr (state:t) : Player.t array = state.players
-
 let places_arr (state: t ) = state.places
 
-let get_curr_player (state:t) players : Player.t = 
-  Array.get players state.current_player
+let get_curr_player (state:t) : Player.t = 
+  Array.get state.players state.current_player
 
 
 let make_state = 
@@ -112,39 +109,65 @@ let purchase state =
                    (get_player_name owner') ^ "!\n");
   end
 
+let transfer_places giver receiver places=
+  Array.map (fun h -> if get_ownership h = giver 
+              then change_ownership h receiver
+              else h) places
+
 let rent state = 
   let curr_player_id = state.current_player in 
   let curr_player = state.players.(curr_player_id) in 
   let place = state.places.(get_curr_pos curr_player) in 
   let owner_id = Place.get_ownership place in
-  if ((owner_id = -1)|| (owner_id = curr_player_id) ) then ()
-  else
-    let rent = Place.get_rent place in
-    let paid_player = state.players.(owner_id) in
-    let curr_player' = Player.change_wealth curr_player 
-        ( -.rent) in
-    let paid_player' = Player.change_wealth paid_player 
-        (+. rent) in
-    state.players.(curr_player_id) <- curr_player';
-    state.players.(owner_id) <- paid_player';
 
+  if ((owner_id = -1)|| (owner_id = curr_player_id) ) then ()
+  else begin
+    let paid_player = state.players.(owner_id) in
+    let rent = Place.get_rent place in
     print_string"You landed on Player ";
     print_string (Player.get_player_name paid_player);
     print_string"'s place. You need to pay a rent of ";
     print_float rent;
     print_string"0 USD.";
     print_endline"";
-    print_string"Money of Player ";
-    print_string (Player.get_player_name paid_player');
-    print_string" is now: ";
-    print_float (Player.get_player_money paid_player');
-    print_endline"";
-    print_string"Money of Player ";
-    print_string (Player.get_player_name curr_player');
-    print_string" is now: ";
-    print_float (Player.get_player_money curr_player');
-    print_endline"\n"
-
+    try (* If the current player has enough money to pay the rent *)
+      (let curr_player' = Player.change_wealth curr_player 
+           ( -.rent) in
+       let paid_player' = Player.change_wealth paid_player 
+           (+. rent) in
+       state.players.(curr_player_id) <- curr_player';
+       state.players.(owner_id) <- paid_player';
+       print_string"Money of Player ";
+       print_string (Player.get_player_name paid_player');
+       print_string" is now: ";
+       print_float (Player.get_player_money paid_player');
+       print_endline"";
+       print_string"Money of Player ";
+       print_string (Player.get_player_name curr_player');
+       print_string" is now: ";
+       print_float (Player.get_player_money curr_player');
+       print_endline"\n";)
+    with Failure msg -> 
+      (*Bankruptcy if the current player does not have enough money to pay the 
+        rent *)
+      print_endline msg;
+      print_endline "You went bankrupt!";
+      let paid_player_name = get_player_name paid_player in
+      print_endline 
+        ("\nGiving all of your money and places to " ^ paid_player_name ^ 
+         "...\n");
+      state.players.(curr_player_id) <- set_activity curr_player false;
+      let paid_player' = 
+        Player.change_wealth paid_player (+. get_player_money curr_player) in
+      state.players.(owner_id) <- paid_player';
+      print_string "Money of Player ";
+      print_string (get_player_name paid_player');
+      print_string " is now: ";
+      print_float (get_player_money paid_player');
+      print_endline "\n";
+      let places' = transfer_places curr_player_id owner_id state.places in
+      state.places <- places';
+  end
 
 (** The cost to develop land is 5% of land and increase rent by 5%*)
 let develop_land state = 

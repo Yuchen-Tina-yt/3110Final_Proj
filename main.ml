@@ -18,8 +18,7 @@ let rec print_strlist (list : string list) =
    the place name that the player is currently on *)
 let welcome state = 
   let places_arr = places_arr(state) in 
-  let player_arr3 = player_arr state in 
-  let player = (get_curr_player state player_arr3) in 
+  let player = (get_curr_player state) in 
   let place = (Array.get places_arr (get_curr_pos player)) in 
   print_string "Current Player Name: ";
   print_endline (get_player_name player);
@@ -33,8 +32,7 @@ let winornot player : bool =
    The function mutates the state and the player according to the parsed
    user input commands *)
 let rec explore st : unit =
-  let player_arr1 = player_arr st in 
-  let player = (get_curr_player st player_arr1) in 
+  let player = (get_curr_player st) in 
   if winornot (player) 
   then (print_endline "Congrats! You win. Game ends, exit automatically."; 
         Stdlib.exit 0)
@@ -67,8 +65,8 @@ let rec explore st : unit =
          end
        | Quit -> (print_endline "Goodbye, game terminates!\n";
                   Stdlib.exit 0)
-       | Money  -> begin let player_arr2 = player_arr st in 
-           let player = (get_curr_player st player_arr2) in 
+       | Money  -> begin 
+           let player = (get_curr_player st) in 
            print_float (get_player_money player); print_endline ""; 
            explore st end
        | End ->  print_endline "Your turn ends.";
@@ -90,17 +88,21 @@ let roll st =
   print_endline "";
   move_player st;
   let places_arr = places_arr(st) in 
-  let player_arr3 = player_arr st in 
-  let player = (get_curr_player st player_arr3) in 
+  let player = (get_curr_player st) in 
   let place = (Array.get places_arr (get_curr_pos player)) in
   print_endline ("You are now at Place " ^ (get_place_name place) ^ ".\n")
 
 (**[play_game state] is the function that allows the players to play the game*)
 let rec play_game state : unit =
-  welcome state ;
-  roll state;
-  rent state;
-  explore state;
+  let curr_player = get_curr_player state in
+  if is_active curr_player then begin
+    welcome state ;
+    roll state;
+    rent state;
+    explore state;
+  end
+  else print_endline ("Player " ^ (get_player_name curr_player) ^ "has been " ^ 
+                      "eliminated. Skipping to the next player...");
   turn state;
   play_game state
 

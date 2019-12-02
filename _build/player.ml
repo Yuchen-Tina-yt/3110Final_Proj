@@ -1,18 +1,20 @@
 open Item
 
 type t = 
-  {name: string; curr_pos: int; money: float; items: string list; id: int}
+  {name: string; curr_pos: int; money: float; items: string list; id: int; 
+   active: bool}
 
 
 let make_player (name:string) (curr_pos: int)
     (money:float) (items: string list) (id: int ): t = 
-  {name =  name; curr_pos =  curr_pos; money = money; items= items; id = id}
+  {name =  name; curr_pos =  curr_pos; money = money; items= items; id = id; 
+   active = true}
 
 let change_wealth (player:t) (amt:float) : t= 
   let new_money = player.money +. amt in
   if new_money >= 0. then
     {name= player.name; curr_pos = player.curr_pos; money = new_money;
-     items = player.items; id = player.id}
+     items = player.items; id = player.id; active = player.active}
   else
     failwith (player.name ^ " does not have enough money. ")
 
@@ -20,19 +22,21 @@ let change_wealth (player:t) (amt:float) : t=
 let add_item (player:t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
    money = player.money +. get_item_value item;
-   items = get_item_name item :: player.items; id = player.id}
+   items = get_item_name item :: player.items; id = player.id; 
+   active = player.active}
 
 let remove_item (player: t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
    money = player.money -. get_item_value item;
    items = List.filter 
-       (fun x -> x <> get_item_name item) player.items; id = player.id}
+       (fun x -> x <> get_item_name item) player.items; id = player.id; 
+   active = player.active}
 
 let move_player' (player: t) (step: int ) = 
   let step' = ((player.curr_pos + step) mod 16) in    
   {name = player.name; curr_pos = step'; 
    money = player.money; 
-   items = player.items; id = player.id }
+   items = player.items; id = player.id; active = player.active }
 
 let get_id (player:t) = 
   player.id
@@ -45,6 +49,13 @@ let get_player_name player =
 
 let get_player_money player =
   player.money
+
+let is_active player =
+  player.active
+
+let set_activity player boolean =
+  {name = player.name; curr_pos = player.curr_pos; money = player.money;
+   items = player.items; id =player.id; active = boolean}
 
 
 (*

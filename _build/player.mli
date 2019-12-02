@@ -29,6 +29,10 @@ val get_player_name: t -> string
 
 val get_player_money: t -> float
 
+val is_active: t -> bool
+
+val set_activity: t -> bool -> t
+
 (*
 (**[move_pos player steps places] is the player after moving number of steps 
    of steps from the player's current position on the map *)
