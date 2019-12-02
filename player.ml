@@ -14,7 +14,7 @@ let change_wealth (player:t) (amt:float) : t=
     {name= player.name; curr_pos = player.curr_pos; money = new_money;
      items = player.items; id = player.id}
   else
-    failwith (player.name ^ " does not have enough money. ")
+    failwith ("Sorry, " ^ player.name ^ " does not have enough money. ")
 
 
 let add_item (player:t) (item: Item.t) : t=

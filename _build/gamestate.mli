@@ -19,3 +19,5 @@ val get_curr_player: t -> Player.t
 val get_inactive_players_ids: t -> int list
 
 val make_current_player_inactive: t -> unit
+
+val get_curr_player_id: t -> int

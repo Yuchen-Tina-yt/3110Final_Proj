@@ -88,13 +88,13 @@ let purchase state =
     state.players.(player_index) <- player'; 
     state.bank <- bank'; 
     state.places.(get_curr_pos player) <- place';
+    print_endline ("Congrats, you successfully purchased this previously " ^ 
+                   "unowned land, " ^ (get_place_name place') ^ "!");
     print_string "Money of Player ";
     print_string (get_player_name player');
-    print_string " is now: ";
+    print_string " is now USD $";
     print_float (get_player_money player');
-    print_endline "";
-    print_endline ("Congrats, you successfully purchased this previously " ^ 
-                   "unowned land, " ^ (get_place_name place') ^ "!\n");
+    print_endline "\n";
   end
   else begin
     (* Buying the place from another player. 
@@ -112,7 +112,17 @@ let purchase state =
     state.players.(cur_owner_int) <- owner';
     print_endline ("Congrats, you successfully purchased this land, " ^ 
                    (get_place_name place_1) ^", from Player " ^ 
-                   (get_player_name owner') ^ "!\n");
+                   (get_player_name owner') ^ "!");
+    print_string "Money of Player ";
+    print_string (get_player_name player_1);
+    print_string " is now USD $";
+    print_float (get_player_money player_1);
+    print_endline "";
+    print_string "Money of Player ";
+    print_string (get_player_name owner');
+    print_string " is now USD $";
+    print_float (get_player_money owner');
+    print_endline "\n";
   end
 
 let transfer_places giver receiver places=
@@ -132,9 +142,8 @@ let rent state =
     let rent = Place.get_rent place in
     print_string"You landed on Player ";
     print_string (Player.get_player_name paid_player);
-    print_string"'s place. You need to pay a rent of ";
+    print_string"'s place. You need to pay a rent of USD $";
     print_float rent;
-    print_string"0 USD.";
     print_endline"";
     try (* If the current player has enough money to pay the rent *)
       (let curr_player' = Player.change_wealth curr_player 
@@ -145,12 +154,12 @@ let rent state =
        state.players.(owner_id) <- paid_player';
        print_string"Money of Player ";
        print_string (Player.get_player_name paid_player');
-       print_string" is now: ";
+       print_string" is now USD $";
        print_float (Player.get_player_money paid_player');
        print_endline"";
        print_string"Money of Player ";
        print_string (Player.get_player_name curr_player');
-       print_string" is now: ";
+       print_string" is now USD $";
        print_float (Player.get_player_money curr_player');
        print_endline"\n";)
     with Failure msg -> 
@@ -168,7 +177,7 @@ let rent state =
       state.players.(owner_id) <- paid_player';
       print_string "Money of Player ";
       print_string (get_player_name paid_player');
-      print_string " is now: ";
+      print_string " is now USD $";
       print_float (get_player_money paid_player');
       print_endline "\n";
       let places' = transfer_places curr_player_id owner_id state.places in
@@ -193,12 +202,23 @@ let develop_land state =
     state.players.(player_index) <- player';
     state.bank <- bank';
     state.places.(get_curr_pos player) <- place''';
+    print_endline 
+      ("Congrats, you have successfully developed this land, " ^ 
+       (get_place_name place''') ^ "!");
+    print_string "Money of Player ";
+    print_string (get_player_name player');
+    print_string " is now USD $";
+    print_float (get_player_money player');
+    print_endline "\n";
   else
     failwith "Sorry, you can't develop this place, because you don't own it.\n"
 
 let turn state = 
   (*print_endline (string_of_int state.current_player); *)
   state.current_player <- ((state.current_player+1) mod 4 )
+
+let get_curr_player_id state =
+  state.current_player
 
 
 
