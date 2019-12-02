@@ -25,15 +25,16 @@ let welcome state =
   print_endline ("You are at Place " ^ (get_place_name place) ^ ".")
 
 (**[winprnot player] is true if the player wins, and false o.w. *)
-let winornot player : bool = 
-  if (get_player_money player) > 1500.0 then true else false
+let winornot state : bool = 
+  let player = (get_curr_player state) in 
+  if ((get_player_money player) > 1500.0 
+      || (List.length (get_inactive_players_ids state)) = 3)then true else false
 
 (**[explore st] allows the player explore the state and make commands. 
    The function mutates the state and the player according to the parsed
    user input commands *)
 let rec explore st : unit =
-  let player = (get_curr_player st) in 
-  if winornot (player) 
+  if winornot (st) 
   then (print_endline "Congrats! You win. Game ends, exit automatically."; 
         Stdlib.exit 0)
   else(
@@ -63,8 +64,8 @@ let rec explore st : unit =
            end
            with Failure msg -> print_endline msg; explore st
          end
-       | Quit -> (print_endline "Goodbye, game terminates!\n";
-                  Stdlib.exit 0)
+       | Quit -> make_current_player_inactive st;
+         print_endline "You have quit the game. \n"
        | Money  -> begin 
            let player = (get_curr_player st) in 
            print_float (get_player_money player); print_endline ""; 
@@ -95,14 +96,15 @@ let roll st =
 (**[play_game state] is the function that allows the players to play the game*)
 let rec play_game state : unit =
   let curr_player = get_curr_player state in
-  if is_active curr_player then begin
+  if not (List.mem (get_id curr_player) (get_inactive_players_ids state)) 
+  then begin
     welcome state ;
     roll state;
     rent state;
     explore state;
   end
-  else print_endline ("Player " ^ (get_player_name curr_player) ^ "has been " ^ 
-                      "eliminated. Skipping to the next player...");
+  else print_endline ("\nPlayer " ^ (get_player_name curr_player) ^ " has been " ^ 
+                      "eliminated.\nSkipping to the next player...\n");
   turn state;
   play_game state
 

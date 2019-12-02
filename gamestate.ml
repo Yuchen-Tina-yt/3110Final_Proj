@@ -10,6 +10,7 @@ type t = {
   mutable bank: Bank.t; 
   countries: Country.t array; 
   mutable current_player: int;
+  mutable inactive_players_ids: int list
 }
 
 let places_arr (state: t ) = state.places
@@ -17,6 +18,10 @@ let places_arr (state: t ) = state.places
 let get_curr_player (state:t) : Player.t = 
   Array.get state.players state.current_player
 
+let get_inactive_players_ids state = state.inactive_players_ids
+
+let make_current_player_inactive state = 
+  state.inactive_players_ids <- state.current_player :: state.inactive_players_ids
 
 let make_state = 
   let player1 = Player.make_player "Shoe" 0 1000. [] 0 in 
@@ -59,7 +64,8 @@ let make_state =
   let c_player = 0 in 
 
   {players = player_array; places = place_array; bank = bank; 
-   countries = country_array; current_player = c_player}
+   countries = country_array; current_player = c_player; 
+   inactive_players_ids = []}
 
 let move_player state = 
   let step = (Random.int 6) + 1 in 
@@ -156,7 +162,7 @@ let rent state =
       print_endline 
         ("\nGiving all of your money and places to " ^ paid_player_name ^ 
          "...\n");
-      state.players.(curr_player_id) <- set_activity curr_player false;
+      make_current_player_inactive state;
       let paid_player' = 
         Player.change_wealth paid_player (+. get_player_money curr_player) in
       state.players.(owner_id) <- paid_player';
