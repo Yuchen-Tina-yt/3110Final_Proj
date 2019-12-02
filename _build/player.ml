@@ -9,8 +9,12 @@ let make_player (name:string) (curr_pos: int)
   {name =  name; curr_pos =  curr_pos; money = money; items= items; id = id}
 
 let change_wealth (player:t) (amt:float) : t= 
-  {name= player.name; curr_pos = player.curr_pos; money = player.money +. amt;
-   items = player.items; id = player.id}
+  let new_money = player.money +. amt in
+  if new_money >= 0. then
+    {name= player.name; curr_pos = player.curr_pos; money = new_money;
+     items = player.items; id = player.id}
+  else
+    failwith (player.name ^ " does not have enough money. ")
 
 
 let add_item (player:t) (item: Item.t) : t=

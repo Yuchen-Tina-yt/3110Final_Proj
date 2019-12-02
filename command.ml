@@ -6,7 +6,6 @@ type command =
   | Purchase
   | Develop
   | End
-  | Rent
 
 exception Empty
 
@@ -55,7 +54,6 @@ let to_command (lst : string list) : command =
     (* else if h = "build" then Build t*)
     (*else if h = "sell" then Sell t
       else if h = "inventory" then Inventory*)
-    else if h = "rent" then Rent
     else raise (Malformed)
 
 

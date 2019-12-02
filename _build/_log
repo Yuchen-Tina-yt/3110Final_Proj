@@ -44,7 +44,9 @@ ocamlfind ocamldep -package ANSITerminal -modules country.ml > country.ml.depend
 # Target: country.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:country.cmo, file:country.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package ANSITerminal -o country.cmo country.ml # cached
 # Target: gamestate.ml.depends, tags: { package(ANSITerminal), extension:ml, file:gamestate.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package ANSITerminal -modules gamestate.ml > gamestate.ml.depends
+ocamlfind ocamldep -package ANSITerminal -modules gamestate.ml > gamestate.ml.depends # cached
+# Target: gamestate.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:gamestate.cmo, file:gamestate.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package ANSITerminal -o gamestate.cmo gamestate.ml # cached
 # Target: item.ml.depends, tags: { package(ANSITerminal), extension:ml, file:item.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package ANSITerminal -modules item.ml > item.ml.depends # cached
 # Target: item.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:item.cmo, file:item.ml, implem, ocaml, quiet, traverse }
@@ -57,8 +59,6 @@ ocamlfind ocamlc -c -package ANSITerminal -o place.cmo place.ml # cached
 ocamlfind ocamldep -package ANSITerminal -modules player.ml > player.ml.depends # cached
 # Target: player.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package ANSITerminal -o player.cmo player.ml # cached
-# Target: gamestate.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:gamestate.cmo, file:gamestate.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package ANSITerminal -o gamestate.cmo gamestate.ml
 # Target: main.byte, tags: { package(ANSITerminal), byte, dont_link_with, extension:byte, file:main.byte, link, ocaml, program, quiet, traverse }
 ocamlfind ocamlc -linkpkg -package ANSITerminal bank.cmo command.cmo country.cmo item.cmo player.cmo place.cmo gamestate.cmo main.cmo -o main.byte
 # Compilation successful.

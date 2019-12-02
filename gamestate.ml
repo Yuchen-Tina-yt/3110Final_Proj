@@ -76,17 +76,28 @@ let purchase state =
   let player_index = state.current_player in 
   let player = state.players.(player_index) in 
   let place = state.places.(get_curr_pos player) in 
-  if (get_ownership place = -1) then
-    let place_value = Place.get_value place in 
+  if (get_ownership place = -1) then begin
+    let place_value = Place.get_value place in
     let player' = Player.change_wealth player (-. place_value) in 
     let player_id = Player.get_id player' in
     let place' = Place.change_ownership place (player_id)in 
     let bank' = Bank.deposit place_value state.bank in 
     state.players.(player_index) <- player'; 
     state.bank <- bank'; 
-    state.places.(get_curr_pos player) <- place'
-  else
-    (* failwith "Someone already owns this place." *)
+    state.places.(get_curr_pos player) <- place';
+    print_string "Money of Player ";
+    print_string (get_player_name player');
+    print_string " is now: ";
+    print_float (get_player_money player');
+    print_endline "";
+    print_endline ("Congrats, you successfully purchased this previously " ^ 
+                   "unowned land, " ^ (get_place_name place') ^ "!\n");
+  end
+  else begin
+    (* Buying the place from another player. 
+       Right now, the old owner 
+       doesn't get a choice whetheer or not they allow the current player to buy 
+       the place from them. *)
     let cur_owner_int = Place.get_ownership place in 
     let owner = state.players.(cur_owner_int) in 
     let place_1 = Place.change_ownership place player_index in 
@@ -95,8 +106,11 @@ let purchase state =
     let owner' = Player.change_wealth owner (+. place_value) in 
     state.places.(get_curr_pos player) <- place_1; 
     state.players.(player_index)<- player_1; 
-    state.players.(cur_owner_int) <- owner' 
-
+    state.players.(cur_owner_int) <- owner';
+    print_endline ("Congrats, you successfully purchased this land, " ^ 
+                   (get_place_name place_1) ^", from Player " ^ 
+                   (get_player_name owner') ^ "!\n");
+  end
 
 let rent state = 
   let curr_player_id = state.current_player in 
@@ -114,22 +128,22 @@ let rent state =
     state.players.(curr_player_id) <- curr_player';
     state.players.(owner_id) <- paid_player';
 
-    print_string"You land on Player ";
+    print_string"You landed on Player ";
     print_string (Player.get_player_name paid_player);
-    print_string"'s land. You need to pay a rent of ";
+    print_string"'s place. You need to pay a rent of ";
     print_float rent;
     print_string"0 USD.";
     print_endline"";
     print_string"Money of Player ";
     print_string (Player.get_player_name paid_player');
-    print_string" is: ";
+    print_string" is now: ";
     print_float (Player.get_player_money paid_player');
     print_endline"";
     print_string"Money of Player ";
     print_string (Player.get_player_name curr_player');
-    print_string" is: ";
+    print_string" is now: ";
     print_float (Player.get_player_money curr_player');
-    print_endline""
+    print_endline"\n"
 
 
 (** The cost to develop land is 5% of land and increase rent by 5%*)
@@ -151,7 +165,7 @@ let develop_land state =
     state.bank <- bank';
     state.places.(get_curr_pos player) <- place''';
   else
-    failwith "You don't own this place."
+    failwith "Sorry, you can't develop this place, because you don't own it.\n"
 
 let turn state = 
   (*print_endline (string_of_int state.current_player); *)

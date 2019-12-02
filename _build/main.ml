@@ -21,10 +21,9 @@ let welcome state =
   let player_arr3 = player_arr state in 
   let player = (get_curr_player state player_arr3) in 
   let place = (Array.get places_arr (get_curr_pos player)) in 
-  print_string "Player Name: ";
+  print_string "Current Player Name: ";
   print_endline (get_player_name player);
-  print_string "You are at place ";
-  print_endline (get_place_name place)
+  print_endline ("You are at Place " ^ (get_place_name place) ^ ".")
 
 (**[winprnot player] is true if the player wins, and false o.w. *)
 let winornot player : bool = 
@@ -41,8 +40,8 @@ let rec explore st : unit =
         Stdlib.exit 0)
   else(
     print_endline 
-      "       To purchase this land, enter purchase; \n 
-       to develop your land, enter develop.\n
+      "       To purchase this place, enter purchase; \n 
+       to develop your place, enter develop.\n
        to see your money, enter money; \n
        to quit game, enter quit.\n
        to end your turn, enter end\n";
@@ -53,8 +52,8 @@ let rec explore st : unit =
        | Purchase ->  begin 
            try begin 
              purchase st; 
-             print_endline "Congrats, you successfully purchased this land! Your
-             turn will now end. You can develop the land in the next round.\n";
+             print_endline "You can develop this land when you next visit. ";
+             print_endline "Your turn will now end. \n";
            end
            with Failure msg -> print_endline msg;
          end
@@ -73,8 +72,6 @@ let rec explore st : unit =
            print_float (get_player_money player); print_endline ""; 
            explore st end
        | End ->  print_endline "Your turn ends.";
-       | Rent -> rent st ; print_endline 
-           "Congrats, you have successfully rent this land!\n";
 
       )
     with | Malformed -> (print_endline "error: command Malformed."; 
@@ -89,15 +86,14 @@ let rec explore st : unit =
    to the place in the state corresponds to the number of the rolled die *)
 let roll st = 
   print_endline "";
-  print_endline "Automatically Roll the Die...";
+  print_endline "Automatically rolling the die...";
   print_endline "";
   move_player st;
   let places_arr = places_arr(st) in 
   let player_arr3 = player_arr st in 
   let player = (get_curr_player st player_arr3) in 
   let place = (Array.get places_arr (get_curr_pos player)) in
-  print_string "You are at place ";
-  print_endline (get_place_name place)
+  print_endline ("You are now at Place " ^ (get_place_name place) ^ ".\n")
 
 (**[play_game state] is the function that allows the players to play the game*)
 let rec play_game state : unit =
