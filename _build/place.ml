@@ -35,3 +35,6 @@ let get_value t =
 
 let get_place_name t =
   t.name
+
+let get_country t =
+  t.country

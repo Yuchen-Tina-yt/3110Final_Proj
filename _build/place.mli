@@ -22,3 +22,5 @@ val get_rent: t -> float
 val get_value: t -> float
 
 val get_place_name: t -> string
+
+val get_country: t -> int

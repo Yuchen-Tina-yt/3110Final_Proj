@@ -66,9 +66,8 @@ let rec explore st : unit =
          print_endline "You have quit the game. \n"
        | Money  -> begin 
            let player = (get_curr_player st) in 
-           print_string ("Money of Player " ^ (get_player_name player)^ " is "
-                         ^"USD $");
-           print_float (get_player_money player); print_endline ""; 
+           print_string ("You have USD $");
+           print_float (get_player_money player); print_endline "0."; 
            explore st end
        | End ->  print_endline "Your turn ends.";
 
@@ -92,27 +91,53 @@ let roll st =
   let player = (get_curr_player st) in 
   let place = (Array.get places_arr (get_curr_pos player)) in
   let owner_id = (get_ownership place) in
-  let buy_price = (get_value place) in
-  print_endline ("You are now at Place " ^ (get_place_name place) ^ ".\n");
+  let buy_price_USD = (get_value place) in
+  let country_idx = get_country place in
+  let country = country_at_index st (country_idx) in
+  let currency = currency_in country in
+  let buy_price_local = exchange_amount_for country buy_price_USD in
+  print_endline ("You are now at Place " ^ (get_place_name place) ^ ".");
   if owner_id = (get_curr_player_id st) then begin
-    print_endline "You own this property.\n";
-    let develop_price = 0.05 *. buy_price in
-    print_string "The price to develop this place is USD $";
-    print_float develop_price;
-    print_endline "\n";
-  end
-  else if owner_id = -1 then begin
-    print_endline "No one owns this place.";
-    print_string "The price to buy this place is USD $";
-    print_float buy_price;
-    print_endline "\n";
-  end
-  else
-    begin
-      print_string "The price to buy this place is USD $";
-      print_float buy_price;
-      print_endline "\n";
+    print_endline "You own this place.";
+    let develop_price_USD = 0.05 *. buy_price_USD in
+    let develop_price_local = exchange_amount_for country develop_price_USD in
+    let exchange_fee = exchange_fee_for country develop_price_USD in
+    if country_idx <> 0 then begin
+      print_string ("\nThe price to develop this place is " ^ currency);
+      print_float develop_price_local;
+      print_string "0, which is USD $";
+      print_float develop_price_USD; 
+      print_string "0.\nAdding a USD $";
+      print_float exchange_fee;
+      print_string "0 exchange fee adds up to a total develop price of USD $";
+      print_float (develop_price_USD +. exchange_fee);
+      print_endline "0.\n"
     end
+    else begin
+      print_string ("\nThe price to buy this place is " ^ currency);
+      print_float buy_price_local; print_endline "0.\n"
+    end
+  end
+  else begin
+    if owner_id = -1 then print_endline "No one owns this place."
+    else ();
+    if country_idx <> 0 then begin
+      let exchange_fee = exchange_fee_for country buy_price_USD in
+      print_string ("\nThe price to buy this place is " ^ currency);
+      print_float buy_price_local;
+      print_string"0, which is USD $";
+      print_float buy_price_USD;
+      print_string "0.\nAdding a USD $";
+      print_float exchange_fee;
+      print_string "0 exchange fee adds up to a total buy price of USD $";
+      print_float (buy_price_USD +. exchange_fee);
+      print_endline "0.\n"
+    end
+    else begin
+      print_string ("\nThe price to buy this place is " ^ currency);
+      print_float buy_price_local; print_endline "0.\n"
+    end
+  end
 
 (**[play_game state] is the function that allows the players to play the game*)
 let rec play_game state : unit =

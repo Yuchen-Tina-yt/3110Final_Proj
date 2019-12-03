@@ -21,3 +21,5 @@ val get_inactive_players_ids: t -> int list
 val make_current_player_inactive: t -> unit
 
 val get_curr_player_id: t -> int
+
+val country_at_index: t -> int -> Country.t
