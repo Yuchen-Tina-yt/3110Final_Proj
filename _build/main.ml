@@ -35,7 +35,8 @@ let winornot state : bool =
    user input commands *)
 let rec explore st : unit =
   if winornot (st) 
-  then (print_endline "Congrats! You win. Game ends, exit automatically."; 
+  then (print_endline ("Congrats! All other players have been eliminated. " ^ 
+                       "You win! Game ends, exit automatically."); 
         Stdlib.exit 0)
   else(
     print_endline 
@@ -63,7 +64,10 @@ let rec explore st : unit =
            with Failure msg -> print_endline msg; explore st
          end
        | Quit -> make_current_player_inactive st;
-         print_endline "You have quit the game. \n"
+         transfer_places st (-1);
+         (* Currently, the player's money isn't put back into the bank. 
+            Maybe that should be implemented. *) 
+         print_endline "You have quit the game. \n";
        | Money  -> begin 
            let player = (get_curr_player st) in 
            print_string ("You have USD $");

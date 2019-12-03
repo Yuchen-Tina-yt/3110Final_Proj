@@ -121,10 +121,11 @@ let purchase state =
     print_float (get_player_money owner'); print_endline "\n";
   end
 
-let transfer_places giver receiver places=
-  Array.map (fun h -> if get_ownership h = giver 
-              then change_ownership h receiver
-              else h) places
+let transfer_places state receiver =
+  state.places <-
+    Array.map (fun h -> if get_ownership h = state.current_player
+                then change_ownership h receiver
+                else h) state.places
 
 let rent state = 
   let curr_player_id = state.current_player in 
@@ -185,8 +186,7 @@ let rent state =
       print_string " now has USD $";
       print_float (get_player_money paid_player');
       print_endline "0.\n";
-      let places' = transfer_places curr_player_id owner_id state.places in
-      state.places <- places';
+      transfer_places state owner_id;
   end
 
 (** The cost to develop land is 5% of land and increase rent by 5%*)
