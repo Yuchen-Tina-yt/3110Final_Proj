@@ -164,6 +164,7 @@ let rec play_game state : unit =
 let main () =
   ANSITerminal.(print_string [red]
                   "\n\nWelcome to International Monopoly!\n");
+  Random.self_init ();
   let state = make_state in
   play_game state
 
