@@ -12,13 +12,18 @@ val make_country : string -> float -> float -> t
 (** [currency_in country] is the name of the currency used in [country]. *)
 val currency_in : t -> string
 
-(** [exchange_received_for country usd_amount] is the amount of money received 
-    after exchanging [usd_amount] in terms of the currency in [country]. 
+(** [exchange_amount_for_USD country usd_amount] is the amount of money received 
+    after exchanging [usd_amount] to the currency in [country]. 
 *)
-val exchange_amount_for : t -> float -> float
+val exchange_amount_for_USD : t -> float -> float
 
-(** [exchange_fee_for country usd_amount] is the amount of money in USDs lost to 
-    the bank after exchanging [usd_amount] in terms of the currency in 
-    [country].
+(** [exchange_amount_to_USD country other_amount] is the amount of money received 
+    after exchanging [other_amount] to USD. 
+*)
+val exchange_amount_to_USD : t -> float -> float
+
+(** [exchange_fee_for country amount] is the amount of money lost to the bank 
+    after exchanging [amount] to the local currency (doesn't matter what 
+    currency [amount] is originally in).
 *)
 val exchange_fee_for : t -> float -> float

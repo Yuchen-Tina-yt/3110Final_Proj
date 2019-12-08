@@ -1,30 +1,41 @@
 open Item
+module CurrencyMap = Map.Make(Int)
+open CurrencyMap
+open Money
 
 type t = 
-  {name: string; curr_pos: int; money: float; items: string list; id: int; }
+  {name: string; curr_pos: int; money: float Map.Make(Int).t ; 
+   items: string list; id: int; }
 
+let make_player (name:string) (curr_pos: int) (items: string list) (id: int ): t = 
+  let initial_money_map = empty |> add 0 1000. |> add 1 0. |> add 2 0. |> 
+                          add 3 0. |> add 4 0. |> add 5 0. in
+  {name =  name; curr_pos =  curr_pos; money = initial_money_map; 
+   items= items; id = id}
 
-let make_player (name:string) (curr_pos: int)
-    (money:float) (items: string list) (id: int ): t = 
-  {name =  name; curr_pos =  curr_pos; money = money; items= items; id = id}
+let add_wealth (player:t) (money: Money.t) : t= 
+  let currency_of_money = get_country_idx money in
+  let current_wealth_in_currency = 
+    find currency_of_money player.money in
+  let amt_of_money = get_amount money in
 
-let change_wealth (player:t) (amt:float) : t= 
-  let new_money = player.money +. amt in
+  let new_money = current_wealth_in_currency +. amt_of_money in
   if new_money >= 0. then
-    {name= player.name; curr_pos = player.curr_pos; money = new_money;
+    {name= player.name; curr_pos = player.curr_pos; 
+     money = add currency_of_money new_money player.money;
      items = player.items; id = player.id}
   else
-    failwith ("Sorry, " ^ player.name ^ " does not have enough money. ")
+    failwith ("Sorry, " ^ player.name ^ " does not have enough money and might 
+    need to swap currencies.")
 
-
-let add_item (player:t) (item: Item.t) : t=
+let add_item (player:t) (item: Item.t) : t= 
   {name = player.name; curr_pos = player.curr_pos; 
-   money = player.money +. get_item_value item;
+   money = player.money;
    items = get_item_name item :: player.items; id = player.id}
 
 let remove_item (player: t) (item: Item.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
-   money = player.money -. get_item_value item;
+   money = player.money;
    items = List.filter 
        (fun x -> x <> get_item_name item) player.items; id = player.id;}
 
@@ -40,11 +51,12 @@ let get_id (player:t) =
 let get_curr_pos player =
   player.curr_pos
 
-let get_player_name player =
+let get_player_name player = 
   player.name
 
 let get_player_money player =
-  player.money
+  bindings player.money |> List.map (function
+      | country_idx, value -> make_money country_idx value)
 
 
 (*

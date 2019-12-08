@@ -4,6 +4,8 @@ type t = {name:string; country: int ; value: float; ownerid: int;
           num_houses: int; rent_payment: float; 
           pass_payment: float}
 
+(* [value], [rent_payment], and [pass_payment] are all in terms of the native 
+   country's currency. *)
 let make_place name country value rent_payment pass_payment =
   {name = name; country = country; value = value; ownerid = -1; 
    num_houses = 0; rent_payment = rent_payment;

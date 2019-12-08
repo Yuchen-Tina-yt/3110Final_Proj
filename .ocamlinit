@@ -4,6 +4,6 @@
 #load "player.cmo";;
 #load "place.cmo";;
 #load "item.cmo";;
-#load "bank.cmo";;
 #load "country.cmo";;
+#load "money.cmo";;
 

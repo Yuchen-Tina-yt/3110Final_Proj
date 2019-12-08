@@ -25,3 +25,7 @@ val get_curr_player_id: t -> int
 val country_at_index: t -> int -> Country.t
 
 val transfer_places: t -> int -> unit
+
+val get_money_list_total_USD_equiv: t -> Money.t list -> float
+
+val money_string: t -> Money.t list -> string
