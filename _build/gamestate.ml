@@ -186,60 +186,66 @@ let check_rent state =
   let curr_player_id = state.current_player in 
   let curr_player = state.players.(curr_player_id) in 
   let place = state.places.(get_curr_pos curr_player) in
+  let country_idx = get_country place in 
+  let country = state.countries.(country_idx) in
   let owner_id = Place.get_ownership place in
-  not ((owner_id = -1) ||  (owner_id = curr_player_id))
+  let currency = currency_in country in
+  if ((owner_id = -1) ||  (owner_id = curr_player_id)) then false
+  else begin 
+    let paid_player = state.players.(owner_id) in
+    let rent = Place.get_rent place in
+    print_string"You landed on Player ";
+    print_string (Player.get_player_name paid_player);
+    print_string ("'s place. You are charged with a rent of " ^ currency);
+    print_float (rent);
+    print_endline "0.";
+    true 
+  end
 
-let rent state = 
+let rent state is_higher = begin
   let curr_player_id = state.current_player in 
   let curr_player = state.players.(curr_player_id) in 
   let place = state.places.(get_curr_pos curr_player) in
   let country_idx = get_country place in 
   let country = state.countries.(country_idx) in
   let owner_id = Place.get_ownership place in
-  let currency = currency_in country in
-  if ((owner_id = -1)|| (owner_id = curr_player_id) ) then ()
-  else begin
-    let paid_player = state.players.(owner_id) in
-    let rent = Place.get_rent place in
-    print_string"You landed on Player ";
-    print_string (Player.get_player_name paid_player);
-    print_string ("'s place. You are forced to pay a rent of " ^ currency);
-    print_float (rent);
-    print_endline "0.";
-    try (* If the current player has enough money to pay the rent *)
-      (let curr_player' = pay rent state curr_player country_idx country in
-       let paid_player' = Player.add_wealth paid_player 
-           (make_money country_idx (+. rent)) in
-       state.players.(curr_player_id) <- curr_player';
-       state.players.(owner_id) <- paid_player';
-       print_string "You now have ";
-       print_string (money_string state (get_player_money curr_player'));
-       print_endline"0.";
-       print_string "Player ";
-       print_string (get_player_name paid_player');
-       print_string" now has ";
-       print_string (money_string state (get_player_money paid_player')); 
-       print_endline"\n";)
-    with Failure msg -> 
-      (*Bankruptcy if the current player does not have enough money to pay the 
-        rent *)
-      print_endline msg;
-      print_endline "You went bankrupt! You are out of the game...";
-      let paid_player_name = get_player_name paid_player in
-      print_endline 
-        ("\nGiving all of your money and places to " ^ paid_player_name ^ 
-         "...\n");
-      make_current_player_inactive state;
-      let curr_player_wealth = get_player_money curr_player in 
-      let paid_player' = transfer_wealth paid_player curr_player_wealth in
-      state.players.(owner_id) <- paid_player';
-      print_string "Player ";
-      print_string (get_player_name paid_player');
-      print_string " now has ";
-      print_string (money_string state (get_player_money paid_player'));
-      print_endline "0.\n";
-      transfer_places state owner_id;
-  end
+  let paid_player = state.players.(owner_id) in
+  let rent = if is_higher then 1.5*.(Place.get_rent place) 
+    else Place.get_rent place in
+  try (* If the current player has enough money to pay the rent *)
+    (let curr_player' = pay rent state curr_player country_idx country in
+     let paid_player' = Player.add_wealth paid_player 
+         (make_money country_idx (+. rent)) in
+     state.players.(curr_player_id) <- curr_player';
+     state.players.(owner_id) <- paid_player';
+     print_string "You now have ";
+     print_string (money_string state (get_player_money curr_player'));
+     print_endline"0.";
+     print_string "Player ";
+     print_string (get_player_name paid_player');
+     print_string" now has ";
+     print_string (money_string state (get_player_money paid_player')); 
+     print_endline"\n";)
+  with Failure msg -> 
+    (*Bankruptcy if the current player does not have enough money to pay the 
+      rent *)
+    print_endline msg;
+    print_endline "You went bankrupt! You are out of the game...";
+    let paid_player_name = get_player_name paid_player in
+    print_endline 
+      ("\nGiving all of your money and places to " ^ paid_player_name ^ 
+       "...\n");
+    make_current_player_inactive state;
+    let curr_player_wealth = get_player_money curr_player in 
+    let paid_player' = transfer_wealth paid_player curr_player_wealth in
+    state.players.(owner_id) <- paid_player';
+    print_string "Player ";
+    print_string (get_player_name paid_player');
+    print_string " now has ";
+    print_string (money_string state (get_player_money paid_player'));
+    print_endline "0.\n";
+    transfer_places state owner_id;
+end
 
 (** The cost to develop land is 5% of land and increase rent by 5%*)
 let develop_land state = 
@@ -280,22 +286,38 @@ let get_curr_player_id state =
 let battle state = 
   let player_index = state.current_player in 
   let player = state.players.(player_index) in 
-  let random_int = Random.int (List.length (Player.get_weapons player)) in 
-  let weapon_1 = List.nth (Player.get_weapons player) random_int in 
-  let player' = Player.remove_weapon player weapon_1 in 
   let place_index = get_curr_pos player in
   let place = state.places.(place_index) in 
   let owner_index = Place.get_ownership place in 
   if (owner_index <> -1) then begin
-    state.players.(player_index) <- player'; 
     let owner = state.players.(owner_index) in 
-    let random_int_2 = Random.int (List.length (Player.get_weapons owner)) in 
-    let weapon_2 = List.nth (Player.get_weapons owner) random_int_2 in
-    let owner' = Player.remove_weapon owner weapon_2 in 
-    state.players.(owner_index) <- owner';  
-    if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then 
-      () else 
-      rent state 
+    let num_weapons_1 = List.length (Player.get_weapons player) in
+    let num_weapons_2 = List.length (Player.get_weapons owner) in 
+    if num_weapons_1 = 0 then
+      begin
+        print_endline "You have no weapons.";
+        print_endline ("You lost the battle and are forced to pay a higher " ^ 
+                       "rent (50% greater).");
+        rent state true;
+      end
+    else if num_weapons_2 = 0 then 
+      print_endline "You won the battle."
+    else
+      let random_int = Random.int num_weapons_1 in 
+      let random_int_2 = Random.int num_weapons_2 in 
+      let weapon_1 = List.nth (Player.get_weapons player) random_int in 
+      let weapon_2 = List.nth (Player.get_weapons owner) random_int_2 in
+      let player' = Player.remove_weapon player weapon_1 in 
+      let owner' = Player.remove_weapon owner weapon_2 in 
+      state.players.(player_index) <- player'; 
+      state.players.(owner_index) <- owner';  
+      if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then 
+        print_endline "You won the battle." 
+      else begin
+        print_endline ("You lost the battle and are forced to pay a higher " ^ 
+                       "rent (50% greater).");
+        rent state true;
+      end
   end
   else ()
 

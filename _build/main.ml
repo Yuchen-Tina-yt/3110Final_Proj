@@ -168,7 +168,7 @@ let rec choose_rent_or_battle st =
      | Purchase | Develop | Quit | Money | End | Chance -> 
        print_endline "Invalid command at this time."
      | Use object_phrase -> print_endline "Invalid command at this time."
-     | Pay -> print_endline "You have decided to pay the rent."; rent st;
+     | Pay -> print_endline "You have decided to pay the rent."; rent st false;
      | Battle -> print_endline "You have decided to battle."; battle st;
     )
   with | Malformed -> (print_endline "error: command Malformed."; 
@@ -206,7 +206,7 @@ let lottery st : unit =
     print_string("You will move forward a random step.");
     welcome st;
     roll st;
-    rent st;
+    rent st false;
     play_round st;
 
   end

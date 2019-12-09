@@ -8,7 +8,7 @@ val purchase : t -> unit
 
 val develop_land : t -> unit
 
-val rent : t -> unit
+val rent : t -> bool -> unit
 
 val turn : t -> unit
 
