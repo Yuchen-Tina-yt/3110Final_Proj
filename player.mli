@@ -27,6 +27,10 @@ val get_player_name: t -> string
 
 val get_player_money: t -> Money.t list
 
+val get_player_money_specific_currency: t -> int -> float
+
+val change_player_chance: t -> string -> t
+
 (*
 (**[move_pos player steps places] is the player after moving number of steps 
    of steps from the player's current position on the map *)

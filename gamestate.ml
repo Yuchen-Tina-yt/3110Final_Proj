@@ -163,6 +163,11 @@ let purchase state =
     print_endline "\n";
   end
 
+(**change the current player *)
+let change_player state new_player = 
+  let player_index = state.current_player in 
+  state.players.(player_index) <- new_player
+
 let transfer_places state receiver =
   state.places <-
     Array.map (fun h -> if get_ownership h = state.current_player
@@ -187,7 +192,7 @@ let rent state =
     let rent = Place.get_rent place in
     print_string"You landed on Player ";
     print_string (Player.get_player_name paid_player);
-    print_string ("'s place. You are froced to pay a rent of " ^ currency);
+    print_string ("'s place. You are forced to pay a rent of " ^ currency);
     print_float (rent);
     print_endline "0.";
     try (* If the current player has enough money to pay the rent *)

@@ -4,6 +4,7 @@ open Player
 open Country 
 open Gamestate
 open Command
+open Money
 exception Illegal 
 
 (**[print_strlist] is the function that prints the string list to the console*)
@@ -28,61 +29,6 @@ let winornot state : bool =
   let money = state |> get_curr_player |> get_player_money in 
   if ((get_money_list_total_USD_equiv state money) > 1500.0 
       || (List.length (get_inactive_players_ids state)) = 3)then true else false
-
-(**[explore st] allows the player explore the state and make commands. 
-   The function mutates the state and the player according to the parsed
-   user input commands *)
-let rec explore st : unit =
-  if winornot (st) 
-  then (print_endline ("Congrats! All other players have been eliminated. " ^ 
-                       "You win! Game ends, exit automatically."); 
-        Stdlib.exit 0)
-  else(
-    print_endline 
-      "       To purchase this place, enter purchase; \n 
-       to develop your place, enter develop.\n
-       to see your money, enter money; \n
-       to quit game, enter quit.\n
-       to end your turn, enter end\n";
-    print_string  "> ";
-    try 
-      (let command = parse (read_line () ) in
-       match command with 
-       | Purchase ->  begin 
-           try begin 
-             purchase st; 
-             print_endline "You can develop this land when you next visit. ";
-             print_endline "Your turn will now end. \n";
-           end
-           with Failure msg -> print_endline msg;
-         end
-       | Develop -> begin
-           try begin
-             develop_land st;
-           end
-           with Failure msg -> print_endline msg; explore st
-         end
-       | Quit -> make_current_player_inactive st;
-         transfer_places st (-1);
-         (* Currently, the player's money isn't put back into the bank. 
-            Maybe that should be implemented. *) 
-         print_endline "You have quit the game. \n";
-       | Money  -> begin 
-           let player = (get_curr_player st) in 
-           print_string ("You have ");
-           print_string (money_string st (get_player_money player)); 
-           print_endline "0."; 
-           explore st end
-       | End ->  print_endline "Your turn ends.";
-
-      )
-    with | Malformed -> (print_endline "error: command Malformed."; 
-                         explore st)
-
-         | Empty -> (print_endline "error: command is Empty."; 
-                     explore st ))
-
-
 
 (**[roll st] mutates the state and the player after moving the player 
    to the place in the state corresponds to the number of the rolled die *)
@@ -126,6 +72,104 @@ let roll st =
       print_float buy_price; print_endline "0.\n"
     end
   end
+
+(**[explore st] allows the player explore the state and make commands. 
+   The function mutates the state and the player according to the parsed
+   user input commands *)
+let rec explore st : unit =
+  if winornot (st) 
+  then (ANSITerminal.(
+      print_string 
+        [magenta]
+        "Congrats! All other players have been eliminated. 
+        You win! Game ends, exit automatically.\n");
+     Stdlib.exit 0)
+  else(
+    let num = Random.int 5 in
+    if num = 1 then begin 
+      ANSITerminal.(
+        print_string [blue]
+          "Boom! You're in the Monopoly's greatest lottery system!\n");
+      let lottery_num = Random.int 10 in 
+      if lottery_num = 0 then begin     (**give money case *)
+        let amt = (Random.float 500.)in 
+        let usd_money = make_money 0 amt in
+        print_string("You will be given $");
+        print_float(amt); print_endline("!");
+        let curr_player = get_curr_player st in 
+        let new_player =  add_wealth curr_player usd_money in 
+        change_player st new_player;
+      end
+      else if lottery_num = 1 then begin     (**lose money case *)
+        let curr_player = get_curr_player st in 
+        let amt = -.(Random.float 10.) *. 0.01 *. 
+                    get_player_money_specific_currency curr_player 0 in 
+        let usd_money = make_money 0 amt in
+        print_string("You will lose $");
+        print_float(amt); print_endline("!");
+        let new_player =  add_wealth curr_player usd_money in
+        change_player st new_player;
+      end
+      else if lottery_num = 2 then begin     (**move forward case *)
+        print_string("You will move forward a random step.");
+        roll st;
+        rent st;
+        explore st;
+      end
+      else begin  (** chance cards*)
+        print_string("You will be given a chance card!");
+        let curr_player = get_curr_player st in 
+        let chance_cards = ["free land"; "free weapon"] in
+        let chance_num = Random.int 1 in 
+        let card = List.nth chance_cards (chance_num) in 
+        let new_player = change_player_chance curr_player card in 
+        change_player st new_player;
+      end
+    end 
+    else
+      print_endline 
+        "       To purchase this place, enter purchase; \n 
+       to develop your place, enter develop.\n
+       to see your money, enter money; \n
+       to quit game, enter quit.\n
+       to end your turn, enter end\n";
+    print_string  "> ";
+    try 
+      (let command = parse (read_line () ) in
+       match command with 
+       | Purchase ->  begin 
+           try begin 
+             purchase st; 
+             print_endline "You can develop this land when you next visit. ";
+             print_endline "Your turn will now end. \n";
+           end
+           with Failure msg -> print_endline msg;
+         end
+       | Develop -> begin
+           try begin
+             develop_land st;
+           end
+           with Failure msg -> print_endline msg; explore st
+         end
+       | Quit -> make_current_player_inactive st;
+         transfer_places st (-1);
+         (* Currently, the player's money isn't put back into the bank. 
+            Maybe that should be implemented. *) 
+         print_endline "You have quit the game. \n";
+       | Money  -> begin 
+           let player = (get_curr_player st) in 
+           print_string ("You have ");
+           print_string (money_string st (get_player_money player)); 
+           print_endline "0."; 
+           explore st end
+       | End ->  print_endline "Your turn ends.";
+       | Chance -> print_endline "Here are your chance cards: ";
+      )
+    with | Malformed -> (print_endline "error: command Malformed."; 
+                         explore st)
+
+         | Empty -> (print_endline "error: command is Empty."; 
+                     explore st ))
 
 (**[play_game state] is the function that allows the players to play the game*)
 let rec play_game state : unit =

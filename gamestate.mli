@@ -29,3 +29,7 @@ val transfer_places: t -> int -> unit
 val get_money_list_total_USD_equiv: t -> Money.t list -> float
 
 val money_string: t -> Money.t list -> string
+
+val pay: float -> t -> Player.t -> int -> Country.t -> Player.t
+
+val change_player: t -> Player.t -> unit

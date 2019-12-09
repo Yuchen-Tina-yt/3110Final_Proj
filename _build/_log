@@ -47,6 +47,10 @@ ocamlfind ocamlc -c -package ANSITerminal -o gamestate.cmo gamestate.ml # cached
 ocamlfind ocamldep -package ANSITerminal -modules item.ml > item.ml.depends # cached
 # Target: item.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:item.cmo, file:item.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package ANSITerminal -o item.cmo item.ml # cached
+# Target: money.ml.depends, tags: { package(ANSITerminal), extension:ml, file:money.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package ANSITerminal -modules money.ml > money.ml.depends # cached
+# Target: money.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:money.cmo, file:money.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package ANSITerminal -o money.cmo money.ml # cached
 # Target: place.ml.depends, tags: { package(ANSITerminal), extension:ml, file:place.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package ANSITerminal -modules place.ml > place.ml.depends # cached
 # Target: place.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:place.cmo, file:place.ml, implem, ocaml, quiet, traverse }
@@ -55,10 +59,6 @@ ocamlfind ocamlc -c -package ANSITerminal -o place.cmo place.ml # cached
 ocamlfind ocamldep -package ANSITerminal -modules player.ml > player.ml.depends # cached
 # Target: player.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package ANSITerminal -o player.cmo player.ml # cached
-# Target: money.ml.depends, tags: { package(ANSITerminal), extension:ml, file:money.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package ANSITerminal -modules money.ml > money.ml.depends # cached
-# Target: money.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:money.cmo, file:money.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package ANSITerminal -o money.cmo money.ml # cached
 # Target: main.byte, tags: { package(ANSITerminal), byte, dont_link_with, extension:byte, file:main.byte, link, ocaml, program, quiet, traverse }
 ocamlfind ocamlc -linkpkg -package ANSITerminal command.cmo country.cmo item.cmo money.cmo player.cmo place.cmo gamestate.cmo main.cmo -o main.byte
 # Compilation successful.
