@@ -288,5 +288,21 @@ let battle state =
   end
   else ()
 
+let get_free_place state = 
+  let player_index = state.current_player in 
+  let player = state.players.(player_index) in 
+  let place = state.places.(get_curr_pos player) in 
+  if (get_ownership place = -1) then begin
+    let place' = Place.change_ownership place (player_index)in 
+    state.places.(get_curr_pos player) <- place';
+    print_endline ("Congrats, you get this previously " ^ 
+                   "unowned land " ^ (get_place_name place') ^ " for free!");
+  end
+  else 
+    print_endline "You can only get an unowned land for free."
+
+
+
+
 
 

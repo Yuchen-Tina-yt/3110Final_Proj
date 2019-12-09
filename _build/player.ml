@@ -72,6 +72,9 @@ let change_player_chance player str =
 let get_weapons player =
   player.weapons
 
+let get_player_chance player =
+  player.chance
+
 
 (*
 (**[find_newpos_name player steps places] is the new place name of the player 

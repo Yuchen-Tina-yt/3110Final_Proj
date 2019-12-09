@@ -1,4 +1,4 @@
-type object_phrase
+type object_phrase = string list
 type command = 
   | Money
   | Quit
@@ -6,6 +6,7 @@ type command =
   | Develop
   | End
   | Chance
+  | Use of object_phrase
 
 exception Empty
 

@@ -73,103 +73,137 @@ let roll st =
     end
   end
 
+
+let rec play_round st: unit = 
+  print_endline 
+    "       To purchase this place, enter purchase; \n 
+       to develop your place, enter develop.\n
+       to see your money, enter money; \n
+       to quit game, enter quit.\n
+       to end your turn, enter end\n";
+  print_string  "> ";
+  try 
+    (let command = parse (read_line () ) in
+     match command with 
+     | Purchase ->  begin 
+         try begin 
+           purchase st; 
+           print_endline "You can develop this land when you next visit. ";
+           print_endline "Your turn will now end. \n";
+         end
+         with Failure msg -> print_endline msg;
+       end
+     | Develop -> begin
+         try begin
+           develop_land st;
+         end
+         with Failure msg -> print_endline msg; play_round st
+       end
+     | Quit -> make_current_player_inactive st;
+       transfer_places st (-1);
+       (* Currently, the player's money isn't put back into the bank. 
+          Maybe that should be implemented. *) 
+       print_endline "You have quit the game. \n";
+     | Money  -> begin 
+         let player = (get_curr_player st) in 
+         print_string ("You have $");
+         print_string (money_string st (get_player_money player)); print_endline "0."; 
+         play_round st end
+     | End ->  print_endline "Your turn ends.";
+     | Chance -> let player = (get_curr_player st) in
+       let cards = get_player_chance player in
+       if List.length cards = 0 then begin 
+         print_endline "You don't have any chance cards currently.";
+         play_round st end
+       else begin
+         print_string "Here are your chance cards: ";
+         print_strlist cards;
+         print_endline "";
+         play_round st
+       end
+     | Use object_phrase -> 
+       let player = (get_curr_player st) in
+       let cards = get_player_chance player in
+       let card_name = (String.concat " " object_phrase) in 
+
+       if List.mem card_name cards then begin
+         print_string " You used chance card ";
+         print_string card_name;
+         if card_name = "free place" then get_free_place st
+       end
+       else print_endline "You do not own this chance card. You cannot use it.";
+       play_round st
+    )
+  with | Malformed -> (print_endline "error: command Malformed."; 
+                       play_round st)
+
+       | Empty -> (print_endline "error: command is Empty."; 
+                   play_round st )
+
+let lottery st : unit = 
+  ANSITerminal.(
+    print_string [blue]
+      "Boom! You're in the Monopoly's greatest lottery system!");
+  let lottery_num = Random.int 100 in 
+  if lottery_num = 0 then begin     (**give money case *)
+    let amt = (Random.float 500.)in 
+    let new_money = make_money 0 amt in
+    print_string("You will be given $");
+    print_float(amt); print_endline("!");
+    let curr_player = get_curr_player st in 
+    let new_player =  add_wealth curr_player new_money in 
+    change_player st new_player;
+  end
+  else if lottery_num = 1 then begin     (**lose money case *)
+    let curr_player = get_curr_player st in 
+    let amt = -.(Random.float 10.) *. 0.01 *.
+                get_player_money_specific_currency curr_player 0 in 
+    print_string("You will lose $");
+    print_float(amt); print_endline("!");
+    let new_money = make_money 0 amt in
+    let new_player =  add_wealth curr_player new_money in 
+    change_player st new_player;
+  end
+  else if lottery_num = 2 then begin     (**move forward case *)
+    print_string("You will move forward a random step.");
+    roll st;
+    rent st;
+    play_round st;
+  end
+  else begin  (** chance cards*)
+    print_string("You will be given a chance card!");
+    let curr_player = get_curr_player st in 
+    let chance_cards = ["free land"; "free weapon"] in
+    let chance_num = Random.int 2 in 
+    let card = List.nth chance_cards (chance_num) in 
+    print_string card;
+    let new_player = change_player_chance curr_player card in 
+    change_player st new_player;
+    print_string "You currently hold the following chance cards: ";
+    print_strlist  (get_player_chance (get_curr_player st));
+  end
+
+
 (**[explore st] allows the player explore the state and make commands. 
    The function mutates the state and the player according to the parsed
    user input commands *)
 let rec explore st : unit =
   if winornot (st) 
-  then (ANSITerminal.(
+  then (
+    ANSITerminal.(
       print_string 
         [magenta]
         "Congrats! All other players have been eliminated. 
-        You win! Game ends, exit automatically.\n");
-     Stdlib.exit 0)
+        You win! Game ends, exit automatically.");
+    Stdlib.exit 0)
   else(
-    let num = Random.int 5 in
-    if num = 1 then begin 
-      ANSITerminal.(
-        print_string [blue]
-          "Boom! You're in the Monopoly's greatest lottery system!\n");
-      let lottery_num = Random.int 10 in 
-      if lottery_num = 0 then begin     (**give money case *)
-        let amt = (Random.float 500.)in 
-        let usd_money = make_money 0 amt in
-        print_string("You will be given $");
-        print_float(amt); print_endline("!");
-        let curr_player = get_curr_player st in 
-        let new_player =  add_wealth curr_player usd_money in 
-        change_player st new_player;
-      end
-      else if lottery_num = 1 then begin     (**lose money case *)
-        let curr_player = get_curr_player st in 
-        let amt = -.(Random.float 10.) *. 0.01 *. 
-                    get_player_money_specific_currency curr_player 0 in 
-        let usd_money = make_money 0 amt in
-        print_string("You will lose $");
-        print_float(amt); print_endline("!");
-        let new_player =  add_wealth curr_player usd_money in
-        change_player st new_player;
-      end
-      else if lottery_num = 2 then begin     (**move forward case *)
-        print_string("You will move forward a random step.");
-        roll st;
-        rent st;
-        explore st;
-      end
-      else begin  (** chance cards*)
-        print_string("You will be given a chance card!");
-        let curr_player = get_curr_player st in 
-        let chance_cards = ["free land"; "free weapon"] in
-        let chance_num = Random.int 1 in 
-        let card = List.nth chance_cards (chance_num) in 
-        let new_player = change_player_chance curr_player card in 
-        change_player st new_player;
-      end
-    end 
-    else
-      print_endline 
-        "       To purchase this place, enter purchase; \n 
-       to develop your place, enter develop.\n
-       to see your money, enter money; \n
-       to quit game, enter quit.\n
-       to end your turn, enter end\n";
-    print_string  "> ";
-    try 
-      (let command = parse (read_line () ) in
-       match command with 
-       | Purchase ->  begin 
-           try begin 
-             purchase st; 
-             print_endline "You can develop this land when you next visit. ";
-             print_endline "Your turn will now end. \n";
-           end
-           with Failure msg -> print_endline msg;
-         end
-       | Develop -> begin
-           try begin
-             develop_land st;
-           end
-           with Failure msg -> print_endline msg; explore st
-         end
-       | Quit -> make_current_player_inactive st;
-         transfer_places st (-1);
-         (* Currently, the player's money isn't put back into the bank. 
-            Maybe that should be implemented. *) 
-         print_endline "You have quit the game. \n";
-       | Money  -> begin 
-           let player = (get_curr_player st) in 
-           print_string ("You have ");
-           print_string (money_string st (get_player_money player)); 
-           print_endline "0."; 
-           explore st end
-       | End ->  print_endline "Your turn ends.";
-       | Chance -> print_endline "Here are your chance cards: ";
-      )
-    with | Malformed -> (print_endline "error: command Malformed."; 
-                         explore st)
+    Random.self_init ();
+    let num = Random.int 2 in
+    (*print_int num;*)
+    if num = 1 then lottery st
+    else play_round st
+  )
 
-         | Empty -> (print_endline "error: command is Empty."; 
-                     explore st ))
 
 (**[play_game state] is the function that allows the players to play the game*)
 let rec play_game state : unit =
@@ -181,7 +215,8 @@ let rec play_game state : unit =
     rent state;
     explore state;
   end
-  else print_endline ("\nPlayer " ^ (get_player_name curr_player) ^ " has been " ^ 
+  else print_endline ("\nPlayer " ^ 
+                      (get_player_name curr_player) ^ " has been " ^ 
                       "eliminated.\nSkipping to the next player...\n");
   turn state;
   play_game state
@@ -202,5 +237,3 @@ let main () =
 
 (* Execute the game engine. *)
 let () = main ()
-
-

@@ -266,24 +266,42 @@ let turn state =
 let get_curr_player_id state =
   state.current_player
 
-let battle state =
-  Random.self_init (); 
+let battle state = 
   let player_index = state.current_player in 
   let player = state.players.(player_index) in 
   let random_int = Random.int (List.length (Player.get_weapons player)) in 
   let weapon_1 = List.nth (Player.get_weapons player) random_int in 
   let player' = Player.remove_weapon player weapon_1 in 
-  state.players.(player_index) <- player'; 
-  let place = state.places.(get_curr_pos player) in 
+  let place_index = get_curr_pos player in
+  let place = state.places.(place_index) in 
   let owner_index = Place.get_ownership place in 
-  let owner = state.players.(owner_index) in 
-  let random_int_2 = Random.int (List.length (Player.get_weapons owner)) in 
-  let weapon_2 = List.nth (Player.get_weapons owner) random_int_2 in
-  let owner' = Player.remove_weapon owner weapon_2 in 
-  state.players.(owner_index) <- owner';  
-  if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then 
-    () else 
-    rent state 
+  if (owner_index <> -1) then begin
+    state.players.(player_index) <- player'; 
+    let owner = state.players.(owner_index) in 
+    let random_int_2 = Random.int (List.length (Player.get_weapons owner)) in 
+    let weapon_2 = List.nth (Player.get_weapons owner) random_int_2 in
+    let owner' = Player.remove_weapon owner weapon_2 in 
+    state.players.(owner_index) <- owner';  
+    if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then 
+      () else 
+      rent state 
+  end
+  else ()
+
+let get_free_place state = 
+  let player_index = state.current_player in 
+  let player = state.players.(player_index) in 
+  let place = state.places.(get_curr_pos player) in 
+  if (get_ownership place = -1) then begin
+    let place' = Place.change_ownership place (player_index)in 
+    state.places.(get_curr_pos player) <- place';
+    print_endline ("Congrats, you get this previously " ^ 
+                   "unowned land " ^ (get_place_name place') ^ " for free!");
+  end
+  else 
+    print_endline "You can only get an unowned land for free."
+
+
 
 
 
