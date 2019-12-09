@@ -148,6 +148,8 @@ let rec play_round st: unit =
        end
        else print_endline "You do not own this chance card. You cannot use it.";
        play_round st
+     |Buy_Weapon -> 
+       player_get_weapon st;
      |Pay | Battle -> print_endline "Invalid command at this time."
     )
   with | Malformed -> (print_endline "error: command Malformed."; 
@@ -165,7 +167,7 @@ let rec choose_rent_or_battle st =
   try 
     (let command = parse (read_line () ) in
      match command with 
-     | Purchase | Develop | Quit | Money | End | Chance -> 
+     | Purchase | Develop | Quit | Money | End | Chance | Buy_Weapon -> 
        print_endline "Invalid command at this time."
      | Use object_phrase -> print_endline "Invalid command at this time."
      | Pay -> print_endline "You have decided to pay the rent."; rent st false;

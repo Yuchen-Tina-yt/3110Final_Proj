@@ -9,4 +9,5 @@
 #load "weapon.cmo";;
 #load "armory.cmo";;
 #load "design.cmo";;
+#load "battle_art.cmo";;
 

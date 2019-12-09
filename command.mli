@@ -9,6 +9,7 @@ type command =
   | Use of object_phrase
   | Battle
   | Pay
+  | Buy_Weapon
 
 exception Empty
 

@@ -39,3 +39,5 @@ val get_free_place: t-> unit
 val check_rent: t -> bool
 
 val battle: t -> unit
+
+val player_get_weapon: t -> unit

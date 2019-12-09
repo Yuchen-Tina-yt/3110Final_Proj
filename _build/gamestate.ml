@@ -327,6 +327,7 @@ let player_get_weapon state =
   let weapon = Armory.armory_get_weapon state.armory in 
   let armory' = Armory.remove_weapon state.armory weapon in 
   let player' = Player.buy_weapon player weapon in 
+  let () = Battle_art.get_weapon_design weapon in 
   state.armory <- armory'; 
   state.players.(player_index) <- player' 
 
