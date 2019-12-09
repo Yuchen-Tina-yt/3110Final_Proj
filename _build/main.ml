@@ -86,6 +86,7 @@ let roll st =
   end
 
 
+
 let rec play_round st: unit = 
   ANSITerminal.print_string [ANSITerminal.green]
     "  My Lord, you now have the following options: \n
@@ -158,27 +159,6 @@ let rec play_round st: unit =
        | Empty -> (print_endline "error: command is Empty."; 
                    play_round st )
 
-let rec choose_rent_or_battle st = 
-  ANSITerminal.print_string [ANSITerminal.green]
-    "  My Lord, you now have the following options: \n
-       Enter battle to battle \n
-       Enter pay to pay rent \n";
-  print_string  "> ";
-  try 
-    (let command = parse (read_line () ) in
-     match command with 
-     | Purchase | Develop | Quit | Money | End | Chance | Buy_Weapon -> 
-       print_endline "Invalid command at this time."
-     | Use object_phrase -> print_endline "Invalid command at this time."
-     | Pay -> print_endline "You have decided to pay the rent."; rent st false;
-     | Battle -> print_endline "You have decided to battle."; battle st;
-    )
-  with | Malformed -> (print_endline "error: command Malformed."; 
-                       choose_rent_or_battle st)
-
-       | Empty -> (print_endline "error: command is Empty."; 
-                   choose_rent_or_battle st )
-
 
 let lottery st : unit = 
   ANSITerminal.(
@@ -225,6 +205,8 @@ let lottery st : unit =
     print_strlist  (get_player_chance (get_curr_player st));
   end
 
+
+
 (**[explore st] allows the player explore the state and make commands. 
    The function mutates the state and the player according to the parsed
    user input commands *)
@@ -248,8 +230,40 @@ let explore st : unit =
   )
 
 
+
+let rec choose_rent_or_battle st = 
+  ANSITerminal.print_string [ANSITerminal.green]
+    "  My Lord, you now have the following options: \n
+       Enter battle to battle \n
+       Enter pay to pay rent \n
+       Enter quit to forever rest in peace\n";
+  print_string  "> ";
+  try 
+    (let command = parse (read_line () ) in
+     match command with 
+     | Purchase | Develop  | Money | End | Chance | Buy_Weapon -> 
+       print_endline "Invalid command at this time."
+     | Use object_phrase -> print_endline "Invalid command at this time."
+     | Pay -> print_endline "You have decided to pay the rent."; rent st false;
+     | Battle -> print_endline "You have decided to battle."; battle st;
+     | Quit -> make_current_player_inactive st;
+       transfer_places st (-1); 
+       (* Currently, the player's money isn't put back into the bank. 
+          Maybe that should be implemented. *) 
+       ANSITerminal.print_string [ANSITerminal.red] 
+         "You have quit the game.\n You will be missed dearly. 💕 \n\n";
+       turn st; play_game st
+    )
+  with | Malformed -> (print_endline "error: command Malformed."; 
+                       choose_rent_or_battle st)
+
+       | Empty -> (print_endline "error: command is Empty."; 
+                   choose_rent_or_battle st )
+
+
 (**[play_game state] is the function that allows the players to play the game*)
-let rec play_game state : unit =
+and 
+  play_game state : unit =
   let curr_player = get_curr_player state in
   if not (List.mem (get_id curr_player) (get_inactive_players_ids state)) 
   then begin
@@ -270,6 +284,8 @@ let rec play_game state : unit =
 let play state : unit = 
   (* welcome state; *)
   play_game state
+
+
 
 
 (** [main ()] prompts for the game to play, then starts it. *)

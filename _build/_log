@@ -84,5 +84,5 @@ ocamlfind ocamldep -package ANSITerminal -modules weapon.ml > weapon.ml.depends 
 # Target: weapon.cmo, tags: { package(ANSITerminal), byte, compile, extension:cmo, extension:ml, file:weapon.cmo, file:weapon.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package ANSITerminal -o weapon.cmo weapon.ml # cached
 # Target: main.byte, tags: { package(ANSITerminal), byte, dont_link_with, extension:byte, file:main.byte, link, ocaml, program, quiet, traverse }
-ocamlfind ocamlc -linkpkg -package ANSITerminal command.cmo country.cmo design.cmo money.cmo weapon.cmo player.cmo armory.cmo battle_art.cmo place.cmo gamestate.cmo main.cmo -o main.byte # cached
+ocamlfind ocamlc -linkpkg -package ANSITerminal command.cmo country.cmo design.cmo money.cmo weapon.cmo player.cmo armory.cmo battle_art.cmo place.cmo gamestate.cmo main.cmo -o main.byte
 # Compilation successful.
