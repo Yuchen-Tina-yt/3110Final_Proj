@@ -1,1 +1,1 @@
-gamestate.ml: Array Country Item List Money Place Player Random Weapon
+gamestate.ml: Armory Array Country Design List Money Place Player Random Weapon

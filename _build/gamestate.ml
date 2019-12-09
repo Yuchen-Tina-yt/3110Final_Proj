@@ -1,15 +1,16 @@
-open Place 
-open Item 
+open Place
 open Player 
 open Country 
 open Money
+open Design
 
 type t = {
   mutable players: Player.t array; 
   mutable places: Place.t array;
   countries: Country.t array; 
   mutable current_player: int;
-  mutable inactive_players_ids: int list
+  mutable inactive_players_ids: int list; 
+  mutable armory: Armory.t 
 }
 
 let places_arr (state: t ) = state.places
@@ -44,26 +45,28 @@ let make_state =
   let player4 = Player.make_player "Wheelbarrow" 0 [] 3 [] in
   let player_array = [|player1; player2; player3; player4|] in 
 
-  let place1 = Place.make_place "place1" 0 100. 15. 15. in 
-  let place2 = Place.make_place "place2" 1 100. 15. 15. in 
-  let place3 = Place.make_place "place3" 2 100. 15. 15. in 
-  let place4 = Place.make_place "place4" 3 100. 15. 15. in 
-  let place5 = Place.make_place "place5" 4 100. 15. 15. in 
-  let place6 = Place.make_place "place6" 5 100. 15. 15. in 
-  let place7 = Place.make_place "place7" 0 100. 15. 15. in 
-  let place8 = Place.make_place "Place8" 1 100. 15. 15. in 
-  let place9 = Place.make_place "place9" 2 100. 15. 15. in 
-  let place10 = Place.make_place "place10" 3 100. 15. 15. in 
-  let place11 = Place.make_place "place11" 4 100. 15. 15. in 
-  let place12 = Place.make_place "place12" 5 100. 15. 15. in 
-  let place13 = Place.make_place "place13" 0 100. 15. 15. in 
-  let place14 = Place.make_place "place14" 1 100. 15. 15. in 
-  let place15 = Place.make_place "place15" 2 100. 15. 15. in 
-  let place16 = Place.make_place "place16" 3 100. 15. 15. in 
-  let place_array = [|place1; place2; place3; place4; place5; place6; place7;
+  let place1 = Place.make_place "China" 0 100. 15. 15. in 
+  let place2 = Place.make_place "Sweden" 1 100. 15. 15. in 
+  let place3 = Place.make_place "Japan" 2 100. 15. 15. in 
+  let place4 = Place.make_place "USA" 3 100. 15. 15. in 
+  let place5 = Place.make_place "Canada" 4 100. 15. 15. in 
+  let place6 = Place.make_place "Korea" 5 100. 15. 15. in 
+  (* let place7 = Place.make_place "place7" 0 100. 15. 15. in 
+     let place8 = Place.make_place "Place8" 1 100. 15. 15. in 
+     let place9 = Place.make_place "place9" 2 100. 15. 15. in 
+     let place10 = Place.make_place "place10" 3 100. 15. 15. in 
+     let place11 = Place.make_place "place11" 4 100. 15. 15. in 
+     let place12 = Place.make_place "place12" 5 100. 15. 15. in 
+     let place13 = Place.make_place "place13" 0 100. 15. 15. in 
+     let place14 = Place.make_place "place14" 1 100. 15. 15. in 
+     let place15 = Place.make_place "place15" 2 100. 15. 15. in 
+     let place16 = Place.make_place "place16" 3 100. 15. 15. in  *)
+  (* let place_array = [|place1; place2; place3; place4; place5; place6; place7;
                       place8; place9; place10; place11; place12; place13; 
                       place14; place15; 
-                      place16|] in 
+                      place16|] in  *)
+  let place_array = [|place1; place2; place3; place4; place5; place6|] in
+  let armory = Armory.make_armory in 
 
   let country_1 = Country.make_country "USD $" 1. 0.01 in 
   let country_2 = Country.make_country "BRL R$" 4.14 0.01 in
@@ -77,10 +80,11 @@ let make_state =
 
   {players = player_array; places = place_array; 
    countries = country_array; current_player = c_player; 
-   inactive_players_ids = []}
+   inactive_players_ids = []; armory = armory}
 
 let move_player state = 
   let step = (Random.int 6) + 1 in 
+  let () = Design.get_dice_design step in 
   let player_int = state.current_player in 
   let player = state.players.(player_int) in 
   state.players.(player_int) <- Player.move_player' player step
@@ -287,6 +291,15 @@ let battle state =
       rent state 
   end
   else ()
+
+let player_get_weapon state = 
+  let player_index = state.current_player in 
+  let player = state.players.(player_index) in 
+  let weapon = Armory.armory_get_weapon state.armory in 
+  let armory' = Armory.remove_weapon state.armory weapon in 
+  let player' = Player.buy_weapon player weapon in 
+  state.armory <- armory'; 
+  state.players.(player_index) <- player' 
 
 let get_free_place state = 
   let player_index = state.current_player in 

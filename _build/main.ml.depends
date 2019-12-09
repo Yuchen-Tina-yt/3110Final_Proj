@@ -1,1 +1,1 @@
-main.ml: ANSITerminal Array Command Country Gamestate Item List Money Place Player Random Stdlib String
+main.ml: ANSITerminal Array Command Country Design Gamestate List Money Place Player Random Stdlib String

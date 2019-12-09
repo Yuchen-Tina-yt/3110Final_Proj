@@ -1,4 +1,3 @@
-open Item
 module CurrencyMap = Map.Make(Int)
 open CurrencyMap
 open Money
@@ -26,13 +25,13 @@ let add_wealth (player:t) (money: Money.t) : t=
      money = add currency_of_money new_money player.money;
      weapons = player.weapons; id = player.id; chance = player.chance}
   else
-    failwith ("Sorry, " ^ player.name ^ " does not have enough money and might 
-    need to swap currencies.")
+    failwith ("Sorry, " ^ player.name ^ " does not have enough money. ")
 
 let buy_weapon (player:t) (weapon: Weapon.t): t = 
-  {name = player.name; curr_pos = player.curr_pos; 
-   money = player.money;
-   weapons = weapon :: player.weapons; id = player.id; chance = player.chance}
+  add_wealth {name = player.name; curr_pos = player.curr_pos; 
+              money = player.money;
+              weapons = weapon :: player.weapons; id = player.id; chance = player.chance}
+    (make_money 0 (-.(float_of_int (Weapon.get_power weapon))))
 
 let remove_weapon (player: t) (weapon: Weapon.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 
@@ -42,7 +41,7 @@ let remove_weapon (player: t) (weapon: Weapon.t) : t=
    id = player.id; chance = player.chance}
 
 let move_player' (player: t) (step: int ) = 
-  let step' = ((player.curr_pos + step) mod 16) in    
+  let step' = ((player.curr_pos + step) mod 6) in    
   {name = player.name; curr_pos = step'; 
    money = player.money; 
    weapons = player.weapons; id = player.id; chance = player.chance}

@@ -1,10 +1,11 @@
 open Place 
-open Item 
 open Player 
 open Country 
 open Gamestate
 open Command
 open Money
+open Design
+
 exception Illegal 
 
 (**[print_strlist] is the function that prints the string list to the console*)
@@ -18,6 +19,7 @@ let rec print_strlist (list : string list) =
    the place name that the player is currently on *)
 let welcome state = 
   let places_arr = places_arr(state) in 
+  let () = Design.get_country_design 0 in 
   let player = (get_curr_player state) in 
   let place = (Array.get places_arr (get_curr_pos player)) in 
   print_string "Current Player Name: ";
@@ -43,6 +45,7 @@ let roll st =
   let owner_id = (get_ownership place) in
   let buy_price = (get_value place) in
   let country_idx = get_country place in
+  let () = Design.get_country_design country_idx in 
   let country = country_at_index st (country_idx) in
   let currency = currency_in country in
   print_endline ("You are now at Place " ^ (get_place_name place) ^ ".");
