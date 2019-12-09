@@ -182,6 +182,13 @@ let rec transfer_wealth receiver = function
   | [] -> receiver
   | money::t -> transfer_wealth (add_wealth receiver money) t
 
+let check_rent state = 
+  let curr_player_id = state.current_player in 
+  let curr_player = state.players.(curr_player_id) in 
+  let place = state.places.(get_curr_pos curr_player) in
+  let owner_id = Place.get_ownership place in
+  not ((owner_id = -1) ||  (owner_id = curr_player_id))
+
 let rent state = 
   let curr_player_id = state.current_player in 
   let curr_player = state.players.(curr_player_id) in 

@@ -7,6 +7,8 @@ type command =
   | End
   | Chance
   | Use of object_phrase
+  | Battle
+  | Pay
 
 exception Empty
 

@@ -148,12 +148,35 @@ let rec play_round st: unit =
        end
        else print_endline "You do not own this chance card. You cannot use it.";
        play_round st
+     |Pay | Battle -> print_endline "Invalid command at this time."
     )
   with | Malformed -> (print_endline "error: command Malformed."; 
                        play_round st)
 
        | Empty -> (print_endline "error: command is Empty."; 
                    play_round st )
+
+let rec choose_rent_or_battle st = 
+  ANSITerminal.print_string [ANSITerminal.green]
+    "  My Lord, you now have the following options: \n
+       Enter battle to battle \n
+       Enter pay to pay rent \n";
+  print_string  "> ";
+  try 
+    (let command = parse (read_line () ) in
+     match command with 
+     | Purchase | Develop | Quit | Money | End | Chance -> 
+       print_endline "Invalid command at this time."
+     | Use object_phrase -> print_endline "Invalid command at this time."
+     | Pay -> print_endline "You have decided to pay the rent."; rent st;
+     | Battle -> print_endline "You have decided to battle."; battle st;
+    )
+  with | Malformed -> (print_endline "error: command Malformed."; 
+                       choose_rent_or_battle st)
+
+       | Empty -> (print_endline "error: command is Empty."; 
+                   choose_rent_or_battle st )
+
 
 let lottery st : unit = 
   ANSITerminal.(
@@ -185,6 +208,7 @@ let lottery st : unit =
     roll st;
     rent st;
     play_round st;
+
   end
   else begin  (** chance cards*)
     print_string("You will be given a chance card!");
@@ -198,7 +222,6 @@ let lottery st : unit =
     print_string "You currently hold the following chance cards: ";
     print_strlist  (get_player_chance (get_curr_player st));
   end
-
 
 (**[explore st] allows the player explore the state and make commands. 
    The function mutates the state and the player according to the parsed
@@ -230,7 +253,10 @@ let rec play_game state : unit =
   then begin
     welcome state;
     roll state;
-    rent state;
+    if check_rent state then begin
+      ANSITerminal.print_string [ANSITerminal.magenta] 
+        "The country currently belongs to another man. \n";
+      choose_rent_or_battle state; end else ();
     explore state;
   end
   else ANSITerminal.print_string [ANSITerminal.green] 

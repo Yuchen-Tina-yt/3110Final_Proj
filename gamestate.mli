@@ -35,3 +35,7 @@ val pay: float -> t -> Player.t -> int -> Country.t -> Player.t
 val change_player: t -> Player.t -> unit
 
 val get_free_place: t-> unit
+
+val check_rent: t -> bool
+
+val battle: t -> unit

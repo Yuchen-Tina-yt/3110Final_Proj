@@ -9,6 +9,7 @@ type command =
   | Chance
   | Use of object_phrase
   | Battle
+  | Pay
 
 exception Empty
 
@@ -36,11 +37,13 @@ let ismalformed (lst : string list) : string list =
   |[] -> lst
   |h :: t -> if (h <> "roll" &&  h <> "money" && h <> "quit"&& h <> "purchase"
                  && h <> "end" && h <> "develop" && h <> "chance" && h <> "use"
+                 && h <> "battle" && h <> "pay"
                 ) 
              || (h = "quit" && t <> []) || 
              (h = "money" && t <> []|| (h = "purchase" && t <> [])
               || (h = "end" && t <> []) || (h = "develop" && t <> [])) 
-             || (h = "chance" && t <> [] || (h = "use" && t = []))
+             || (h = "chance" && t <> [] || (h = "use" && t = []) || 
+                 (h = "battle" && t <> []) || (h = "pay" && t <> []))
     then raise (Malformed)
     else lst
 
@@ -57,6 +60,8 @@ let to_command (lst : string list) : command =
     else if h = "end" then End
     else if h = "chance" then Chance
     else if h = "use" then Use t
+    else if h = "battle" then Battle
+    else if h = "pay" then Pay
     (* else if h = "build" then Build t*)
     (*else if h = "sell" then Sell t
       else if h = "inventory" then Inventory*)
