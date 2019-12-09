@@ -7,7 +7,8 @@ open Bank
 type t = {
   mutable players: Player.t array; 
   mutable places: Place.t array;
-  mutable bank: Bank.t; 
+  mutable bank: Bank.t;
+  mutable armory: Armory.t;  
   countries: Country.t array; 
   mutable current_player: int;
   mutable inactive_players_ids: int list
@@ -53,7 +54,7 @@ let make_state =
                       place16|] in 
 
   let bank = Bank.make_bank 100000. 4000. in 
-
+  let armory = Armory.make_armory in 
   let country_1 = Country.make_country "USD $" 1. 0. in 
   let country_2 = Country.make_country "BRL R$" 4.22 0.01 in
   let country_3 = Country.make_country "EUR €" 0.90 0.01 in
@@ -64,7 +65,7 @@ let make_state =
                         country_6|] in 
   let c_player = 0 in 
 
-  {players = player_array; places = place_array; bank = bank; 
+  {players = player_array; places = place_array; bank = bank; armory = armory;
    countries = country_array; current_player = c_player; 
    inactive_players_ids = []}
 
@@ -218,7 +219,33 @@ let develop_land state =
     print_float (get_player_money player');
     print_endline "0.\n";
   else
-    failwith "Sorry, you can't develop this place, because you don't own it.\n"
+    failwith "Sorry, you can't develop this place, because you don't own it.\n" 
+
+
+let battle state =
+  Random.self_init (); 
+  let player_index = state.current_player in 
+  let player = state.players.(player_index) in 
+  let random_int = Random.int (List.length (Player.get_weapons player)) in 
+  let weapon_1 = List.nth (Player.get_weapons player) random_int in 
+  let player' = Player.remove_weapon player weapon_1 in 
+  state.players.(player_index) <- player'; 
+  let place = state.places.(get_curr_pos player) in 
+  let owner_index = Place.get_ownership place in 
+  let owner = state.players.(owner_index) in 
+  let random_int_2 = Random.int (List.length (Player.get_weapons owner)) in 
+  let weapon_2 = List.nth (Player.get_weapons owner) random_int_2 in
+  let owner' = Player.remove_weapon owner weapon_2 in 
+  state.players.(owner_index) <- owner';  
+  if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then 
+    () else 
+    rent state 
+
+
+(**TODO: buy and sell weapons *)
+
+
+
 
 let turn state = 
   (*print_endline (string_of_int state.current_player); *)
