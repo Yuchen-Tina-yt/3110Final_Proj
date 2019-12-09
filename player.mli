@@ -3,19 +3,11 @@ type t
 
 (** [make_player name curr_pos money items] is the player who has the 
     attributes name name, curr_pos curr_pos, money money, and items items *)
-val make_player: string -> int -> string list->int ->t
+val make_player: string -> int -> string list->int -> Weapon.t list ->t
 
 
 (**[add_wealth player money] is [player] after adding to them [money].*)
 val add_wealth: t -> Money.t -> t
-
-(**[add_item player item] is the player after adding an item to the player's 
-   items list *)
-val add_item: t -> Item.t -> t
-
-(**[remove_item player item] is the player after deleting an item 
-   from the player;s items list *)
-val remove_item: t -> Item.t -> t
 
 val move_player': t-> int -> t 
 
@@ -30,6 +22,16 @@ val get_player_money: t -> Money.t list
 val get_player_money_specific_currency: t -> int -> float
 
 val change_player_chance: t -> string -> t
+
+(**[add_item player item] is the player after adding an item to the player's 
+   items list *)
+val buy_weapon: t -> Weapon.t -> t
+
+(**[remove_item player item] is the player after deleting an item 
+   from the player;s items list *)
+val remove_weapon: t -> Weapon.t -> t
+
+val get_weapons: t-> Weapon.t list 
 
 (*
 (**[move_pos player steps places] is the player after moving number of steps 

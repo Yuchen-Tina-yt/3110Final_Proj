@@ -38,10 +38,10 @@ let rec get_money_list_total_USD_equiv state = function
                 (get_money_list_total_USD_equiv state t)
 
 let make_state = 
-  let player1 = Player.make_player "Shoe" 0 [] 0 in 
-  let player2 = Player.make_player "Car" 0 [] 1 in 
-  let player3 = Player.make_player "Hat" 0 [] 2 in
-  let player4 = Player.make_player "Wheelbarrow" 0 [] 3 in
+  let player1 = Player.make_player "Shoe" 0 [] 0 [] in 
+  let player2 = Player.make_player "Car" 0 [] 1 [] in 
+  let player3 = Player.make_player "Hat" 0 [] 2 [] in
+  let player4 = Player.make_player "Wheelbarrow" 0 [] 3 [] in
   let player_array = [|player1; player2; player3; player4|] in 
 
   let place1 = Place.make_place "place1" 0 100. 15. 15. in 
@@ -266,6 +266,24 @@ let turn state =
 let get_curr_player_id state =
   state.current_player
 
+let battle state =
+  Random.self_init (); 
+  let player_index = state.current_player in 
+  let player = state.players.(player_index) in 
+  let random_int = Random.int (List.length (Player.get_weapons player)) in 
+  let weapon_1 = List.nth (Player.get_weapons player) random_int in 
+  let player' = Player.remove_weapon player weapon_1 in 
+  state.players.(player_index) <- player'; 
+  let place = state.places.(get_curr_pos player) in 
+  let owner_index = Place.get_ownership place in 
+  let owner = state.players.(owner_index) in 
+  let random_int_2 = Random.int (List.length (Player.get_weapons owner)) in 
+  let weapon_2 = List.nth (Player.get_weapons owner) random_int_2 in
+  let owner' = Player.remove_weapon owner weapon_2 in 
+  state.players.(owner_index) <- owner';  
+  if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then 
+    () else 
+    rent state 
 
 
 

@@ -6,4 +6,6 @@
 #load "item.cmo";;
 #load "country.cmo";;
 #load "money.cmo";;
+#load "weapon.cmo";;
+#load "armory.cmo";;
 
