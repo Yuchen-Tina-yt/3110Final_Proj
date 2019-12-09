@@ -39,10 +39,10 @@ let rec get_money_list_total_USD_equiv state = function
                 (get_money_list_total_USD_equiv state t)
 
 let make_state = 
-  let player1 = Player.make_player "Shoe" 0 [] 0 [] in 
-  let player2 = Player.make_player "Car" 0 [] 1 [] in 
-  let player3 = Player.make_player "Hat" 0 [] 2 [] in
-  let player4 = Player.make_player "Wheelbarrow" 0 [] 3 [] in
+  let player1 = Player.make_player "Cat" 0 [] 0 [] in 
+  let player2 = Player.make_player "Bunny" 0 [] 1 [] in 
+  let player3 = Player.make_player "Dog" 0 [] 2 [] in
+  let player4 = Player.make_player "Camel" 0 [] 3 [] in
   let player_array = [|player1; player2; player3; player4|] in 
 
   let place1 = Place.make_place "China" 0 100. 15. 15. in 

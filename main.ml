@@ -19,12 +19,14 @@ let rec print_strlist (list : string list) =
    the place name that the player is currently on *)
 let welcome state = 
   let places_arr = places_arr(state) in 
-  let () = Design.get_country_design 0 in 
   let player = (get_curr_player state) in 
   let place = (Array.get places_arr (get_curr_pos player)) in 
-  print_string "Current Player Name: ";
+  let place_id = get_country place in 
+  let () = Design.get_country_design place_id in 
+  ANSITerminal.print_string [ANSITerminal.green] "Current Player: ";
   print_endline (get_player_name player);
-  print_endline ("You are at Place " ^ (get_place_name place) ^ ".")
+  ANSITerminal.print_string [ANSITerminal.green] "Current Country: ";
+  print_endline (get_place_name place)
 
 (**[winprnot player] is true if the player wins, and false o.w. *)
 let winornot state : bool = 
@@ -36,7 +38,8 @@ let winornot state : bool =
    to the place in the state corresponds to the number of the rolled die *)
 let roll st = 
   print_endline "";
-  print_endline "Automatically rolling the die...";
+  ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_yellow] 
+    "Now the dice rolling~~~ 😉";
   print_endline "";
   move_player st;
   let places_arr = places_arr(st) in 
@@ -48,42 +51,51 @@ let roll st =
   let () = Design.get_country_design country_idx in 
   let country = country_at_index st (country_idx) in
   let currency = currency_in country in
-  print_endline ("You are now at Place " ^ (get_place_name place) ^ ".");
+  ANSITerminal.print_string [ANSITerminal.green] "Current Player: ";
+  print_endline (get_player_name player);
+  ANSITerminal.print_string [ANSITerminal.green] "Current Country: ";
+  print_endline (get_place_name place ^ "\n");
   if owner_id = (get_curr_player_id st) then begin
-    print_endline "You own this place.";
+    ANSITerminal.print_string [ANSITerminal.red] ("Welcome home, my lord! 👑");
+    ANSITerminal.print_string [ANSITerminal.red] (get_place_name place ^ " is yours. \n");
     let develop_price = 0.05 *. buy_price in
     if country_idx <> 0 then begin
-      print_string ("\nThe price to develop this place is " ^ currency);
-      print_float develop_price;
-      print_endline "0.\n"
+      ANSITerminal.print_string [ANSITerminal.magenta] ("My lord, you have the choice of developing the land at your pleasure.\n");
+      ANSITerminal.print_string [ANSITerminal.magenta] 
+        ("Develop Price: " ^ currency ^ string_of_float develop_price ^ "\n");
+
     end
     else begin
-      print_string ("\nThe price to buy this place is " ^ currency);
-      print_float buy_price; print_endline "0.\n"
+      ANSITerminal.print_string [ANSITerminal.magenta] ("You have the choice of buying the place.\n");
+      ANSITerminal.print_string [ANSITerminal.magenta] 
+        ("Purchase Price: " ^ currency ^ string_of_float buy_price ^ "\n");
     end
   end
   else begin
-    if owner_id = -1 then print_endline "No one owns this place."
+    if owner_id = -1 then 
+      ANSITerminal.print_string [ANSITerminal.magenta] "The country currently belongs to no men. \n"
     else ();
     if country_idx <> 0 then begin
-      print_string ("\nThe price to buy this place is " ^ currency);
-      print_float buy_price;
-      print_endline "0.\n"
+      ANSITerminal.print_string [ANSITerminal.magenta] 
+        ("Purchase Price: " ^ currency ^ string_of_float buy_price ^ "\n");
     end
     else begin
-      print_string ("\nThe price to buy this place is " ^ currency);
-      print_float buy_price; print_endline "0.\n"
+      ANSITerminal.print_string [ANSITerminal.magenta] 
+        ("Purchase Price: " ^ currency ^ string_of_float buy_price ^ "\n");
     end
   end
 
 
 let rec play_round st: unit = 
-  print_endline 
-    "       To purchase this place, enter purchase; \n 
-       to develop your place, enter develop.\n
-       to see your money, enter money; \n
-       to quit game, enter quit.\n
-       to end your turn, enter end\n";
+  ANSITerminal.print_string [ANSITerminal.green]
+    "  My Lord, you now have the following options: \n
+       Enter purchase to purchase the place \n 
+       Enter develop to develop the place \n
+       Enter monety to check your iron bank reserve \n
+       Enter quit to surrender\n
+       Enter end to end your turn \n
+       Enter chance to see your chance cards \n
+       Enter use to use your chance card \n";
   print_string  "> ";
   try 
     (let command = parse (read_line () ) in
@@ -106,7 +118,7 @@ let rec play_round st: unit =
        transfer_places st (-1);
        (* Currently, the player's money isn't put back into the bank. 
           Maybe that should be implemented. *) 
-       print_endline "You have quit the game. \n";
+       ANSITerminal.print_string [ANSITerminal.red] "You have quit the game.\n You will be missed dearly. 💕 \n\n";
      | Money  -> begin 
          let player = (get_curr_player st) in 
          print_string ("You have $");
@@ -146,8 +158,8 @@ let rec play_round st: unit =
 let lottery st : unit = 
   ANSITerminal.(
     print_string [blue]
-      "Boom! You're in the Monopoly's greatest lottery system!");
-  let lottery_num = Random.int 100 in 
+      "Boom! You have entered the lottery system! \n");
+  let lottery_num = Random.int 10 in 
   if lottery_num = 0 then begin     (**give money case *)
     let amt = (Random.float 500.)in 
     let new_money = make_money 0 amt in
@@ -169,6 +181,7 @@ let lottery st : unit =
   end
   else if lottery_num = 2 then begin     (**move forward case *)
     print_string("You will move forward a random step.");
+    welcome st;
     roll st;
     rent st;
     play_round st;
@@ -190,19 +203,21 @@ let lottery st : unit =
 (**[explore st] allows the player explore the state and make commands. 
    The function mutates the state and the player according to the parsed
    user input commands *)
-let rec explore st : unit =
+
+
+let explore st : unit =
   if winornot (st) 
   then (
     ANSITerminal.(
       print_string 
-        [magenta]
-        "Congrats! All other players have been eliminated. 
-        You win! Game ends, exit automatically.");
+        [red]
+        "\n\n Salute, My Lord. 
+        Your now reign in supreme. 🍺 \n");
     Stdlib.exit 0)
   else(
     Random.self_init ();
-    let num = Random.int 2 in
-    (*print_int num;*)
+    let num = Random.int 5 in
+    (* (print_int num;) *)
     if num = 1 then lottery st
     else play_round st
   )
@@ -213,26 +228,31 @@ let rec play_game state : unit =
   let curr_player = get_curr_player state in
   if not (List.mem (get_id curr_player) (get_inactive_players_ids state)) 
   then begin
-    welcome state ;
+    welcome state;
     roll state;
     rent state;
     explore state;
   end
-  else print_endline ("\nPlayer " ^ 
-                      (get_player_name curr_player) ^ " has been " ^ 
-                      "eliminated.\nSkipping to the next player...\n");
+  else ANSITerminal.print_string [ANSITerminal.green] 
+      ((get_player_name curr_player) ^ " is out. \n" ^ 
+       "Now moving on to the next player.\n");
   turn state;
   play_game state
 
+let play state : unit = 
+  (* welcome state; *)
+  play_game state
 
 
 (** [main ()] prompts for the game to play, then starts it. *)
 let main () =
+  ANSITerminal.resize 99 99;
   ANSITerminal.(print_string [red]
-                  "\n\nWelcome to International Monopoly!\n");
+                  "\n\nWelcome to the Feud of Lords!\n");
+  Design.get_dice_design 0;
   Random.self_init ();
   let state = make_state in
-  play_game state
+  play state
 
 
 

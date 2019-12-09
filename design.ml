@@ -5,7 +5,7 @@
 
 
 let board : unit = 
-  ANSITerminal.resize 99 99 
+  ANSITerminal.resize 1 1 
 
 let board_initiate = 
   "
@@ -45,6 +45,7 @@ let board_initiate =
 
 
 ===============================================================================
+\n
 "
 
 (* 
@@ -103,6 +104,7 @@ let board_1 =
 
 
 ===============================================================================
+\n
 "
 
 
@@ -146,6 +148,7 @@ let board_2 =
 
 
 ===============================================================================
+\n
 "
 
 
@@ -188,7 +191,9 @@ let board_3 =
 
 
 
-=============================================================================="
+===============================================================================
+\n
+"
 
 
 
@@ -203,7 +208,7 @@ let board_4 =
                  |  (   )  |                 |::::====|                       
                  |___`-'___|                 |========|                       
 
-     🇸🇪                                                            🇨🇦        
+     �����                                                            🇨🇦        
   ________                                                      _________     
  |  ||    |                                                    |::_,^._::|    
  |==::====|                                                    |::\\___/::|    
@@ -230,6 +235,7 @@ let board_4 =
 
 
 ===============================================================================
+\n
 "
 
 let board_5 = 
@@ -270,6 +276,7 @@ let board_5 =
 
 
 ===============================================================================
+\n
 "
 
 let board_6 = 
@@ -310,13 +317,14 @@ let board_6 =
 
 
 ===============================================================================
+\n
 "
 
 
 let china = 
 
   "
-  🇨🇳中国欢迎您!
+  🇨🇳  中国欢迎您!
 
                               _,add8ba,
                             ,d888888888b,
@@ -330,8 +338,8 @@ let china =
   ,d88'           d888888I                                              `b,
   d88I           ,8888888'            ___                                `b,
  d888           ,8888888I         d88888888b,           ,d8888b,           `b
-,8888           I8888888I        d8888888888I          ,88888888b           8,
-d8886           888888888       Y888888888P'           Y8888888888,        ,8b
+,8888           I8888888I        d8888888888I          888888888b           8,
+d8886           888888888       888888888888           88888888888,        ,8b
 88888b          I88888888b      `Y8888888^             `Y888888888I        d88,
 `888888b         88888888888b,                           `Y8888P^        d8888
  Y888888b       ,8888888888888ba,_          _______        `88^        ,d88888
@@ -345,13 +353,13 @@ d8886           888888888       Y888888888P'           Y8888888888,        ,8b
          Y88888888888P   `88888888888888888888888     8888888888888888
             ^888888888^      88888888888888888888,     8888888888888
                                 Y8888888888888888P     `888888888
-                                  `YY88888888888P'
+                                  `YY88888888888P'\n
 
 "
 
 let japan = 
   "
-  🇯🇵日本へようこそ!
+  🇯🇵  日本へようこそ!
 
                  /,   ,|   ,|
              /| /(  ,' / ,//
@@ -375,14 +383,14 @@ let japan =
              |:#:###\\########|#\\
              /:#:|:::\\|::::::|:(
              ):#:|::::\\::::::|:/
-            /:#;/:::::<::::::|(
+            /:#;/:::::<::::::|(\n
 
 "
 
 let usa = 
 
   "
-  🇺🇸Welcome to the USA!
+  🇺������ Welcome to the USA!
 
             .----.
            /       \\
@@ -406,13 +414,13 @@ let usa =
 \\          /    \\           /
  `'-------`      `--------'`
 
-"
+\n"
 
 
 let korea = 
 
   "
-  🇰🇷한국에오신것을환영합니다!
+  🇰🇷  한국에오신것을환영합니다!
 
   EEEEEEEEEEEEE          XXXX          XXXX              OOOOOOO 
   EEEEEEEEEEEEE           XXXX        XXXX            OOOO     OOOO
@@ -423,13 +431,14 @@ let korea =
   EEE                       XXXX    XXXX            OOOO         OOOO
   EEE                      XXXX      XXXX            OOOO       OOOO
   EEEEEEEEEEEEE           XXXX        XXXX            OOOO     OOOO
-  EEEEEEEEEEEEE          XXXX          XXXX              OOOOOOO
+  EEEEEEEEEEEEE          XXXX          XXXX              OOOOOOO\n
+
   "
 
 
 let sweden = 
   "
-🇸🇪Välkommen till Sverige!
+🇸🇪  Välkommen till Sverige!
 
 IIIIIIII         KKKK       KKKK          EEEEEEEEEE              AAA
 IIIIIIII         KKKK      KKKK           EEEEEEEEEE             AAAAA
@@ -440,13 +449,13 @@ IIIIIIII         KKKK      KKKK           EEEEEEEEEE             AAAAA
   IIII           KKKK   KKKK              EEE                AAAAAAAAAAAAAA        
   IIII           KKKK     KKKK            EEE               AAA          AAA
 IIIIIIII         KKKK       KKKK          EEEEEEEEEE        AAA          AAA
-IIIIIIII         KKKK         KKKK        EEEEEEEEEE       AAAA          AAAA
+IIIIIIII         KKKK         KKKK        EEEEEEEEEE       AAAA          AAAA\n
 "
 
 let canada = 
 
   "  
-🇨🇦Bienvenue au Canada!
+🇨🇦  Bienvenue au Canada!
 
 ________Justin•♥____________Justin•♥•Bi
 ______Justin•♥•Biebe_______Justin•♥•BieberJust
@@ -467,27 +476,28 @@ _________________Justin•♥•Bieber
 ___________________Justin•♥•Bi
 _____________________Justin•
 ______________________Justi
-_______________________Ju
+_______________________Ju\n
 
 "
 
 
 let get_dice_design number = 
   match number with
-  | 1 -> print_endline board_1
-  | 2 -> print_endline board_2
-  | 3 -> print_endline board_3
-  | 4 -> print_endline board_4
-  | 5 -> print_endline board_5
-  | 6 -> print_endline board_6
+  | 0 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_initiate
+  | 1 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_1
+  | 2 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_2
+  | 3 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_3
+  | 4 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_4
+  | 5 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_5
+  | 6 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_6
   | _ -> failwith ""  
 
 let get_country_design country_id = 
   match country_id with
-  | 0 -> print_endline china
-  | 1 -> print_endline sweden
-  | 2 -> print_endline japan
-  | 3 -> print_endline usa
-  | 4 -> print_endline canada
-  | 5 -> print_endline korea
+  | 0 -> ANSITerminal.print_string [ANSITerminal.red] china
+  | 1 -> ANSITerminal.print_string [ANSITerminal.blue] sweden
+  | 2 -> ANSITerminal.print_string [ANSITerminal.cyan] japan
+  | 3 -> ANSITerminal.print_string [ANSITerminal.green] usa
+  | 4 -> ANSITerminal.print_string [ANSITerminal.magenta] canada
+  | 5 -> ANSITerminal.print_string [ANSITerminal.yellow] korea
   | _ -> failwith "" 
