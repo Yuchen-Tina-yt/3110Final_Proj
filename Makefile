@@ -1,4 +1,4 @@
-MODULES=player country place gamestate main command money armory weapon design battle_art
+MODULES=player country place gamestate main command money armory weapon design battle_art card
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)

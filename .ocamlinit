@@ -10,4 +10,5 @@
 #load "armory.cmo";;
 #load "design.cmo";;
 #load "battle_art.cmo";;
+#load "card.cmo";;
 
