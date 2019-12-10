@@ -279,14 +279,12 @@ and
       ((get_player_name curr_player) ^ " is out. \n" ^ 
        "Now moving on to the next player.\n");
   turn state;
-  play_game state
+  play_game state 
 
 let play state : unit = 
   (* welcome state; *)
+  name_players state;
   play_game state
-
-
-
 
 (** [main ()] prompts for the game to play, then starts it. *)
 let main () =

@@ -34,6 +34,8 @@ val remove_weapon: t -> Weapon.t -> t
 val get_weapons: t-> Weapon.t list 
 
 val get_player_chance: t -> string list
+
+val mutate_player_name: t ->  string -> t
 (*
 (**[move_pos player steps places] is the player after moving number of steps 
    of steps from the player's current position on the map *)

@@ -344,6 +344,17 @@ let get_free_place state =
   else 
     print_endline "You can only get an unowned land for free."
 
+let name player num =
+  print_string ("Player " ^ (string_of_int num) ^ ", please enter your name: ");
+  let new_name = read_line () in
+  mutate_player_name player new_name
+
+let name_players state = 
+  let players = state.players in
+  for x = 0 to ((Array.length players)-1) do
+    state.players.(x) <- name (state.players.(x)) (x+1)
+  done
+
 
 
 

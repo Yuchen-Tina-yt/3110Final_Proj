@@ -41,3 +41,5 @@ val check_rent: t -> bool
 val battle: t -> unit
 
 val player_get_weapon: t -> unit
+
+val name_players: t -> unit

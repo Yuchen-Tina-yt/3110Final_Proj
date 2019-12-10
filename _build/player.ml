@@ -74,6 +74,10 @@ let get_weapons player =
 let get_player_chance player =
   player.chance
 
+let mutate_player_name (player: t) (new_name : string) = 
+  {name = new_name; curr_pos = player.curr_pos; money = player.money; 
+   weapons = player.weapons; id = player.id; chance = player.chance}
+
 
 (*
 (**[find_newpos_name player steps places] is the new place name of the player 
