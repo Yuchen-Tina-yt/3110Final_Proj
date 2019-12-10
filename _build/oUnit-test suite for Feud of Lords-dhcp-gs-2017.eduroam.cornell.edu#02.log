@@ -1,33 +1,39 @@
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:1:2 USD's is 2.*.0.01 = 0.02 in country_1's currency.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:1:2 USD's is 2.*.0.01 = 0.02 in country_1's currency is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:1:2 USD's is 2.*.0.01 = 0.02 in country_1's currency.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:3:Exchange fee for exchanging 4. (arbitrary currency) in country_1 
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I:   is  4.*.0.5 = 2..
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:3:Exchange fee for exchanging 4. (arbitrary currency) in country_1 
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I:   is  4.*.0.5 = 2. is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:3:Exchange fee for exchanging 4. (arbitrary currency) in country_1 
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I:   is  4.*.0.5 = 2..
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:5:amount of five_dollars is 5..
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:5:amount of five_dollars is 5. is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:5:amount of five_dollars is 5..
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:7:ownerid of place_2 is 3.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:7:ownerid of place_2 is 3 is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:7:ownerid of place_2 is 3.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:8:value of place_1 is 150..
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:8:value of place_1 is 150. is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:8:value of place_1 is 150..
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:11:rent of place_4 is 75..
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:11:rent of place_4 is 75. is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:11:rent of place_4 is 75..
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:13:country index of place_1 is 1.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:13:country index of place_1 is 1 is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:13:country index of place_1 is 1.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:14:name of bob is 'Bob'.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:14:name of bob is 'Bob' is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:14:name of bob is 'Bob'.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:16:current position of bob is 5.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:16:current position of bob is 5 is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:16:current position of bob is 5.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:18:bob has no weapons.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:18:bob has no weapons is successful.
-2019-12-10T05:08:54+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:18:bob has no weapons.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:1:2 USD's is 2.*.0.01 = 0.02 in country_1's currency.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:1:2 USD's is 2.*.0.01 = 0.02 in country_1's currency is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:1:2 USD's is 2.*.0.01 = 0.02 in country_1's currency.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:3:Exchange fee for exchanging 4. (arbitrary currency) in country_1 
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I:   is  4.*.0.5 = 2..
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:3:Exchange fee for exchanging 4. (arbitrary currency) in country_1 
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I:   is  4.*.0.5 = 2. is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:3:Exchange fee for exchanging 4. (arbitrary currency) in country_1 
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I:   is  4.*.0.5 = 2..
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:5:amount of five_dollars is 5..
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:5:amount of five_dollars is 5. is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:5:amount of five_dollars is 5..
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:7:ownerid of place_2 is 3.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:7:ownerid of place_2 is 3 is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:7:ownerid of place_2 is 3.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:9:value of place_3 is 175..
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:9:value of place_3 is 175. is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:9:value of place_3 is 175..
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:11:rent of place_4 is 75..
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:11:rent of place_4 is 75. is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:11:rent of place_4 is 75..
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:13:country index of place_1 is 1.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:13:country index of place_1 is 1 is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:13:country index of place_1 is 1.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:15:name of new_name_player is 'Dave'.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:15:name of new_name_player is 'Dave' is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:15:name of new_name_player is 'Dave'.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:17:current position of bob_move is 2.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:17:current position of bob_move is 2 is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:17:current position of bob_move is 2.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:19:bob has no weapons.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:19:bob has no weapons is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:19:bob has no weapons.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:21:bob_chance has a chance card called 'nice'.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:21:bob_chance has a chance card called 'nice' is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:21:bob_chance has a chance card called 'nice'.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Start test test suite for Feud of Lords:23:bob has 0. in the currency with country index 4.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: Test test suite for Feud of Lords:23:bob has 0. in the currency with country index 4 is successful.
+2019-12-10T05:23:13+00:00 dhcp-gs-2017.eduroam.cornell.edu#02 I: End test test suite for Feud of Lords:23:bob has 0. in the currency with country index 4.

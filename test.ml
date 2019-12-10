@@ -20,11 +20,11 @@ let country_tests = [
   (fun _ -> assert_equal 2. (exchange_fee_for country_1 4.))
 ]
 
-let five_dollars = make_money 0 5.
+let five_dollars = make_money 1 5.
 
 let money_tests = [
-  "country index of five_dollars is 0" >::
-  (fun _ -> assert_equal 0 (get_country_idx five_dollars));
+  "country index of five_dollars is 1" >::
+  (fun _ -> assert_equal 1 (get_country_idx five_dollars));
   "amount of five_dollars is 5." >::
   (fun _ -> assert_equal 5. (get_amount five_dollars));
 ]
@@ -55,6 +55,9 @@ let place_tests = [
 
 let bob = make_player "Bob" 5 3 []
 let new_name_player = mutate_player_name bob "Dave"
+let bob_five_dollars = add_wealth bob five_dollars
+let bob_move = move_player' bob 3
+let bob_chance = change_player_chance bob "nice"
 
 let player_tests = [
   "name of bob is 'Bob'" >::
@@ -63,16 +66,23 @@ let player_tests = [
   (fun _ -> assert_equal "Dave" (get_player_name new_name_player));
   "current position of bob is 5" >::
   (fun _ -> assert_equal 5 (get_curr_pos bob));
+  "current position of bob_move is 2" >::
+  (fun _ -> assert_equal 2 (get_curr_pos bob_move));
   "id of bob is 3" >::
   (fun _ -> assert_equal 3 (get_id bob));
   "bob has no weapons" >::
   (fun _ -> assert_equal [] (get_weapons bob));
   "bob has no chance cards" >::
   (fun _ -> assert_equal [] (get_player_chance bob));
+  "bob_chance has a chance card called 'nice'" >::
+  (fun _ -> assert_equal ["nice"] (get_player_chance bob_chance));
   "bob has 1000. in the currency with country index 0" >::
   (fun _ -> assert_equal 1000. (get_player_money_specific_currency bob 0));
   "bob has 0. in the currency with country index 4" >::
   (fun _ -> assert_equal 0. (get_player_money_specific_currency bob 4));
+  "bob_five_dollars has 5. in the currency with country index 1" >::
+  (fun _ -> assert_equal 5. 
+      (get_player_money_specific_currency bob_five_dollars 1));
 ]
 
 let suite =
