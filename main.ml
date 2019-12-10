@@ -39,7 +39,7 @@ let winornot state : bool =
 let roll st = 
   print_endline "";
   ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_yellow] 
-    "Now the dice rolling~~~ 😉";
+    "Now the dice rolling~~~ 🎲";
   print_endline "";
   move_player st;
   let places_arr = places_arr(st) in 
@@ -48,6 +48,15 @@ let roll st =
   let owner_id = (get_ownership place) in
   let buy_price = (get_value place) in
   let country_idx = get_country place in
+  let () = ANSITerminal.print_string [ANSITerminal.green] 
+      ("Off we go 🛩 ") in 
+  let () = ANSITerminal.print_string 
+      [ANSITerminal.black; ANSITerminal.on_yellow] 
+      (Design.frame_seperater) in 
+  let () = print_endline "" in 
+  let () = ANSITerminal.print_string 
+      [ANSITerminal.magenta] 
+      ("Welcome to " ^ get_place_name place ^ "") in 
   let () = Design.get_country_design country_idx in 
   let country = country_at_index st (country_idx) in
   let currency = currency_in country in
@@ -56,24 +65,29 @@ let roll st =
   ANSITerminal.print_string [ANSITerminal.green] "Current Country: ";
   print_endline (get_place_name place ^ "\n");
   if owner_id = (get_curr_player_id st) then begin
-    ANSITerminal.print_string [ANSITerminal.red] ("Welcome home, my lord! 👑");
-    ANSITerminal.print_string [ANSITerminal.red] (get_place_name place ^ " is yours. \n");
+    ANSITerminal.print_string [ANSITerminal.red] 
+      ("Welcome home, my lord! 👑");
+    ANSITerminal.print_string [ANSITerminal.red] 
+      (get_place_name place ^ " is yours. \n");
     let develop_price = 0.05 *. buy_price in
     if country_idx <> 0 then begin
-      ANSITerminal.print_string [ANSITerminal.magenta] ("My lord, you have the choice of developing the land at your pleasure.\n");
+      ANSITerminal.print_string [ANSITerminal.magenta] 
+        ("My lord, you have the choice of developing the land at your pleasure.\n");
       ANSITerminal.print_string [ANSITerminal.magenta] 
         ("Develop Price: " ^ currency ^ string_of_float develop_price ^ "\n");
 
     end
     else begin
-      ANSITerminal.print_string [ANSITerminal.magenta] ("You have the choice of buying the place.\n");
+      ANSITerminal.print_string [ANSITerminal.magenta] 
+        ("You have the choice of buying the place.\n");
       ANSITerminal.print_string [ANSITerminal.magenta] 
         ("Purchase Price: " ^ currency ^ string_of_float buy_price ^ "\n");
     end
   end
   else begin
     if owner_id = -1 then 
-      ANSITerminal.print_string [ANSITerminal.magenta] "The country currently belongs to no men. \n"
+      ANSITerminal.print_string [ANSITerminal.magenta] 
+        "The country currently belongs to no men. \n"
     else ();
     if country_idx <> 0 then begin
       ANSITerminal.print_string [ANSITerminal.magenta] 
@@ -119,7 +133,8 @@ let rec play_round st: unit =
        transfer_places st (-1);
        (* Currently, the player's money isn't put back into the bank. 
           Maybe that should be implemented. *) 
-       ANSITerminal.print_string [ANSITerminal.red] "You have quit the game.\n You will be missed dearly. 💕 \n\n";
+       ANSITerminal.print_string [ANSITerminal.red] 
+         "You have quit the game.\n You will be missed dearly. 💕 \n\n";
      | Money  -> begin 
          let player = (get_curr_player st) in 
          print_string ("You have $");
@@ -129,10 +144,12 @@ let rec play_round st: unit =
      | Chance -> let player = (get_curr_player st) in
        let cards = get_player_chance player in
        if List.length cards = 0 then begin 
-         print_endline "You don't have any chance cards currently.";
+         ANSITerminal.print_string [ANSITerminal.blue]  
+           "My Lord, you unfornately don't have any chance cards currently.";
          play_round st end
        else begin
-         print_string "Here are your chance cards: ";
+         ANSITerminal.print_string [ANSITerminal.blue] 
+           "My Lord, here are your chance cards: ";
          print_strlist cards;
          print_endline "";
          play_round st
@@ -143,20 +160,28 @@ let rec play_round st: unit =
        let card_name = (String.concat " " object_phrase) in 
 
        if List.mem card_name cards then begin
-         print_string " You used chance card ";
-         print_string card_name;
+         ANSITerminal.print_string [ANSITerminal.blue] 
+           "My Lord, you used chance card ";
+         ANSITerminal.print_string [ANSITerminal.blue] 
+           card_name;
          if card_name = "free place" then get_free_place st
        end
-       else print_endline "You do not own this chance card. You cannot use it.";
+       else        
+         ANSITerminal.print_string [ANSITerminal.blue] 
+           "My Lord, you unfornatebly do not own this chance card 
+           and cannot use it.";
        play_round st
      |Buy_Weapon -> 
        player_get_weapon st;
-     |Pay | Battle -> print_endline "Invalid command at this time."
+     |Pay | Battle -> ANSITerminal.print_string [ANSITerminal.magenta] 
+                        "Invalid command at this time."
     )
-  with | Malformed -> (print_endline "error: command Malformed."; 
+  with | Malformed -> (ANSITerminal.print_string [ANSITerminal.magenta] 
+                         "error: command Malformed."; 
                        play_round st)
 
-       | Empty -> (print_endline "error: command is Empty."; 
+       | Empty -> (ANSITerminal.print_string [ANSITerminal.magenta] 
+                     "error: command is Empty."; 
                    play_round st )
 
 
@@ -210,8 +235,6 @@ let lottery st : unit =
 (**[explore st] allows the player explore the state and make commands. 
    The function mutates the state and the player according to the parsed
    user input commands *)
-
-
 let explore st : unit =
   if winornot (st) 
   then (
@@ -243,9 +266,12 @@ let rec choose_rent_or_battle st =
      match command with 
      | Purchase | Develop  | Money | End | Chance | Buy_Weapon -> 
        print_endline "Invalid command at this time."
-     | Use object_phrase -> print_endline "Invalid command at this time."
-     | Pay -> print_endline "You have decided to pay the rent."; rent st false;
-     | Battle -> print_endline "You have decided to battle."; battle st;
+     | Use object_phrase -> ANSITerminal.print_string [ANSITerminal.magenta] 
+                              "Invalid command at this time."
+     | Pay -> ANSITerminal.print_string [ANSITerminal.magenta] 
+                "You have decided to pay the rent."; rent st false;
+     | Battle -> ANSITerminal.print_string [ANSITerminal.magenta] 
+                   "You have decided to battle."; battle st;
      | Quit -> make_current_player_inactive st;
        transfer_places st (-1); 
        (* Currently, the player's money isn't put back into the bank. 
@@ -277,7 +303,7 @@ and
   end
   else ANSITerminal.print_string [ANSITerminal.green] 
       ((get_player_name curr_player) ^ " is out. \n" ^ 
-       "Now moving on to the next player.\n");
+       "The game shall continue. Now moving on to the next player.\n");
   turn state;
   play_game state 
 
@@ -295,9 +321,6 @@ let main () =
   Random.self_init ();
   let state = make_state in
   play state
-
-
-
 
 
 (* Execute the game engine. *)

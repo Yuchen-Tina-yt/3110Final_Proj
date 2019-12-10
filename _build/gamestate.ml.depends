@@ -1,1 +1,1 @@
-gamestate.ml: Armory Array Battle_art Country Design List Money Place Player Random Weapon
+gamestate.ml: ANSITerminal Armory Array Battle_art Country Design List Money Place Player Random Weapon

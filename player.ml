@@ -6,7 +6,7 @@ type t =
   {name: string; curr_pos: int; money: float Map.Make(Int).t ; 
    id: int; chance: string list; weapons: Weapon.t list}
 
-let make_player (name:string) (curr_pos: int) (items: string list) (id: int ) 
+let make_player (name:string) (curr_pos: int) (id: int ) 
     (weapons: (Weapon.t list)): t = 
   let initial_money_map = empty |> add 0 1000. |> add 1 0. |> add 2 0. |> 
                           add 3 0. |> add 4 0. |> add 5 0. in

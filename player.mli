@@ -3,7 +3,7 @@ type t
 
 (** [make_player name curr_pos money items] is the player who has the 
     attributes name name, curr_pos curr_pos, money money, and items items *)
-val make_player: string -> int -> string list->int -> Weapon.t list ->t
+val make_player: string -> int ->int -> Weapon.t list ->t
 
 
 (**[add_wealth player money] is [player] after adding to them [money].*)

@@ -353,7 +353,7 @@ d8886           888888888       888888888888           88888888888,        ,8b
          Y88888888888P   `88888888888888888888888     8888888888888888
             ^888888888^      88888888888888888888,     8888888888888
                                 Y8888888888888888P     `888888888
-                                  `YY88888888888P'\n
+                                  `YY88888888888P'
 
 "
 
@@ -383,7 +383,7 @@ let japan =
              |:#:###\\########|#\\
              /:#:|:::\\|::::::|:(
              ):#:|::::\\::::::|:/
-            /:#;/:::::<::::::|(\n
+            /:#;/:::::<::::::|(
 
 "
 
@@ -414,7 +414,7 @@ let usa =
 \\          /    \\           /
  `'-------`      `--------'`
 
-\n"
+"
 
 
 let korea = 
@@ -431,7 +431,7 @@ let korea =
   EEE                       XXXX    XXXX            OOOO         OOOO
   EEE                      XXXX      XXXX            OOOO       OOOO
   EEEEEEEEEEEEE           XXXX        XXXX            OOOO     OOOO
-  EEEEEEEEEEEEE          XXXX          XXXX              OOOOOOO\n
+  EEEEEEEEEEEEE          XXXX          XXXX              OOOOOOO
 
   "
 
@@ -449,7 +449,7 @@ IIIIIIII         KKKK      KKKK           EEEEEEEEEE             AAAAA
   IIII           KKKK   KKKK              EEE                AAAAAAAAAAAAAA        
   IIII           KKKK     KKKK            EEE               AAA          AAA
 IIIIIIII         KKKK       KKKK          EEEEEEEEEE        AAA          AAA
-IIIIIIII         KKKK         KKKK        EEEEEEEEEE       AAAA          AAAA\n
+IIIIIIII         KKKK         KKKK        EEEEEEEEEE       AAAA          AAAA
 "
 
 let canada = 
@@ -457,39 +457,53 @@ let canada =
   "  
 🇨🇦  Bienvenue au Canada!
 
-________Justin•♥____________Justin•♥•Bi
-______Justin•♥•Biebe_______Justin•♥•BieberJust
-____Justin•♥•BieberJust___Justin•♥•BieberJustin•♥
-___Justin•♥•BieberJustin•♥•BieberJu________Justin•
-__Justin•♥•BieberJustin•♥•BieberJu__________Justin•
-_Justin•♥•BieberJustin•♥•BieberJustin________Justin•
-_Justin•♥•BieberJustin•♥•BieberJustin•♥•B_______Justin
+       Justin•♥____________Justin•♥•Bi
+      Justin•♥•Biebe_______Justin•♥•BieberJust
+    Justin•♥•BieberJust___Justin•♥•BieberJustin•♥
+   Justin•♥•BieberJustin•♥•BieberJu________Justin•
+  Justin•♥•BieberJustin•♥•BieberJu__________Justin•
+ Justin•♥•BieberJustin•♥•BieberJustin________Justin•
+ Justin•♥•BieberJustin•♥•BieberJustin•♥•B_______Justin
 Justin•♥•BieberJustin•♥•BieberJustin•♥•Biebe____Justi
 Justin•♥•BieberJustin•♥•BieberJustin•♥•BieberJu___J
 Justin•♥•BieberJustin•♥•BieberJustin•♥•BieberJus
-_Justin•♥•BieberJustin•♥•BieberJustin•♥•Bieber
-____Justin•♥•BieberJustin•♥•BieberJustin•♥•
-______Justin•♥•BieberJustin•♥•BieberJust
-_________Justin•♥•BieberJustin•♥•Bieb
-______________Justin•♥•BieberJusti
-_________________Justin•♥•Bieber
-___________________Justin•♥•Bi
-_____________________Justin•
-______________________Justi
-_______________________Ju\n
+ Justin•♥•BieberJustin•♥•BieberJustin•♥•Bieber
+    Justin•♥•BieberJustin•♥•BieberJustin•♥•
+     Justin•♥•BieberJustin•♥•BieberJust
+        Justin•♥•BieberJustin•♥•Bieb
+             Justin•♥•BieberJusti
+                Justin•♥•Bieber
+                  Justin•♥•Bi
+                     Justin•
+                      Justi
+                       Jus
 
 "
 
 
 let get_dice_design number = 
   match number with
-  | 0 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_initiate
-  | 1 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_1
-  | 2 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_2
-  | 3 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_3
-  | 4 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_4
-  | 5 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_5
-  | 6 -> ANSITerminal.print_string [ANSITerminal.black; ANSITerminal.on_green] board_6
+  | 0 -> ANSITerminal.print_string 
+           [ANSITerminal.black; ANSITerminal.on_green] board_initiate;
+    print_endline ""
+  | 1 -> ANSITerminal.print_string
+           [ANSITerminal.black; ANSITerminal.on_green] board_1;
+    print_endline ""
+  | 2 -> ANSITerminal.print_string 
+           [ANSITerminal.black; ANSITerminal.on_green] board_2;
+    print_endline ""
+  | 3 -> ANSITerminal.print_string 
+           [ANSITerminal.black; ANSITerminal.on_green] board_3;
+    print_endline ""
+  | 4 -> ANSITerminal.print_string 
+           [ANSITerminal.black; ANSITerminal.on_green] board_4;
+    print_endline ""
+  | 5 -> ANSITerminal.print_string 
+           [ANSITerminal.black; ANSITerminal.on_green] board_5;
+    print_endline ""
+  | 6 -> ANSITerminal.print_string 
+           [ANSITerminal.black; ANSITerminal.on_green] board_6;
+    print_endline ""
   | _ -> failwith ""  
 
 let get_country_design country_id = 
@@ -501,3 +515,10 @@ let get_country_design country_id =
   | 4 -> ANSITerminal.print_string [ANSITerminal.magenta] canada
   | 5 -> ANSITerminal.print_string [ANSITerminal.yellow] korea
   | _ -> failwith "" 
+
+
+let frame_seperater = 
+  "
+###############################################################################
+\n 
+"
