@@ -1,10 +1,26 @@
+(* These unit tests check the functions for the more foundational modules for 
+   our game. These teest demonstrate the correctness of our game system, because 
+   they extensively test the essential helper functions which the higher level 
+   functions in our game call. 
+
+   Any functions in those modules that return unit were not unit tested, because 
+   they depend on correct calls to functions in the more foundational modules 
+   anyways. For the same reason, functions in main.ml and many functions in 
+   gamestate.ml were not unit tested. 
+
+   Functions in battle_art.ml, card.ml, and design.ml were not unit tested, 
+   because those functions simply return ASCII art.
+
+   Any functions not tested were checked by thorough game play testing. *)
+
 open OUnit2
 open Country
 open Money
 open Place
 open Player
-
-(* TODO: Add test plan *)
+open Weapon
+open Gamestate
+open Command
 
 let country_1 = make_country "USD $" 0.01 0.5
 
@@ -53,11 +69,22 @@ let place_tests = [
   (fun _ -> assert_equal 1 (get_country place_1));
 ]
 
+let ak47 = make_weapon "gun" 250
+
+let weapon_tests = [
+  "type of ak47 is 'gun'" >::
+  (fun _ -> assert_equal "gun" (get_weapon_type ak47));
+  "power of ak47 is 250" >::
+  (fun _ -> assert_equal 250 (get_power ak47))
+]
+
 let bob = make_player "Bob" 5 3 []
 let new_name_player = mutate_player_name bob "Dave"
 let bob_five_dollars = add_wealth bob five_dollars
 let bob_move = move_player' bob 3
 let bob_chance = change_player_chance bob "nice"
+let bob_ak47 = buy_weapon bob ak47
+let bob_removed_ak47 = remove_weapon bob_ak47 ak47
 
 let player_tests = [
   "name of bob is 'Bob'" >::
@@ -72,6 +99,10 @@ let player_tests = [
   (fun _ -> assert_equal 3 (get_id bob));
   "bob has no weapons" >::
   (fun _ -> assert_equal [] (get_weapons bob));
+  "bob_ak47 has weapon ak47" >::
+  (fun _ -> assert_equal [ak47] (get_weapons bob_ak47));
+  "bob_removed_ak47 has no weapons" >::
+  (fun _ -> assert_equal [] (get_weapons bob_removed_ak47));
   "bob has no chance cards" >::
   (fun _ -> assert_equal [] (get_player_chance bob));
   "bob_chance has a chance card called 'nice'" >::
@@ -85,12 +116,71 @@ let player_tests = [
       (get_player_money_specific_currency bob_five_dollars 1));
 ]
 
+let initial_state = make_state
+
+let gamestate_tests = [
+  "Current player id of initial_state is 0" >::
+  (fun _ -> assert_equal 0 (get_curr_player_id initial_state));
+  "Current player name is 'Cat'" >::
+  (fun _ -> assert_equal "Cat" 
+      (initial_state |> get_curr_player |> get_player_name));
+  "No rent needs to be paid by the current player in inital_state" >::
+  (fun _ -> assert_equal false (check_rent initial_state));
+  "currency for at index 3 in inital_state is 'USD $'" >::
+  (fun _ -> assert_equal "USD $" 
+      (country_at_index initial_state 3 |> currency_in));
+  "no inactive players in inital_state" >::
+  (fun _ -> assert_equal [] (get_inactive_players_ids initial_state));
+  "first place in the place array is 'China' in initial_state" >::
+  (fun _ -> assert_equal "China" 
+      ((places_arr initial_state).(0) |> get_place_name));
+  "string for five_dollars in initial_state is '5.0 SEK kr'" >::
+  (fun _ -> assert_equal "SEK kr5." 
+      (money_string initial_state [five_dollars]));
+]
+
+let command_tests = [
+  "parse of 'money' is Money"  >::
+  (fun _ -> assert_equal Money (parse "money"));
+  "parse of 'quit' is Quit"  >::
+  (fun _ -> assert_equal Quit (parse "quit"));
+  "parse of 'purchase' is Purchase"  >::
+  (fun _ -> assert_equal Purchase (parse "purchase"));
+  "parse of 'develop' is Develop"  >::
+  (fun _ -> assert_equal Develop (parse "develop"));
+  "parse of 'end' is End"  >::
+  (fun _ -> assert_equal End (parse "end"));
+  "parse of 'chance' is Chance"  >::
+  (fun _ -> assert_equal Chance (parse "chance"));
+  "parse of 'use chance' is Use ['chance']" >::
+  (fun _ -> assert_equal (Use ["chance"]) (parse "use chance"));
+  "parse of 'battle' is Battle"  >::
+  (fun _ -> assert_equal Battle (parse "battle"));
+  "parse of 'pay' is Pay"  >::
+  (fun _ -> assert_equal Pay (parse "pay"));
+  "parse of 'buy_weapon' is Buy_Weapon" >::
+  (fun _ -> assert_equal Buy_Weapon (parse "buy_weapon"));
+  "parse of 'money money' raises Malformed" >::
+  (fun _ -> assert_raises Malformed (fun () -> parse "money money"));
+  "parse of 'use' raises Malformed" >::
+  (fun _ -> assert_raises Malformed (fun () -> parse "use"));
+  "parse of '' raises Empty" >::
+  (fun _ -> assert_raises Empty (fun () -> parse ""));
+  "parse of 'notcommand' raises Malformed" >::
+  (fun _ -> assert_raises Malformed (fun () -> parse "notcommand"));
+  "parse of 'use chance1 chance2' raises Malformed" >::
+  (fun _ -> assert_raises Malformed (fun () -> parse "use chance1 chance2"));
+]
+
 let suite =
   "test suite for Feud of Lords"  >::: List.flatten [
     country_tests;
     money_tests;
     place_tests;
+    weapon_tests;
     player_tests;
+    gamestate_tests;
+    command_tests;
   ]
 
 let _ = run_test_tt_main suite

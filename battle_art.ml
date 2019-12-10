@@ -156,4 +156,4 @@ let get_weapon_design (weapon : Weapon.t) =
   | "Iceball" -> ANSITerminal.print_string [ANSITerminal.green] ice_ball
   | "Fireball" -> ANSITerminal.print_string [ANSITerminal.magenta] fire_ball
   | "Plasmaball" -> ANSITerminal.print_string [ANSITerminal.yellow] plasma_ball
-  | _ -> failwith "" 
+  | _ -> failwith "Weapon name not found" 
