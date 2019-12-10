@@ -380,12 +380,14 @@ let get_free_place state =
     ANSITerminal.print_string [ANSITerminal.magenta] 
       "My Lord, you can only get an unowned land for free."
 
-let name player num =
+let rec name player num =
   ANSITerminal.print_string [ANSITerminal.green]  
     ("Dear Lord " ^ (string_of_int num) ^ 
      ", please enter thy name: ");
   let new_name = read_line () in
-  mutate_player_name player new_name
+  if String.trim new_name <> "" then
+    mutate_player_name player new_name
+  else name player num
 
 let name_players state = 
   let players = state.players in

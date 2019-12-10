@@ -8,7 +8,7 @@ let make_armory =
   let sword = Weapon.make_weapon "Sword" 100 in
   let gun = Weapon.make_weapon "Gun" 150 in  
   let fireball = Weapon.make_weapon "Fireball" 200 in 
-  let iceball = Weapon.make_weapon "IceBall" 250 in 
+  let iceball = Weapon.make_weapon "Iceball" 250 in 
   let plasmaball = Weapon.make_weapon "Plasmaball" 300 in 
   let arr = [(dagger, 11);(sword, 10); (gun, 7); (fireball, 5); 
              (iceball, 3); (plasmaball, 1)] in
