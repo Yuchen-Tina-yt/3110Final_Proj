@@ -9,7 +9,8 @@ type t =
 let make_player (name:string) (curr_pos: int) (id: int ) 
     (weapons: (Weapon.t list)): t = 
   let initial_money_map = empty |> add 0 1000. |> add 1 0. |> add 2 0. |> 
-                          add 3 0. |> add 4 0. |> add 5 0. in
+                          add 3 0. |> add 4 0. |> add 5 0. |> add 6 0. |> 
+                          add 7 0. |> add 8 0. |> add 9 0. in
   {name =  name; curr_pos =  curr_pos; money = initial_money_map; id = id; 
    chance = []; weapons = weapons}
 
@@ -41,7 +42,7 @@ let remove_weapon (player: t) (weapon: Weapon.t) : t=
    id = player.id; chance = player.chance}
 
 let move_player' (player: t) (step: int ) = 
-  let step' = ((player.curr_pos + step) mod 6) in    
+  let step' = ((player.curr_pos + step) mod 10) in    
   {name = player.name; curr_pos = step'; 
    money = player.money; 
    weapons = player.weapons; id = player.id; chance = player.chance}

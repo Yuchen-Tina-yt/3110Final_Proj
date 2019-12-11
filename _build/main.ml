@@ -106,11 +106,12 @@ let rec play_round st: unit =
     "  My Lord, you now have the following options: \n
        Enter purchase to purchase the place \n 
        Enter develop to develop the place \n
-       Enter monety to check your iron bank reserve \n
+       Enter money to check your iron bank reserve \n
        Enter quit to surrender\n
        Enter end to end your turn \n
        Enter chance to see your chance cards \n
-       Enter use to use your chance card \n";
+       Enter use free land to use your chance card \n
+       Enter buy_weapon to buy a weapon\n";
   print_string  "> ";
   try 
     (let command = parse (read_line () ) in
@@ -164,13 +165,13 @@ let rec play_round st: unit =
            "My Lord, you used chance card ";
          ANSITerminal.print_string [ANSITerminal.blue] 
            card_name;
-         if card_name = "free place" then get_free_place st
+         if card_name = "free land" then get_free_place st;
+         play_round st
        end
        else        
          ANSITerminal.print_string [ANSITerminal.blue] 
            "My Lord, you unfornatebly do not own this chance card 
            and cannot use it.";
-       play_round st
      |Buy_Weapon -> 
        player_get_weapon st;
      |Pay | Battle -> ANSITerminal.print_string [ANSITerminal.magenta] 
@@ -195,6 +196,7 @@ let lottery st : unit =
     let new_money = make_money 0 amt in
     print_string("You will be given $");
     print_float(amt); print_endline("!");
+    Card.get_lottery_pic lottery_num;
     let curr_player = get_curr_player st in 
     let new_player =  add_wealth curr_player new_money in 
     change_player st new_player;
@@ -205,23 +207,25 @@ let lottery st : unit =
                 get_player_money_specific_currency curr_player 0 in 
     print_string("You will lose $");
     print_float(amt); print_endline("!");
+    Card.get_lottery_pic lottery_num;
     let new_money = make_money 0 amt in
     let new_player =  add_wealth curr_player new_money in 
     change_player st new_player;
   end
   else if lottery_num = 2 then begin     (**move forward case *)
     print_string("You will move forward a random step.");
+    Card.get_lottery_pic lottery_num;
     welcome st;
     roll st;
     rent st false;
     play_round st;
-
   end
   else begin  (** chance cards*)
     print_string("You will be given a chance card!");
+    Card.get_lottery_pic lottery_num;
     let curr_player = get_curr_player st in 
-    let chance_cards = ["free land"; "free weapon"] in
-    let chance_num = Random.int 2 in 
+    let chance_cards = ["free land"] in
+    let chance_num = Random.int 1 in 
     let card = List.nth chance_cards (chance_num) in 
     print_string card;
     let new_player = change_player_chance curr_player card in 
@@ -298,8 +302,7 @@ and
     if check_rent state then begin
       ANSITerminal.print_string [ANSITerminal.magenta] 
         "The country currently belongs to another man. \n";
-      choose_rent_or_battle state; end else ();
-    explore state;
+      choose_rent_or_battle state; end else explore state;
   end
   else ANSITerminal.print_string [ANSITerminal.green] 
       ((get_player_name curr_player) ^ " is out. \n" ^ 

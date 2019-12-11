@@ -43,7 +43,7 @@ let ismalformed (lst : string list) : string list =
              || (h = "quit" && t <> []) || 
              (h = "money" && t <> []|| (h = "purchase" && t <> [])
               || (h = "end" && t <> []) || (h = "develop" && t <> [])) 
-             || (h = "chance" && t <> [] || (h = "use" && List.length t <> 1) || 
+             || (h = "chance" && t <> [] || (h = "use" && List.length t <> 2) || 
                  (h = "battle" && t <> []) || (h = "pay" && t <> [])
                  || (h = "buy_weapon" && t <> []))
     then raise (Malformed)

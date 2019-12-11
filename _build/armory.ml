@@ -10,8 +10,14 @@ let make_armory =
   let fireball = Weapon.make_weapon "Fireball" 200 in 
   let iceball = Weapon.make_weapon "Iceball" 250 in 
   let plasmaball = Weapon.make_weapon "Plasmaball" 300 in 
-  let arr = [(dagger, 11);(sword, 10); (gun, 7); (fireball, 5); 
-             (iceball, 3); (plasmaball, 1)] in
+  let bow = Weapon.make_weapon "Bow" 25 in
+  let axe = Weapon.make_weapon "Axe" 75 in
+  let bomb = Weapon.make_weapon "Bomb" 125 in
+  let saw = Weapon.make_weapon "Saw" 75 in
+  let arr = [(bow, 10);(dagger, 10);(axe,9); (saw,9); 
+             (sword, 8); (bomb,8); (gun, 7); 
+             (fireball, 7); 
+             (iceball, 6); (plasmaball, 4)] in
   {weapons = arr; count = 37}
 
 let rec remove_weapon_helper lst weapon= 
@@ -34,7 +40,12 @@ let armory_get_weapon t =
     let fireball = Weapon.make_weapon "Fireball" 200 in 
     let iceball = Weapon.make_weapon "IceBall" 250 in 
     let plasmaball = Weapon.make_weapon "Plasmaball" 300 in 
-    let w_type_lst = [dagger; sword; gun; fireball;iceball;plasmaball] in 
+    let bow = Weapon.make_weapon "Bow" 25 in
+    let axe = Weapon.make_weapon "Axe" 75 in
+    let bomb = Weapon.make_weapon "Bomb" 125 in
+    let saw = Weapon.make_weapon "Saw" 75 in
+    let w_type_lst = [dagger; sword; gun; fireball;iceball;plasmaball;
+                      bow; axe; bomb; saw] in 
     let ran_int = Random.int (List.length (w_type_lst)) in 
     let weapon = List.nth w_type_lst ran_int in  
     weapon 

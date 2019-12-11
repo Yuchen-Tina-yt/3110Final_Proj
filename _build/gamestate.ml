@@ -51,6 +51,10 @@ let make_state =
   let place4 = Place.make_place "USA" 3 100. 15. 15. in 
   let place5 = Place.make_place "Canada" 4 100. 15. 15. in 
   let place6 = Place.make_place "Korea" 5 100. 15. 15. in 
+  let place7 = Place.make_place  "France" 6 100. 15. 15. in
+  let place8 = Place.make_place  "Egypt" 7 100. 15. 15. in
+  let place9 = Place.make_place  "Australia" 8 100. 15. 15. in
+  let place10 = Place.make_place  "Brazil" 9 100. 15. 15. in
   (* let place7 = Place.make_place "place7" 0 100. 15. 15. in 
      let place8 = Place.make_place "Place8" 1 100. 15. 15. in 
      let place9 = Place.make_place "place9" 2 100. 15. 15. in 
@@ -65,7 +69,8 @@ let make_state =
                       place8; place9; place10; place11; place12; place13; 
                       place14; place15; 
                       place16|] in  *)
-  let place_array = [|place1; place2; place3; place4; place5; place6|] in
+  let place_array = [|place1; place2; place3; place4; place5; place6; place7; 
+                      place8; place9; place10|] in
   let armory = Armory.make_armory in 
 
 
@@ -75,8 +80,13 @@ let make_state =
   let country_4 = Country.make_country "USD $" 1. 0.01 in
   let country_5 = Country.make_country "CAD $" 1.32 0.01 in
   let country_6 = Country.make_country "KRW ₩" 1193.02 0.01 in
+  let country_7 = Country.make_country "EUR €" 0.9 0.01 in
+  let country_8 = Country.make_country "EGP e£" 0.062 0.01 in
+  let country_9 = Country.make_country "AUD A$" 0.68 0.01 in
+  let country_10 = Country.make_country "BRL R$" 4.15 0.01 in
   let country_array = [|country_1; country_2; country_3; country_4; country_5; 
-                        country_6|] in 
+                        country_6; country_7; country_8; country_9; 
+                        country_10|] in 
   let c_player = 0 in 
 
   {players = player_array; places = place_array; 
