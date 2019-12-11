@@ -22,18 +22,25 @@ let make_armory =
 
 let rec remove_weapon_helper lst weapon= 
   match lst with 
-  | []-> failwith "There aren't anymore weapons of this type"
-  | (a,b)::y -> if ((a = weapon) && (b > 0)) then
-      (a, b-1)::y else (a,b)::(remove_weapon_helper y weapon)
+  | []-> failwith "Sorry, there aren't any more weapons of this type"
+  | (a,b)::y -> if ((a = weapon) && (b > 0)) 
+    then 
+      if b-1 = 0 
+      then y 
+      else (a, b-1)::y 
+    else (a,b)::(remove_weapon_helper y weapon)
 
-let remove_weapon t weapon =
+let armory_remove_weapon t weapon =
   let lst = t.weapons in 
   let new_lst = remove_weapon_helper lst weapon in 
-  if t.count < 1 then failwith "There are no more weapons left" else 
-    {weapons = new_lst; count = t.count -1}
+  if t.count < 1 then 
+    failwith "Sorry my Lord, the weaponry is out of stock of all weapons." 
+  else {weapons = new_lst; count = t.count -1}
 
 let armory_get_weapon t = 
-  if t.count < 1 then failwith "There are no more weapons left" else 
+  if t.count < 1 then 
+    failwith "Sorry my Lord, the weaponry is out of stock of all weapons." 
+  else 
     let dagger = Weapon.make_weapon "Dagger" 50 in 
     let sword = Weapon.make_weapon "Sword" 100 in
     let gun = Weapon.make_weapon "Gun" 150 in  
