@@ -407,3 +407,21 @@ let name_players state =
   for x = 0 to ((Array.length state.players)-1) do
     state.players.(x) <- name (state.players.(x)) (x+1) state
   done
+
+let use_chance_card state object_phrase expected_card_name =
+  let player_idx = get_curr_player_id state in
+  let player = state.players.(player_idx) in
+  let card_name = (String.concat " " object_phrase) in 
+  if card_name = expected_card_name then 
+    let player_removed_card = remove_player_chance player card_name in
+    ANSITerminal.print_string [ANSITerminal.blue] 
+      ("My Lord, you used your chance card " ^ card_name ^ ".\n");
+    state.players.(player_idx) <- player_removed_card; 
+    get_free_place state;
+  else if card_name <> "free escape" && card_name <> "free land" then
+    failwith
+      ("My Lord, " ^ card_name ^ "is not a name of a chance card.\n")
+  else
+    failwith
+      ("My Lord, you unfortunately cannot use chance card " ^ card_name ^
+       " at this time.\n") 

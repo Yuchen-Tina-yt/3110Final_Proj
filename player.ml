@@ -76,12 +76,26 @@ let get_player_money player =
 let get_player_money_specific_currency player country_idx =
   find country_idx player.money
 
-(**[change_player_chance player str] is the player after changed his/her
+(**[add_player_chance player str] is the player after changed his/her
    chance card inventory *)
-let change_player_chance player str = 
+let add_player_chance player card_name = 
   {name = player.name; curr_pos = player.curr_pos; 
    money = player.money; 
-   weapons = player.weapons; id = player.id; chance = str :: player.chance}
+   weapons = player.weapons; id = player.id; 
+   chance = card_name :: player.chance}
+
+(** [remove_player_chance_helper card_name list] is [list] with the first 
+    instance of [card_name] removed from [list]*)
+let rec remove_player_chance_helper card_name = function
+  | [] -> failwith "My Lord, you unfornately do not own this chance card 
+           and cannot use it.\n"
+  | h::t -> if h = card_name then t else 
+      h::remove_player_chance_helper card_name t
+
+let remove_player_chance player card_name =
+  {name = player.name; curr_pos = player.curr_pos; money = player.money; 
+   weapons = player.weapons; id =  player.id; 
+   chance  = remove_player_chance_helper card_name player.chance}
 
 let get_weapons player =
   player.weapons

@@ -236,9 +236,9 @@ let rent state is_higher = begin
        "You now have ";
      ANSITerminal.print_string [ANSITerminal.magenta] 
        (money_string state (get_player_money curr_player'));
-     ANSITerminal.print_string [ANSITerminal.magenta] "0.";
+     ANSITerminal.print_string [ANSITerminal.magenta] "0.\n";
      ANSITerminal.print_string [ANSITerminal.magenta] 
-       "Player ";
+       "Lord ";
      ANSITerminal.print_string [ANSITerminal.magenta] 
        (get_player_name paid_player');
      ANSITerminal.print_string [ANSITerminal.magenta] 
@@ -333,7 +333,7 @@ let battle state =
       end
     else if num_weapons_2 = 0 then 
       ANSITerminal.print_string [ANSITerminal.magenta] 
-        "Congrats My Lord! The battle is won. You now owns the land.\n" 
+        "Congrats My Lord! The battle is won. You now own the land.\n" 
     else
       let random_int = Random.int num_weapons_1 in 
       let random_int_2 = Random.int num_weapons_2 in 
@@ -345,7 +345,7 @@ let battle state =
       state.players.(owner_index) <- owner';  
       if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then 
         ANSITerminal.print_string [ANSITerminal.magenta] 
-          "Congrats My Lord! The battle is won. You now owns the land.\n" 
+          "Congrats My Lord! The battle is won. You now own the land.\n" 
       else begin
         ANSITerminal.print_string [ANSITerminal.magenta]
           ("My Lord, you have lost and there is no holy ground for the loser. 
@@ -407,3 +407,23 @@ let name_players state =
   for x = 0 to ((Array.length state.players)-1) do
     state.players.(x) <- name (state.players.(x)) (x+1) state
   done
+
+let use_chance_card state object_phrase expected_card_name =
+  let player_idx = get_curr_player_id state in
+  let player = state.players.(player_idx) in
+  let card_name = (String.concat " " object_phrase) in 
+  if card_name = expected_card_name then 
+    let player_removed_card = remove_player_chance player card_name in
+    ANSITerminal.print_string [ANSITerminal.blue] 
+      ("My Lord, you used your chance card " ^ card_name ^ ".\n");
+    state.players.(player_idx) <- player_removed_card; 
+    if card_name = "free land" then
+      get_free_place state
+    else ();
+  else if card_name <> "free escape" && card_name <> "free land" then
+    failwith
+      ("My Lord, " ^ card_name ^ "is not a name of a chance card.\n")
+  else
+    failwith
+      ("My Lord, you unfortunately cannot use chance card " ^ card_name ^
+       " at this time.\n") 

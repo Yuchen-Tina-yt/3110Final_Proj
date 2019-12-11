@@ -75,3 +75,8 @@ val player_get_weapon: t -> unit
 
 (**[name_players a] modifies [a] with modified player name .*)
 val name_players: t -> unit
+
+(** [use_chance_card a strlist card_name] is [a] after the current player uses a 
+    card of [card_name] which will fail if [strlist] does not represent a card 
+    of [card_name] or if the current player doesn't have that card. *)
+val use_chance_card: t -> string list -> string -> unit

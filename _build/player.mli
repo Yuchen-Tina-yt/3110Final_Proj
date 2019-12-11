@@ -32,9 +32,13 @@ val get_player_money: t -> Money.t list
     [player].*)
 val get_player_money_specific_currency: t -> int -> float
 
-(** [change_player_chance player] is the player after changed the chance card
-    inventory*)
-val change_player_chance: t -> string -> t
+(** [add_player_chance player card_name] is the player after adding the chance 
+    card with [card_name] to their inventory*)
+val add_player_chance: t -> string -> t
+
+(** [remove_player_chance player card_name] is the player after removing the 
+    chance card with [card_name] from their inventory *)
+val remove_player_chance: t -> string -> t
 
 (**[add_weapon player weapon] is the [player] after adding weapon to their
    weapon inventory. *)

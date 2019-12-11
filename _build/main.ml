@@ -149,23 +149,11 @@ let rec play_round st: unit =
          print_endline "";
          play_round st
        end
-     | Use object_phrase -> 
-       let player = (get_curr_player st) in
-       let cards = get_player_chance player in
-       let card_name = (String.concat " " object_phrase) in 
-
-       if List.mem card_name cards then begin
-         ANSITerminal.print_string [ANSITerminal.blue] 
-           "My Lord, you used chance card ";
-         ANSITerminal.print_string [ANSITerminal.blue] 
-           card_name;
-         if card_name = "free land" then get_free_place st;
-         play_round st
+     | Use object_phrase -> begin try
+           use_chance_card st object_phrase "free land";
+         with Failure msg -> ANSITerminal.print_string [ANSITerminal.blue] msg;
+           play_round st; 
        end
-       else        
-         ANSITerminal.print_string [ANSITerminal.blue] 
-           "My Lord, you unfornatebly do not own this chance card 
-           and cannot use it.";
      |Buy_Weapon -> begin
          try (player_get_weapon st) with Failure msg -> print_endline msg;
        end
@@ -237,10 +225,10 @@ let lottery st : unit =
     print_string("You will be given a chance card!");
     Card.get_lottery_pic lottery_num;
     let curr_player = get_curr_player st in 
-    let chance_cards = ["free land"] in
-    let chance_num = Random.int 1 in 
+    let chance_cards = ["free land"; "free escape"] in
+    let chance_num = Random.int 2 in 
     let card = List.nth chance_cards (chance_num) in 
-    let new_player = change_player_chance curr_player card in 
+    let new_player = add_player_chance curr_player card in 
     change_player st new_player;
     print_string "You currently hold the following chance cards: ";
     print_strlist  (get_player_chance (get_curr_player st));
@@ -276,19 +264,37 @@ let rec choose_rent_or_battle st =
        Enter 'battle' to battle \n
        Enter 'pay' to pay the rent \n
        Enter 'weapons' to see your weapons arsenal \n
+       Enter 'chance' to see your chance cards \n
+       Enter 'use free escape' to use your chance card \n
        Enter 'quit' to forever rest in peace\n";
   print_string  "> ";
   try 
     (let command = parse (read_line () ) in
      match command with 
-     | Purchase | Develop  | Money | End | Chance | Buy_Weapon -> 
+     | Purchase | Develop  | Money | End | Buy_Weapon -> 
        print_endline "Invalid command at this time."
-     | Use object_phrase -> ANSITerminal.print_string [ANSITerminal.magenta] 
-                              "Invalid command at this time."
+     | Use object_phrase -> begin try
+           use_chance_card st object_phrase "free escape";
+         with Failure msg -> ANSITerminal.print_string [ANSITerminal.blue] msg;
+           choose_rent_or_battle st; 
+       end
      | Pay -> ANSITerminal.print_string [ANSITerminal.magenta] 
                 "You have decided to pay the rent."; rent st false;
      | Battle -> ANSITerminal.print_string [ANSITerminal.magenta] 
                    "You have decided to battle."; battle st;
+     | Chance -> let player = (get_curr_player st) in
+       let cards = get_player_chance player in
+       if List.length cards = 0 then begin 
+         ANSITerminal.print_string [ANSITerminal.blue]  
+           "My Lord, you unfornately don't have any chance cards currently.\n";
+         choose_rent_or_battle st end
+       else begin
+         ANSITerminal.print_string [ANSITerminal.blue] 
+           "My Lord, here are your chance cards: ";
+         print_strlist cards;
+         print_endline "";
+         choose_rent_or_battle st
+       end   
      | Weapons -> begin 
          let player = (get_curr_player st) in
          let weapons = (get_weapons player) in
