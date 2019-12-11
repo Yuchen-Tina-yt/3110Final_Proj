@@ -340,12 +340,12 @@ and
   else begin  (** this is the chance card system, players can hold multiple 
                   chance cards with them and use one when condition satisfied.*)
     print_string("You will be given a chance card!");
-    Card.get_lottery_pic lottery_num;
     let curr_player = get_curr_player st in 
     let chance_cards = ["free land"; "free escape"] in
     let chance_num = Random.int 2 in 
     let card = List.nth chance_cards (chance_num) in 
     let new_player = add_player_chance curr_player card in 
+    Card.get_lottery_pic lottery_num;
     change_player st new_player;
     print_string "You currently hold the following chance cards: ";
     print_strlist  (get_player_chance (get_curr_player st));
