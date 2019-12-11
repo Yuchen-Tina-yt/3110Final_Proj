@@ -122,7 +122,7 @@ let rec play_round st: unit =
            print_endline "You can develop this land when you next visit. ";
            print_endline "Your turn will now end. \n";
          end
-         with Failure msg -> print_endline msg;
+         with Failure msg -> print_endline msg; play_round st;
        end
      | Develop -> begin
          try begin
@@ -138,7 +138,7 @@ let rec play_round st: unit =
          "You have quit the game.\n You will be missed dearly. 💕 \n\n";
      | Money  -> begin 
          let player = (get_curr_player st) in 
-         print_string ("You have $");
+         print_string ("You have ");
          print_string (money_string st (get_player_money player)); print_endline "0."; 
          play_round st end
      | End ->  print_endline "Your turn ends.";
@@ -146,7 +146,7 @@ let rec play_round st: unit =
        let cards = get_player_chance player in
        if List.length cards = 0 then begin 
          ANSITerminal.print_string [ANSITerminal.blue]  
-           "My Lord, you unfornately don't have any chance cards currently.";
+           "My Lord, you unfornately don't have any chance cards currently.\n";
          play_round st end
        else begin
          ANSITerminal.print_string [ANSITerminal.blue] 
@@ -172,8 +172,9 @@ let rec play_round st: unit =
          ANSITerminal.print_string [ANSITerminal.blue] 
            "My Lord, you unfornatebly do not own this chance card 
            and cannot use it.";
-     |Buy_Weapon -> 
-       player_get_weapon st;
+     |Buy_Weapon -> begin
+         try (player_get_weapon st) with Failure msg -> print_endline msg;
+       end
      |Pay | Battle -> ANSITerminal.print_string [ANSITerminal.magenta] 
                         "Invalid command at this time."
     )
@@ -319,7 +320,7 @@ let play state : unit =
 let main () =
   ANSITerminal.resize 99 99;
   ANSITerminal.(print_string [red]
-                  "\n\nWelcome to the Feud of Lords!\n");
+                  "\n\nWelcome to the Lord of Feuds!\n");
   Design.get_dice_design 0;
   Random.self_init ();
   let state = make_state in

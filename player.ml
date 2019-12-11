@@ -8,8 +8,8 @@ type t =
 
 let make_player (name:string) (curr_pos: int) (id: int ) 
     (weapons: (Weapon.t list)): t = 
-  let initial_money_map = empty |> add 0 1000. |> add 1 0. |> add 2 0. |> 
-                          add 3 0. |> add 4 0. |> add 5 0. |> add 6 0. |> 
+  let initial_money_map = empty |> add 0 0. |> add 1 0. |> add 2 0. |> 
+                          add 3 1000. |> add 4 0. |> add 5 0. |> add 6 0. |> 
                           add 7 0. |> add 8 0. |> add 9 0. in
   {name =  name; curr_pos =  curr_pos; money = initial_money_map; id = id; 
    chance = []; weapons = weapons}
@@ -78,19 +78,3 @@ let get_player_chance player =
 let mutate_player_name (player: t) (new_name : string) = 
   {name = new_name; curr_pos = player.curr_pos; money = player.money; 
    weapons = player.weapons; id = player.id; chance = player.chance}
-
-
-(*
-(**[find_newpos_name player steps places] is the new place name of the player 
-   after moving number of steps steps from the player's current position*)
-let find_newpos_name (player: t) 
-    (steps: int) (places : Places.places_lst) : string=
-  let curr_pos = palyer.curr_pos in 
-  let start_index = List.find (fun x -> x=curr_pos) places in 
-  List.nth places ((start_index + steps) mod (List.length Places))
-
-let move_pos (player: t) (steps: int) (places : Places.places_lst) : t= 
-  {name = player.name; curr_pos = find_newpos_name player steps places;
-   money = player.money; items = player.items}
-
-*)

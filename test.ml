@@ -173,7 +173,7 @@ let command_tests = [
 ]
 
 let suite =
-  "test suite for Feud of Lords"  >::: List.flatten [
+  "test suite for Lord of Feuds"  >::: List.flatten [
     country_tests;
     money_tests;
     place_tests;

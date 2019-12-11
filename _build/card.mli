@@ -1,1 +1,0 @@
-val get_lottery_pic: int -> unit

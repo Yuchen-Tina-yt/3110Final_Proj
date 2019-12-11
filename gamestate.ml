@@ -45,16 +45,16 @@ let make_state =
   let player4 = Player.make_player "Camel" 0 3 [] in
   let player_array = [|player1; player2; player3; player4|] in 
 
-  let place1 = Place.make_place "China" 0 100. 15. 15. in 
-  let place2 = Place.make_place "Sweden" 1 100. 15. 15. in 
-  let place3 = Place.make_place "Japan" 2 100. 15. 15. in 
+  let place1 = Place.make_place "China" 0 1000. 15. 15. in 
+  let place2 = Place.make_place "Sweden" 1 1000. 15. 15. in 
+  let place3 = Place.make_place "Japan" 2 10000. 15. 15. in 
   let place4 = Place.make_place "USA" 3 100. 15. 15. in 
-  let place5 = Place.make_place "Canada" 4 100. 15. 15. in 
-  let place6 = Place.make_place "Korea" 5 100. 15. 15. in 
+  let place5 = Place.make_place "Canada" 4 150. 15. 15. in 
+  let place6 = Place.make_place "Korea" 5 100000. 15. 15. in 
   let place7 = Place.make_place  "France" 6 100. 15. 15. in
-  let place8 = Place.make_place  "Egypt" 7 100. 15. 15. in
-  let place9 = Place.make_place  "Australia" 8 100. 15. 15. in
-  let place10 = Place.make_place  "Brazil" 9 100. 15. 15. in
+  let place8 = Place.make_place  "Egypt" 7 6. 10. 15. in
+  let place9 = Place.make_place  "Australia" 8 50. 15. 15. in
+  let place10 = Place.make_place  "Brazil" 9 400. 15. 15. in
   (* let place7 = Place.make_place "place7" 0 100. 15. 15. in 
      let place8 = Place.make_place "Place8" 1 100. 15. 15. in 
      let place9 = Place.make_place "place9" 2 100. 15. 15. in 
@@ -142,7 +142,7 @@ let purchase state =
   let country_idx = get_country place in
   let country = state.countries.(country_idx) in
   let place_value = get_value place in
-  if (get_ownership place = -1) then begin
+  if (get_ownership place = -1 && get_ownership place <> player_index) then begin
     let player' = pay place_value state player country_idx country in
     let player_id = get_id player' in
     let place' = change_ownership place (player_id)in
@@ -150,7 +150,7 @@ let purchase state =
     state.places.(get_curr_pos player) <- place';
     ANSITerminal.print_string [ANSITerminal.magenta] 
       ("Congrats my lord, you successfully purchased this previously " ^ 
-       "unowned land, " ^ (get_place_name place') ^ "!");
+       "unowned land, " ^ (get_place_name place') ^ "!\n");
     ANSITerminal.print_string [ANSITerminal.magenta] 
       "You now have "; 
     ANSITerminal.print_string [ANSITerminal.magenta] 
@@ -158,35 +158,16 @@ let purchase state =
     ANSITerminal.print_string [ANSITerminal.magenta] 
       "0.\n";
   end
+  else if (get_ownership place =  player_index) then 
+    failwith "My Lord, you have landed on the land you purchased previously. 
+    Please enter another command.\n"
   else begin
     (* Buying the place from another player. 
        Right now, the old owner 
        doesn't get a choice whetheer or not they allow the current player to buy 
        the place from them. *)
-    let cur_owner_int = get_ownership place in 
-    let owner = state.players.(cur_owner_int) in 
-    let place_1 = change_ownership place player_index in 
-    let player_1 = pay place_value state player country_idx country in 
-    let owner' = add_wealth owner (make_money country_idx place_value) in 
-    state.places.(get_curr_pos player) <- place_1; 
-    state.players.(player_index)<- player_1; 
-    state.players.(cur_owner_int) <- owner';
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      ("Congrats My Lord, you successfully purchased this land, " ^ 
-       (get_place_name place_1) ^", from Player " ^ 
-       (get_player_name owner') ^ "!");
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      "You now have "; 
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      (money_string state (get_player_money player_1));
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      "0.";     
-    ANSITerminal.print_string [ANSITerminal.magenta] "Lord ";
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      (get_player_name owner'); print_string " now has ";
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      (money_string state (get_player_money owner')); 
-    print_endline "\n";
+    failwith "Sorry, the land belongs to some other Lord. 
+    Therefore, the purchase cannot be completed.\n"
   end
 
 (**change the current player *)
@@ -221,7 +202,7 @@ let check_rent state =
     ANSITerminal.print_string [ANSITerminal.magenta] 
       (Player.get_player_name paid_player);
     ANSITerminal.print_string [ANSITerminal.magenta] 
-      ("You are charged with a rent of " ^ currency ^ string_of_float rent);
+      (".\nYou are charged with a rent of " ^ currency ^ string_of_float rent);
     ANSITerminal.print_string [ANSITerminal.magenta] "0.";
     true 
   end
@@ -338,12 +319,12 @@ let battle state =
           "Shame! You are unarmed.";
         ANSITerminal.print_string [ANSITerminal.magenta]
           ("My Lord, you have lost and there is no holy ground for the loser. 
-          You lost the battle and now needs to pay a 50% higher remedy.");
+          You lost the battle and now needs to pay a 50% higher remedy.\n");
         rent state true;
       end
     else if num_weapons_2 = 0 then 
       ANSITerminal.print_string [ANSITerminal.magenta] 
-        "Congrats My Lord! The battle is won. You now owns the land." 
+        "Congrats My Lord! The battle is won. You now owns the land.\n" 
     else
       let random_int = Random.int num_weapons_1 in 
       let random_int_2 = Random.int num_weapons_2 in 
@@ -355,11 +336,11 @@ let battle state =
       state.players.(owner_index) <- owner';  
       if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then 
         ANSITerminal.print_string [ANSITerminal.magenta] 
-          "Congrats My Lord! The battle is won. You now owns the land." 
+          "Congrats My Lord! The battle is won. You now owns the land.\n" 
       else begin
         ANSITerminal.print_string [ANSITerminal.magenta]
           ("My Lord, you have lost and there is no holy ground for the loser. 
-          You lost the battle and now needs to pay a 50% higher remedy.");
+          You lost the battle and now needs to pay a 50% higher remedy.\n");
         rent state true;
       end
   end
@@ -404,9 +385,3 @@ let name_players state =
   for x = 0 to ((Array.length players)-1) do
     state.players.(x) <- name (state.players.(x)) (x+1)
   done
-
-
-
-
-
-
