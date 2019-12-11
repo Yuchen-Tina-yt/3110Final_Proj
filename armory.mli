@@ -1,18 +1,17 @@
-(** This module represent the weapon and how many weapons the players
-    could buy in the game. *)
+(** This module represents an armory of weapons to control how many total
+    weapons the players can buy in a game. *)
 
-(**The abstract type represent the armory.*)
+(**The abstract type that represents the armory.*)
 type t 
 
-(**[make_armory] makes the armory with predifined weapon types and 
-   amounts *)
+(**[make_armory] makes an armory with predifined weapons and their quantities.*)
 val make_armory: t
 
-(**[armory_remove_weapon a weapon] returns a modified armory with  [weapon]
-   removed. This happens when the player buys a weapon. Modifies [a]
-   and returns a new armory*)
+(**[armory_remove_weapon armory weapon] returns [armory] with [weapon]
+   removed. 
+   Raises a failure if [armory] has no more weapons. *)
 val armory_remove_weapon: t->Weapon.t -> t
 
-(**[armory_get_weapon a] returns a random weapon that exists in [a]. 
-   This determines which weapon the player will get*)
+(**[armory_get_weapon armory] returns a random weapon that exists in [armory].
+   Raises a failure if [armory] has no more weapons.*)
 val armory_get_weapon: t -> Weapon.t 

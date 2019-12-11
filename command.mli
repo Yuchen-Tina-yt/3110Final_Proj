@@ -1,8 +1,10 @@
 (**This module represents the commands that could be used in the game and 
    functions to parse user input to commands *)
+
+(**The type that represents the object phrase *)
 type object_phrase = string list
 
-(**The abstract type represent the object_phrase *)
+(**The type that represents the commands *)
 type command = 
   | Money
   | Quit
@@ -22,5 +24,5 @@ exception Empty
 (**Exception of Malformed *)
 exception Malformed
 
-(**[parse str] is the command parsed from the original user input *)
+(**[parse str] is the command parsed from the original user input [str]. *)
 val parse: string -> command

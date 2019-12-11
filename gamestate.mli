@@ -3,25 +3,28 @@
 (**The abstract type representing the game board *)
 type t
 
-(**[make_state] is the game board*)
+(**[make_state] is the initial game board*)
 val make_state : t
 
-(**[move_player a] modifies [a] with the position of the
-   current player changed*)
+(**[move_player a] is [a] with the position of the
+   current player changed after a random dice roll*)
 val move_player : t -> unit
 
-(**[purchase a] modifies [a] by changing the ownership of a place
-   to the currrent player*)
+(**[purchase a] is [a] after the current player purchases the current place.
+   Raises a failure if the current place is already owned. *)
 val purchase : t -> unit
 
-(**[develop_land a] modifies [a] by developing the current place*)
+(**[develop_land a] modifies [a] according to when the current player develops 
+   the current place. 
+   Raises a failure if the current place isn't owned by the current player. *)
 val develop_land : t -> unit
 
-(**[rent a] modifies[a] making the current player pay a 
-   rent if they end up on someone's property*)
+(**[rent a is_higher] modifies [a] to make the current player pay a rent to the 
+   owner of the current place. The rent is 1.5 times more expensive if [is_higher] 
+   is true. *)
 val rent : t -> bool -> unit
 
-(**[turn a] modifies [a] by changing the current player*)
+(**[turn a] modifies [a] to have the current player changed to the next player*)
 val turn : t -> unit
 
 (**[places_arr a] returns the array of places in [a] *)
@@ -30,29 +33,33 @@ val places_arr: t -> Place.t array
 (**[get_curr_player a ] returns the current player in [a]*)
 val get_curr_player: t -> Player.t
 
-(**[get_inactive_player_id a] returns the current inactive player in [a]*)
+(**[get_inactive_player_id a] returns the current inactive player ids in [a]. *)
 val get_inactive_players_ids: t -> int list
 
-(**[make_current_player_inactive a] modifies [a] to make 
-   the current player inactive. *)
+(**[make_current_player_inactive a] is [a] with the the current player made 
+   inactive. *)
 val make_current_player_inactive: t -> unit
 
-(**[get_curr_player_id a] returns the id of the current player in [a]*)
+(**[get_curr_player_id a] is the id of the current player in [a]*)
 val get_curr_player_id: t -> int
 
-(**[get_curr_player_id a in] returns the country in [a] at the specified [in]*)
+(**[get_curr_player_id a in] returns the country in [a] at the specified index 
+   [in].*)
 val country_at_index: t -> int -> Country.t
 
 (**[trasfer_places place] chances ownership of place*)
 val transfer_places: t -> int -> unit
 
-(**[get_money_list_totoal_USD_equiv t] returns the monye total as USD*)
+(**[get_money_list_total_USD_equiv money_list] returns the total of 
+   [money_list] in USD's*)
 val get_money_list_total_USD_equiv: t -> Money.t list -> float
 
-(**[money_string t] returns the list of all money*)
+(**[money_string money_list] returns the output to the interface for 
+   [money_list] in [t]*)
 val money_string: t -> Money.t list -> string
 
-(**[pay fl state player in country] returns a player who has been paid*)
+(** [pay amount state player country_idx country] is [player] after paying 
+    the [amount] in the terms of the currency in [country].*)
 val pay: float -> t -> Player.t -> int -> Country.t -> Player.t
 
 (**[change_player t player] changes the player turn*)
@@ -61,11 +68,11 @@ val change_player: t -> Player.t -> unit
 (**[get_free_place a] uses the chance card to get a place for free*)
 val get_free_place: t-> unit
 
-(**[check_rent t] checkes the rent *)
+(**[check_rent t] is true if the rent needs to be paid in [t]*)
 val check_rent: t -> bool
 
-(**[battle a] allows the current player to battle the player who owns the land
-   they land on. If they lose, they have to pay the rent plus a fee. It modifies
+(**[battle a] modifies [a] after the current player battles the owner of the current 
+   place. If they lose, they have to pay the rent plus a fee. It modifies
    [a]*)
 val battle: t -> unit
 

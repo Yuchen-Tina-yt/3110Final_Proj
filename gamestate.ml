@@ -46,15 +46,15 @@ let make_state =
   let player4 = Player.make_player "Camel" 0 3 [] in
   let player_array = [|player1; player2; player3; player4|] in 
 
-  let place1 = Place.make_place "China" 0 1000. 150. 15. in 
-  let place2 = Place.make_place "Sweden" 1 1000. 150. 15. in 
-  let place3 = Place.make_place "Japan" 2 10000. 1500. 15. in 
+  let place1 = Place.make_place "China" 0 700. 100. 15. in 
+  let place2 = Place.make_place "Sweden" 1 950. 150. 15. in 
+  let place3 = Place.make_place "Japan" 2 10800. 1600. 15. in 
   let place4 = Place.make_place "USA" 3 100. 15. 15. in 
-  let place5 = Place.make_place "Canada" 4 150. 30. 15. in 
-  let place6 = Place.make_place "Korea" 5 100000. 15000. 15. in 
+  let place5 = Place.make_place "Canada" 4 150. 25. 15. in 
+  let place6 = Place.make_place "Korea" 5 120000. 18000. 15. in 
   let place7 = Place.make_place  "France" 6 100. 15. 15. in
-  let place8 = Place.make_place  "Egypt" 7 6. 10. 1. in
-  let place9 = Place.make_place  "Australia" 8 50. 10. 15. in
+  let place8 = Place.make_place  "Egypt" 7 1500. 225. 1. in
+  let place9 = Place.make_place  "Australia" 8 150. 25. 15. in
   let place10 = Place.make_place  "Brazil" 9 400. 60. 15. in
   (* let place7 = Place.make_place "place7" 0 100. 15. 15. in 
      let place8 = Place.make_place "Place8" 1 100. 15. 15. in 
@@ -82,8 +82,8 @@ let make_state =
   let country_5 = Country.make_country "CAD $" 1.32 0.01 in
   let country_6 = Country.make_country "KRW ₩" 1193.02 0.01 in
   let country_7 = Country.make_country "EUR €" 0.9 0.01 in
-  let country_8 = Country.make_country "EGP e£" 0.062 0.01 in
-  let country_9 = Country.make_country "AUD A$" 0.68 0.01 in
+  let country_8 = Country.make_country "EGP e£" 16.15 0.01 in
+  let country_9 = Country.make_country "AUD A$" 1.45 0.01 in
   let country_10 = Country.make_country "BRL R$" 4.15 0.01 in
   let country_array = [|country_1; country_2; country_3; country_4; country_5; 
                         country_6; country_7; country_8; country_9; 
@@ -101,7 +101,7 @@ let move_player state =
   let player = state.players.(player_int) in 
   state.players.(player_int) <- Player.move_player' player step
 
-(** [country_idx_of_most_money state idx max_amount money_list] returns the 
+(** [country_idx_of_most_money state idx max_amount money_list] is the 
     index of the country in state.countries that [money_list] has the most 
     money in. *)
 let rec country_idx_of_most_money state idx max_amount = function 
@@ -115,8 +115,6 @@ let rec country_idx_of_most_money state idx max_amount = function
     else
       country_idx_of_most_money state idx max_amount t
 
-(** [pay amount state player country_idx country] is [player] after paying 
-    the [amount] in the terms of the currency in [country].*)
 let pay amount state player country_idx country =
   (* First tries to pay that player in the local currency. *)
   try (add_wealth player 
@@ -142,8 +140,6 @@ let pay amount state player country_idx country =
     (add_wealth player (make_money other_country_idx 
                           (-.exchange_amount -.exchange_fee)))
 
-(** [purchase state] is the function to purchase the land
-    Add foreign currency functionality. Use helper function*)
 let purchase state = 
   let player_index = state.current_player in 
   let player = state.players.(player_index) in 
@@ -190,6 +186,7 @@ let transfer_places state receiver =
                 then change_ownership h receiver
                 else h) state.places
 
+(** [transfer_wealth] *)
 let rec transfer_wealth receiver = function
   | [] -> receiver
   | money::t -> transfer_wealth (add_wealth receiver money) t
@@ -273,7 +270,6 @@ let rent state is_higher = begin
     transfer_places state owner_id;
 end
 
-(** The cost to develop land is 5% of land and increase rent by 5%*)
 let develop_land state = 
   let player_index = state.current_player in 
   let player = state.players.(player_index) in 
@@ -306,7 +302,6 @@ let develop_land state =
       "My Lord, you can't develop this place, because you don't own it.\n"
 
 let turn state = 
-  (*print_endline (string_of_int state.current_player); *)
   state.current_player <- ((state.current_player+1) mod 4 )
 
 let get_curr_player_id state =

@@ -20,15 +20,20 @@ let make_armory =
              (iceball, 6); (plasmaball, 4)] in
   {weapons = arr; count = 37}
 
-let rec remove_weapon_helper lst weapon= 
+(** [remove_weapon_helper lst weapon] is [lst], an association list of 
+    weapons and their quantities, with the quantity of [weapon] decremented by 
+    1. However, if the number of [weapon] would becomes 0, the entire pair of
+    [weapon] and its quantity is removed from [lst].
+    Raises a failure if [lst] is empty. *)
+let rec remove_weapon_helper lst weapon_type= 
   match lst with 
   | []-> failwith "Sorry, there aren't any more weapons of this type"
-  | (a,b)::y -> if ((a = weapon) && (b > 0)) 
+  | (a,b)::y -> if ((a = weapon_type) && (b > 0)) 
     then 
       if b-1 = 0 
       then y 
       else (a, b-1)::y 
-    else (a,b)::(remove_weapon_helper y weapon)
+    else (a,b)::(remove_weapon_helper y weapon_type)
 
 let armory_remove_weapon t weapon =
   let lst = t.weapons in 

@@ -32,53 +32,53 @@ ocamlfind ocamldep -package OUnit -package ANSITerminal -modules place.ml > plac
 # Target: place.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:place.cmo, file:place.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o place.cmo place.ml # cached
 # Target: gamestate.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:gamestate.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules gamestate.mli > gamestate.mli.depends # cached
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules gamestate.mli > gamestate.mli.depends
 # Target: gamestate.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:gamestate.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o gamestate.cmi gamestate.mli # cached
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o gamestate.cmi gamestate.mli
 # Target: gamestate.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:gamestate.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules gamestate.ml > gamestate.ml.depends # cached
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules gamestate.ml > gamestate.ml.depends
 # Target: armory.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:armory.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules armory.mli > armory.mli.depends # cached
-# Target: armory.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:armory.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o armory.cmi armory.mli # cached
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules armory.mli > armory.mli.depends
 # Target: battle_art.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:battle_art.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules battle_art.mli > battle_art.mli.depends # cached
-# Target: battle_art.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:battle_art.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o battle_art.cmi battle_art.mli # cached
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules battle_art.mli > battle_art.mli.depends
 # Target: design.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:design.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules design.mli > design.mli.depends # cached
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules design.mli > design.mli.depends
+# Target: armory.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:armory.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o armory.cmi armory.mli
+# Target: battle_art.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:battle_art.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o battle_art.cmi battle_art.mli
 # Target: design.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:design.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o design.cmi design.mli # cached
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o design.cmi design.mli
 # Target: gamestate.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:gamestate.cmo, file:gamestate.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o gamestate.cmo gamestate.ml # cached
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o gamestate.cmo gamestate.ml
 # Target: main.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:main.mli, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules main.mli > main.mli.depends # cached
 # Target: main.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:main.mli, interf, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o main.cmi main.mli # cached
 # Target: main.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:main.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules main.ml > main.ml.depends
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules main.ml > main.ml.depends # cached
 # Target: card.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:card.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules card.mli > card.mli.depends # cached
-# Target: card.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:card.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o card.cmi card.mli # cached
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules card.mli > card.mli.depends
 # Target: command.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:command.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules command.mli > command.mli.depends # cached
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules command.mli > command.mli.depends
+# Target: card.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:card.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o card.cmi card.mli
 # Target: command.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:command.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o command.cmi command.mli # cached
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o command.cmi command.mli
 # Target: main.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:main.cmo, file:main.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o main.cmo main.ml
 # Target: command.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:command.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules command.ml > command.ml.depends # cached
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules command.ml > command.ml.depends
 # Target: command.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:command.cmo, file:command.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o command.cmo command.ml # cached
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o command.cmo command.ml
 # Target: money.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:money.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules money.ml > money.ml.depends # cached
 # Target: money.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:money.cmo, file:money.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o money.cmo money.ml # cached
 # Target: armory.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:armory.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules armory.ml > armory.ml.depends # cached
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules armory.ml > armory.ml.depends
 # Target: armory.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:armory.cmo, file:armory.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o armory.cmo armory.ml # cached
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o armory.cmo armory.ml
 # Target: weapon.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:weapon.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules weapon.ml > weapon.ml.depends # cached
 # Target: weapon.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:weapon.cmo, file:weapon.ml, implem, ocaml, quiet, traverse }
@@ -86,13 +86,412 @@ ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o weapon.cmo weapon.ml
 # Target: design.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:design.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules design.ml > design.ml.depends # cached
 # Target: design.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:design.cmo, file:design.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o design.cmo design.ml # cached
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o design.cmo design.ml
++ ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o design.cmo design.ml
+File "design.ml", line 15, characters 14-16:
+15 |           | :/\: || :/\: || :/\: || :/\: || (\/) || :(): || (\/) |
+                   ^^
+Warning 14: illegal backslash escape in string.
+File "design.ml", line 15, characters 22-24:
+15 |           | :/\: || :/\: || :/\: || :/\: || (\/) || :(): || (\/) |
+                           ^^
+Warning 14: illegal backslash escape in string.
+File "design.ml", line 15, characters 30-32:
+15 |           | :/\: || :/\: || :/\: || :/\: || (\/) || :(): || (\/) |
+                                   ^^
+Warning 14: illegal backslash escape in string.
+File "design.ml", line 15, characters 38-40:
+15 |           | :/\: || :/\: || :/\: || :/\: || (\/) || :(): || (\/) |
+                                           ^^
+Warning 14: illegal backslash escape in string.
+File "design.ml", line 15, characters 45-47:
+15 |           | :/\: || :/\: || :/\: || :/\: || (\/) || :(): || (\/) |
+                                                  ^^
+Warning 14: illegal backslash escape in string.
+File "design.ml", line 15, characters 61-63:
+15 |           | :/\: || :/\: || :/\: || :/\: || (\/) || :(): || (\/) |
+                                                                  ^^
+Warning 14: illegal backslash escape in string.
+File "design.ml", line 16, characters 21-23:
+16 |           | (__) || :\/: || (__) || (__) || :\/: || ()() || :\/: |
+                          ^^
+Warning 14: illegal backslash escape in string.
+File "design.ml", line 16, characters 45-47:
+16 |           | (__) || :\/: || (__) || (__) || :\/: || ()() || :\/: |
+                                                  ^^
+Warning 14: illegal backslash escape in string.
+File "design.ml", line 16, characters 61-63:
+16 |           | (__) || :\/: || (__) || (__) || :\/: || ()() || :\/: |
+                                                                  ^^
+Warning 14: illegal backslash escape in string.
+File "design.ml", line 25, characters 33-35:
+25 |                            //)__(\/,-` |_| O  o o O|
+                                      ^^
+Warning 14: illegal backslash escape in string.
 # Target: battle_art.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:battle_art.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules battle_art.ml > battle_art.ml.depends # cached
 # Target: battle_art.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:battle_art.cmo, file:battle_art.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o battle_art.cmo battle_art.ml # cached
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o battle_art.cmo battle_art.ml
++ ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o battle_art.cmo battle_art.ml
+File "battle_art.ml", line 180, characters 0-2:
+180 | \###################|######################|###########|,-'`
+      ^^
+Warning 14: illegal backslash escape in string.
 # Target: card.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:card.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules card.ml > card.ml.depends # cached
 # Target: card.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:card.cmo, file:card.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o card.cmo card.ml # cached
+ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o card.cmo card.ml
++ ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o card.cmo card.ml
+File "card.ml", line 9, characters 37-39:
+9 | |               ******    | |   | |\ \| |___| |___   |
+                                         ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 10, characters 26-28:
+10 | |               ******    \_|   \_| \_\____/\____/   |   
+                               ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 10, characters 32-34:
+10 | |               ******    \_|   \_| \_\____/\____/   |   
+                                     ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 10, characters 36-38:
+10 | |               ******    \_|   \_| \_\____/\____/   |   
+                                         ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 10, characters 38-40:
+10 | |               ******    \_|   \_| \_\____/\____/   |   
+                                           ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 10, characters 44-46:
+10 | |               ******    \_|   \_| \_\____/\____/   |   
+                                                 ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 30, characters 21-23:
+30 |                   | (\/) || :/\: || :(): || (\/) |
+                          ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 30, characters 30-32:
+30 |                   | (\/) || :/\: || :(): || (\/) |
+                                   ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 30, characters 45-47:
+30 |                   | (\/) || :/\: || :(): || (\/) |
+                                                  ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 31, characters 21-23:
+31 |                   | :\/: || :\/: || ()() || :\/: |
+                          ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 31, characters 29-31:
+31 |                   | :\/: || :\/: || ()() || :\/: |
+                                  ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 31, characters 45-47:
+31 |                   | :\/: || :\/: || ()() || :\/: |
+                                                  ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 43, characters 28-30:
+43 |    /--------------------/   \----------/   \--------------------\
+                                 ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 43, characters 43-45:
+43 |    /--------------------/   \----------/   \--------------------\
+                                                ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 47, characters 4-6:
+47 |     \_____________|___|__| |____________| |__|___|_____________/
+         ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 55, characters 36-38:
+55 |                           _____/ || \_____
+                                         ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 56, characters 32-34:
+56 |                          / :    \||/    : \
+                                     ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 58, characters 26-28:
+58 |                           \___|__||__|___/
+                               ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 69, characters 18-20:
+69 |                | (\/) || :/\: || :(): || (\/) || (\/) | 
+                       ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 69, characters 27-29:
+69 |                | (\/) || :/\: || :(): || (\/) || (\/) | 
+                                ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 69, characters 42-44:
+69 |                | (\/) || :/\: || :(): || (\/) || (\/) | 
+                                               ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 69, characters 50-52:
+69 |                | (\/) || :/\: || :(): || (\/) || (\/) | 
+                                                       ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 70, characters 18-20:
+70 |                | :\/: || :\/: || ()() || :\/: || :\/: |
+                       ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 70, characters 26-28:
+70 |                | :\/: || :\/: || ()() || :\/: || :\/: |
+                               ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 70, characters 42-44:
+70 |                | :\/: || :\/: || ()() || :\/: || :\/: |
+                                               ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 70, characters 50-52:
+70 |                | :\/: || :\/: || ()() || :\/: || :\/: |
+                                                       ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 8-10:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+             ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 10-12:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+               ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 12-14:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                 ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 14-16:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                   ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 16-18:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                     ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 18-20:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                       ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 20-22:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                         ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 22-24:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                           ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 24-26:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                             ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 26-28:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                               ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 28-30:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                 ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 30-32:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                   ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 32-34:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                     ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 34-36:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                       ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 36-38:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                         ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 38-40:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                           ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 40-42:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                             ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 42-44:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                               ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 44-46:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                 ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 46-48:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                   ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 48-50:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                     ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 50-52:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                       ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 52-54:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                         ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 54-56:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                           ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 56-58:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                             ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 58-60:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                               ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 60-62:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                                 ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 62-64:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                                   ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 76, characters 64-66:
+76 | ||//$\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//$\\||
+                                                                     ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 82, characters 14-16:
+82 | ||>>|         \$/            ||  $$ --/  ||        One Hundred     |<<||
+                   ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 83, characters 35-37:
+83 | ||<<|      L38036133B        *\\  |\_/  //* series                 |>>||
+                                        ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 84, characters 37-39:
+84 | ||>>|  12                     *\\/___\_//* 
+                                          ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 85, characters 40-42:
+85 | ||<<\      Treasurer     ______/Franklin\________     Secretary 12 />>||
+                                             ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 7-9:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+            ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 9-11:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+              ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 11-13:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 13-15:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                  ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 15-17:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                    ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 17-19:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                      ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 19-21:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                        ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 21-23:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                          ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 23-25:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                            ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 25-27:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                              ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 27-29:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 29-31:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                  ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 31-33:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                    ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 33-35:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                      ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 35-37:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                        ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 37-39:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                          ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 39-41:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                            ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 41-43:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                              ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 43-45:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 45-47:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                  ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 47-49:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                    ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 49-51:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                      ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 51-53:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                        ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 53-55:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                          ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 55-57:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                            ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 57-59:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                              ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 59-61:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                                ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 61-63:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                                  ^^
+Warning 14: illegal backslash escape in string.
+File "card.ml", line 88, characters 63-65:
+88 | ||\\$//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\$//||
+                                                                    ^^
+Warning 14: illegal backslash escape in string.
 # Compilation successful.
