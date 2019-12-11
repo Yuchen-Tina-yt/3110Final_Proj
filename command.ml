@@ -1,3 +1,4 @@
+(**The abstract type represent the object phrase *)
 type object_phrase = string list
 
 type command = 

@@ -1,0 +1,1 @@
+For MS3, our system is fully developed, to run the game you just run make play in the terminal; if you encounter any problem related to main.byte, just run make clean and rm main.byte then run make build and make play. Then you could follow the instructions printed in the terminal and play the game by inputting commands.

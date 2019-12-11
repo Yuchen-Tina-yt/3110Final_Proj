@@ -1,3 +1,5 @@
+(** This module represents the state of the game *)
+
 (**The abstract type representing the game board *)
 type t
 
