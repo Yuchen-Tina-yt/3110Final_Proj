@@ -12,3 +12,6 @@ val get_weapon_type: t -> string
 
 (**[get_power a] returns the power of [a]*)
 val get_power: t -> int 
+
+(**[weapon_string list] returns the display string for weapons in [list] *)
+val weapon_string: t list -> string

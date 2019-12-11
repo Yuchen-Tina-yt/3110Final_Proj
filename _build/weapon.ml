@@ -10,3 +10,10 @@ let get_weapon_type weapon=
 
 let get_power weapon =
   weapon.power 
+
+let rec weapon_string = function
+  | [] -> ""
+  | [weapon] -> get_weapon_type weapon ^ " (" ^ string_of_int (get_power weapon) 
+                ^ " Power)" 
+  | weapon::t -> get_weapon_type weapon ^ " (" ^ string_of_int 
+                   (get_power weapon) ^ " Power), "  ^  weapon_string t 

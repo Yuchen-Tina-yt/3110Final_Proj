@@ -5,6 +5,7 @@ open Gamestate
 open Command
 open Money
 open Design
+open Weapon
 
 exception Illegal 
 
@@ -72,7 +73,8 @@ let roll st =
       (get_place_name place ^ " is yours. \n");
     let develop_price = 0.05 *. buy_price in
     ANSITerminal.print_string [ANSITerminal.magenta] 
-      ("My lord, you have the choice of developing the land at your pleasure.\n");
+      ("My lord, you have the choice "^
+       "of developing the land at your pleasure.\n");
     ANSITerminal.print_string [ANSITerminal.magenta] 
       ("Develop Price: " ^ currency ^ string_of_float develop_price ^ "\n");
   end
@@ -96,14 +98,15 @@ let roll st =
 let rec play_round st: unit = 
   ANSITerminal.print_string [ANSITerminal.green]
     "  My Lord, you now have the following options: \n
-       Enter purchase to purchase the place \n 
-       Enter develop to develop the place \n
-       Enter money to check your iron bank reserve \n
-       Enter quit to surrender\n
-       Enter end to end your turn \n
-       Enter chance to see your chance cards \n
-       Enter use free land to use your chance card \n
-       Enter buy_weapon to buy a weapon\n";
+       Enter 'purchase' to purchase the place \n 
+       Enter 'develop' to develop the place \n
+       Enter 'money' to check your iron bank reserve \n
+       Enter 'quit' to forever rest in peace \n
+       Enter 'end' to end your turn \n
+       Enter 'chance' to see your chance cards \n
+       Enter 'use free land' to use your chance card \n
+       Enter 'buy_weapon' to buy a random weapon of a random price \n
+       Enter 'weapons' to see your weapon arsenal \n";
   print_string  "> ";
   try 
     (let command = parse (read_line () ) in
@@ -129,7 +132,8 @@ let rec play_round st: unit =
      | Money  -> begin 
          let player = (get_curr_player st) in 
          print_string ("You have ");
-         print_string (money_string st (get_player_money player)); print_endline "0."; 
+         print_string (money_string st (get_player_money player)); 
+         print_endline "0."; 
          play_round st end
      | End ->  print_endline "Your turn ends.";
      | Chance -> let player = (get_curr_player st) in
@@ -164,6 +168,21 @@ let rec play_round st: unit =
            and cannot use it.";
      |Buy_Weapon -> begin
          try (player_get_weapon st) with Failure msg -> print_endline msg;
+       end
+     | Weapons -> begin 
+         let player = (get_curr_player st) in
+         let weapons = (get_weapons player) in
+         if weapons = [] then begin 
+           ANSITerminal.print_string [ANSITerminal.blue]
+             "My Lord, you unfortunately don't have any weapons currently.\n"; 
+           play_round st
+         end
+         else begin
+           ANSITerminal.print_string [ANSITerminal.blue]
+             ("My Lord, here are your weapons: " ^ weapon_string (weapons) 
+              ^ "\n");
+           play_round st
+         end
        end
      |Pay | Battle -> ANSITerminal.print_string [ANSITerminal.magenta] 
                         "Invalid command at this time."
@@ -221,7 +240,6 @@ let lottery st : unit =
     let chance_cards = ["free land"] in
     let chance_num = Random.int 1 in 
     let card = List.nth chance_cards (chance_num) in 
-    print_string card;
     let new_player = change_player_chance curr_player card in 
     change_player st new_player;
     print_string "You currently hold the following chance cards: ";
@@ -255,9 +273,10 @@ let explore st : unit =
 let rec choose_rent_or_battle st = 
   ANSITerminal.print_string [ANSITerminal.green]
     "  My Lord, you now have the following options: \n
-       Enter battle to battle \n
-       Enter pay to pay rent \n
-       Enter quit to forever rest in peace\n";
+       Enter 'battle' to battle \n
+       Enter 'pay' to pay the rent \n
+       Enter 'weapons' to see your weapons arsenal \n
+       Enter 'quit' to forever rest in peace\n";
   print_string  "> ";
   try 
     (let command = parse (read_line () ) in
@@ -270,10 +289,22 @@ let rec choose_rent_or_battle st =
                 "You have decided to pay the rent."; rent st false;
      | Battle -> ANSITerminal.print_string [ANSITerminal.magenta] 
                    "You have decided to battle."; battle st;
+     | Weapons -> begin 
+         let player = (get_curr_player st) in
+         let weapons = (get_weapons player) in
+         if weapons = [] then begin 
+           ANSITerminal.print_string [ANSITerminal.blue]
+             "My Lord, you unfortunately don't have any weapons currently.\n"; 
+           choose_rent_or_battle st
+         end
+         else begin
+           ANSITerminal.print_string [ANSITerminal.blue]
+             ("My Lord, here are your weapons: " ^ weapon_string (weapons));
+           choose_rent_or_battle st
+         end
+       end
      | Quit -> make_current_player_inactive st;
        transfer_places st (-1); 
-       (* Currently, the player's money isn't put back into the bank. 
-          Maybe that should be implemented. *) 
        ANSITerminal.print_string [ANSITerminal.red] 
          "You have quit the game.\n You will be missed dearly. 💕 \n\n";
        turn st; play_game st

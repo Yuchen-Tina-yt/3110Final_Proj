@@ -1,6 +1,8 @@
 open ANSITerminal
 
 let dagger = "
+You have been bestowed a dagger!
+
        .---.
        |---|
        |---|
@@ -17,9 +19,13 @@ let dagger = "
       |.-'**|
        \\***/
         \\*/
-         V"
+         V
+
+"
 
 let sword = "
+You have been bestowed a sword!
+
                       d@b
 H@b                 ,H@@______________________________________________________
 H@@EEEEEEEEEEEEEEEEEEEH@@                                                    /
@@ -27,8 +33,11 @@ H@@EEEEEEEEEEEEEEEEEEEH@@                                                   /
 H@@EEEEEEEEEEEEEEEEEEEH@@___________________________________________________
 H@P                  `H@@
                       T@
+
 "
 let gun = "
+You have been bestowed a gun!
+
  +--^----------,--------,-----,--------^-,
  | |||||||||   `--------'     |          O
  `+---------------------------^----------|
@@ -39,9 +48,13 @@ let gun = "
   / XXXXXX /
  / XXXXXX /
 (________(                
- `------' "
+ `------' 
+
+ "
 
 let ice_ball = "
+You have been bestowed an ice ball!
+
   *                                                               *
            *                                                  *
                  ______  _____  _____  ______
@@ -74,9 +87,12 @@ let ice_ball = "
               \\    /  \\ \\___      ___/ /  \\    /
                \\  /    \\    \\    /    / *  \\  /        *
     *           \\______/\\____\\  /____/\\______/
-           *                              *"
+           *                              *
+
+"
 
 let fire_ball = "
+You have been bestowed a fire ball!
 
     (  .      )
            )           (              )
@@ -91,9 +107,13 @@ let fire_ball = "
                 | |_ _ _ __ ___ 
                 |  _| | '__/ _ \
                 | | | | | |  __/
-                |_| |_|_|  \\___|"
+                |_| |_|_|  \\___|
+
+"
 
 let plasma_ball = "
+You have been bestowed a plasma ball!
+
                                ________________
                           ____/ (  (    )   )  \\___
                          /( (  (  )   _    ))  )   )\
@@ -117,9 +137,11 @@ let plasma_ball = "
                         (        |(||(||)||||        )
                           (     //|/l|||)|\\ \\     )
                         (/ / //  /|//||||\\  \\ \\  \\ _)
+
 "
 
 let bow = "
+You have been bestowed a bow!
 
           4$$-.                       
            4   '.                                        
@@ -140,9 +162,12 @@ let bow = "
            4    .                                        
            J.                                            
           '$$
-          "
+
+"
 
 let axe = "
+You have been bestowed an axe!
+
                                            _.gd8888888bp._
                                         .g88888888888888888p.
                                       .d8888P''       ''Y8888b.
@@ -161,9 +186,12 @@ let axe = "
                                       'Y8888p..       ,.d8888P'
                                         'Y88888888888888888P'
                                            ''YY8888888PP''
-                                           "
+
+"
 
 let bomb = "
+You have been bestowed a bomb!
+
                  .               
                  .               
                  .       :       
@@ -196,9 +224,12 @@ let bomb = "
     ;BMMMMMMMMMMMMMMMMY          
       +BMMMMMMMMMMMBY:           
         :+YRBBBRVt;
-        "
+
+"
 
 let saw = "
+You have been bestowed a saw!
+
       ______________________________ ______________________
     ,/                              |                      \
   ,/                                |  __              __   }
@@ -207,7 +238,8 @@ let saw = "
                                       `-.  `--.__.--'   .-'
                                          `-._       _.-'
                                              `-----'
-                                             "
+
+"
 
 
 

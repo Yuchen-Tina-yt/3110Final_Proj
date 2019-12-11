@@ -3,6 +3,7 @@ open Player
 open Country 
 open Money
 open Design
+open Weapon
 
 type t = {
   mutable players: Player.t array; 
@@ -126,10 +127,18 @@ let pay amount state player country_idx country =
     let other_country_idx = 
       country_idx_of_most_money state 0 0. (get_player_money player) in
     let other_country = state.countries.(other_country_idx) in
+    let other_country_currency = currency_in other_country in
+    let this_country_currency = currency_in country in
     let exchange_amount = (amount |> exchange_amount_to_USD 
                              country |> exchange_amount_for_USD 
                              other_country) in
     let exchange_fee = exchange_fee_for other_country exchange_amount in
+    print_endline ("Since you didn't have enough money in " ^ 
+                   this_country_currency ^ ", you paid an exchange fee of " ^
+                   other_country_currency ^ (string_of_float exchange_fee) ^ 
+                   " and exchanged " ^ other_country_currency ^ 
+                   (string_of_float exchange_amount) ^ "0 for " ^ 
+                   this_country_currency ^ (string_of_float amount) ^ "0.\n");
     (add_wealth player (make_money other_country_idx 
                           (-.exchange_amount -.exchange_fee)))
 
@@ -353,12 +362,20 @@ let player_get_weapon state =
   let armory' = Armory.remove_weapon state.armory weapon in 
   let country_idx = get_curr_pos player in
   let country = state.countries.(country_idx) in
-  let player_after_paying = pay (float_of_int (Weapon.get_power weapon)) state 
+  let amount_to_pay = exchange_amount_for_USD country
+      (float_of_int (Weapon.get_power weapon)) in
+  let player_after_paying = pay amount_to_pay state 
       player country_idx country in
   let player_with_weapon = add_weapon player_after_paying weapon in 
   let () = Battle_art.get_weapon_design weapon in 
   state.armory <- armory'; 
-  state.players.(player_index) <- player_with_weapon 
+  state.players.(player_index) <- player_with_weapon;
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    "You now have "; 
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    (money_string state (get_player_money player_with_weapon));
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    "0.\n"
 
 let get_free_place state = 
   let player_index = state.current_player in 
@@ -375,17 +392,18 @@ let get_free_place state =
     ANSITerminal.print_string [ANSITerminal.magenta] 
       "My Lord, you can only get an unowned land for free."
 
-let rec name player num =
+let rec name player num state =
   ANSITerminal.print_string [ANSITerminal.green]  
     ("Dear Lord " ^ (string_of_int num) ^ 
-     ", please enter thy name: ");
+     ", please enter thy unique name: ");
   let new_name = read_line () in
-  if String.trim new_name <> "" then
+  if String.trim new_name <> "" && not 
+       (Array.exists (fun player -> get_player_name player = new_name) 
+          state.players) then
     mutate_player_name player new_name
-  else name player num
+  else name player num state
 
 let name_players state = 
-  let players = state.players in
-  for x = 0 to ((Array.length players)-1) do
-    state.players.(x) <- name (state.players.(x)) (x+1)
+  for x = 0 to ((Array.length state.players)-1) do
+    state.players.(x) <- name (state.players.(x)) (x+1) state
   done

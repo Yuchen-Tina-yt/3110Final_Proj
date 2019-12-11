@@ -14,6 +14,7 @@ type command =
   | Battle
   | Pay
   | Buy_Weapon
+  | Weapons
 
 (**Exception of Empty *)
 exception Empty

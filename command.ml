@@ -12,6 +12,7 @@ type command =
   | Battle
   | Pay
   | Buy_Weapon
+  | Weapons
 
 exception Empty
 
@@ -39,14 +40,15 @@ let ismalformed (lst : string list) : string list =
   |[] -> lst
   |h :: t -> if (h <> "roll" &&  h <> "money" && h <> "quit"&& h <> "purchase"
                  && h <> "end" && h <> "develop" && h <> "chance" && h <> "use"
-                 && h <> "battle" && h <> "pay" && h <> "buy_weapon"
+                 && h <> "battle" && h <> "pay" && h <> "buy_weapon" && 
+                 h <> "weapons"
                 ) 
              || (h = "quit" && t <> []) || 
              (h = "money" && t <> []|| (h = "purchase" && t <> [])
               || (h = "end" && t <> []) || (h = "develop" && t <> [])) 
              || (h = "chance" && t <> [] || (h = "use" && List.length t <> 2) || 
                  (h = "battle" && t <> []) || (h = "pay" && t <> [])
-                 || (h = "buy_weapon" && t <> []))
+                 || (h = "buy_weapon" && t <> []) || h = "weapons" && t <> [])
     then raise (Malformed)
     else lst
 
@@ -66,6 +68,7 @@ let to_command (lst : string list) : command =
     else if h = "battle" then Battle
     else if h = "pay" then Pay
     else if h = "buy_weapon" then Buy_Weapon
+    else if h = "weapons" then Weapons
     (* else if h = "build" then Build t*)
     (*else if h = "sell" then Sell t
       else if h = "inventory" then Inventory*)
