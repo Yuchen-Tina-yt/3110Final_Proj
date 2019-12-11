@@ -1,4 +1,4 @@
-(** This module represent the weapon type and how many weapons the players
+(** This module represent the weapon and how many weapons the players
     could buy in the game. *)
 
 (**The abstract type represent the armory.*)

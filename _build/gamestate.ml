@@ -151,7 +151,7 @@ let purchase state =
   let country_idx = get_country place in
   let country = state.countries.(country_idx) in
   let place_value = get_value place in
-  if (get_ownership place = -1 && get_ownership place <> player_index) then begin
+  if (get_ownership place = -1) then begin
     let player' = pay place_value state player country_idx country in
     let player_id = get_id player' in
     let place' = change_ownership place (player_id)in
@@ -236,9 +236,9 @@ let rent state is_higher = begin
        "You now have ";
      ANSITerminal.print_string [ANSITerminal.magenta] 
        (money_string state (get_player_money curr_player'));
-     ANSITerminal.print_string [ANSITerminal.magenta] "0.";
+     ANSITerminal.print_string [ANSITerminal.magenta] "0.\n";
      ANSITerminal.print_string [ANSITerminal.magenta] 
-       "Player ";
+       "Lord ";
      ANSITerminal.print_string [ANSITerminal.magenta] 
        (get_player_name paid_player');
      ANSITerminal.print_string [ANSITerminal.magenta] 
@@ -303,7 +303,7 @@ let develop_land state =
     ANSITerminal.print_string [ANSITerminal.magenta] "0.\n";
   else
     failwith 
-      "Sorry, you can't develop this place, because you don't own it.\n"
+      "My Lord, you can't develop this place, because you don't own it.\n"
 
 let turn state = 
   (*print_endline (string_of_int state.current_player); *)
@@ -331,9 +331,11 @@ let battle state =
           You lost the battle and now needs to pay a 50% higher remedy.\n");
         rent state true;
       end
-    else if num_weapons_2 = 0 then 
+    else if num_weapons_2 = 0 then begin
+      state.places.(place_index) <- change_ownership place player_index;
       ANSITerminal.print_string [ANSITerminal.magenta] 
-        "Congrats My Lord! The battle is won. You now owns the land.\n" 
+        "Congrats My Lord! The battle is won. You now own the land.\n";
+    end
     else
       let random_int = Random.int num_weapons_1 in 
       let random_int_2 = Random.int num_weapons_2 in 
@@ -343,9 +345,11 @@ let battle state =
       let owner' = Player.remove_weapon owner weapon_2 in 
       state.players.(player_index) <- player'; 
       state.players.(owner_index) <- owner';  
-      if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then 
+      if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then begin
+        state.places.(place_index) <- change_ownership place player_index;
         ANSITerminal.print_string [ANSITerminal.magenta] 
-          "Congrats My Lord! The battle is won. You now owns the land.\n" 
+          "Congrats My Lord! The battle is won. You now own the land.\n" 
+      end
       else begin
         ANSITerminal.print_string [ANSITerminal.magenta]
           ("My Lord, you have lost and there is no holy ground for the loser. 
@@ -417,7 +421,9 @@ let use_chance_card state object_phrase expected_card_name =
     ANSITerminal.print_string [ANSITerminal.blue] 
       ("My Lord, you used your chance card " ^ card_name ^ ".\n");
     state.players.(player_idx) <- player_removed_card; 
-    get_free_place state;
+    if card_name = "free land" then
+      get_free_place state
+    else ();
   else if card_name <> "free escape" && card_name <> "free land" then
     failwith
       ("My Lord, " ^ card_name ^ "is not a name of a chance card.\n")

@@ -155,7 +155,8 @@ let rec play_round st: unit =
            play_round st; 
        end
      |Buy_Weapon -> begin
-         try (player_get_weapon st) with Failure msg -> print_endline msg;
+         try (player_get_weapon st) with Failure msg -> print_endline msg; 
+           play_round st;
        end
      | Weapons -> begin 
          let player = (get_curr_player st) in
@@ -173,7 +174,7 @@ let rec play_round st: unit =
          end
        end
      |Pay | Battle -> ANSITerminal.print_string [ANSITerminal.magenta] 
-                        "Invalid command at this time."
+                        "Invalid command at this time."; play_round st
     )
   with | Malformed -> (ANSITerminal.print_string [ANSITerminal.magenta] 
                          "error: command Malformed."; 
@@ -183,85 +184,13 @@ let rec play_round st: unit =
                      "error: command is Empty."; 
                    play_round st )
 
-(**[lottery st] is the lottery system in the game that randomly give the player 
-   money, let the player lose money, move the player forward a random step, or 
-   let the player participate in the chance card system. *)
-let lottery st : unit = 
-  ANSITerminal.(
-    print_string [blue]
-      "Boom! You have entered the lottery system! \n");
-  let lottery_num = Random.int 10 in 
-  if lottery_num = 0 then begin     (**give money case *)
-    let amt = (Random.float 500.)in 
-    let new_money = make_money 0 amt in
-    print_string("You will be given $");
-    print_float(amt); print_endline("!");
-    Card.get_lottery_pic lottery_num;
-    let curr_player = get_curr_player st in 
-    let new_player =  add_wealth curr_player new_money in 
-    change_player st new_player;
-  end
-  else if lottery_num = 1 then begin     (**lose money case *)
-    let curr_player = get_curr_player st in 
-    let amt = -.(Random.float 10.) *. 0.01 *.
-                get_player_money_specific_currency curr_player 0 in 
-    print_string("You will lose $");
-    print_float(amt); print_endline("!");
-    Card.get_lottery_pic lottery_num;
-    let new_money = make_money 0 amt in
-    let new_player =  add_wealth curr_player new_money in 
-    change_player st new_player;
-  end
-  else if lottery_num = 2 then begin     (**move forward case *)
-    print_string("You will move forward a random step.");
-    Card.get_lottery_pic lottery_num;
-    welcome st;
-    roll st;
-    rent st false;
-    play_round st;
-  end
-  else begin  (** this is the chance card system, players can hold multiple 
-                  chance cards with them and use one when condition satisfied.*)
-    print_string("You will be given a chance card!");
-    Card.get_lottery_pic lottery_num;
-    let curr_player = get_curr_player st in 
-    let chance_cards = ["free land"; "free escape"] in
-    let chance_num = Random.int 2 in 
-    let card = List.nth chance_cards (chance_num) in 
-    let new_player = add_player_chance curr_player card in 
-    change_player st new_player;
-    print_string "You currently hold the following chance cards: ";
-    print_strlist  (get_player_chance (get_curr_player st));
-  end
-
-
-
-(**[explore st] allows the player explore the state and make commands. 
-   The function mutates the state and the player according to the parsed
-   user input commands *)
-let explore st : unit =
-  if winornot (st) 
-  then (
-    ANSITerminal.(
-      print_string 
-        [red]
-        "\n\n Salute, My Lord. 
-        Your now reign in supreme. 🍺 \n");
-    Stdlib.exit 0)
-  else(
-    Random.self_init ();
-    let num = Random.int 5 in
-    (* (print_int num;) *)
-    if num = 1 then lottery st
-    else play_round st
-  )
-
 (**[choose_rent_or_battle st] is the function that lets the current player 
    choose to pay the rent or participate in battle *)
 let rec choose_rent_or_battle st = 
   ANSITerminal.print_string [ANSITerminal.green]
     "  My Lord, you now have the following options: \n
        Enter 'battle' to battle \n
+       Enter 'money' to check your iron bank reserve \n
        Enter 'pay' to pay the rent \n
        Enter 'weapons' to see your weapons arsenal \n
        Enter 'chance' to see your chance cards \n
@@ -271,8 +200,14 @@ let rec choose_rent_or_battle st =
   try 
     (let command = parse (read_line () ) in
      match command with 
-     | Purchase | Develop  | Money | End | Buy_Weapon -> 
-       print_endline "Invalid command at this time."
+     | Purchase | Develop | End | Buy_Weapon -> 
+       print_endline "Invalid command at this time."; choose_rent_or_battle st;
+     | Money -> begin 
+         let player = (get_curr_player st) in 
+         print_string ("You have ");
+         print_string (money_string st (get_player_money player)); 
+         print_endline "0."; 
+         choose_rent_or_battle st end
      | Use object_phrase -> begin try
            use_chance_card st object_phrase "free escape";
          with Failure msg -> ANSITerminal.print_string [ANSITerminal.blue] msg;
@@ -340,6 +275,81 @@ and
        "The game shall continue. Now moving on to the next player.\n");
   turn state;
   play_game state 
+
+and 
+  (**[explore st] allows the player explore the state and make commands. 
+     The function mutates the state and the player according to the parsed
+     user input commands *)
+  explore st : unit = 
+  if winornot (st) 
+  then begin
+    ANSITerminal.(
+      print_string 
+        [red]
+        "\n\n Salute, My Lord. 
+        Your now reign in supreme. 🍺 \n");
+    Stdlib.exit 0
+  end
+  else begin
+    Random.self_init ();
+    let num = Random.int 5 in
+    (* (print_int num;) *)
+    if num = 1 then lottery st
+    else play_round st
+  end
+
+(**[lottery st] is the lottery system in the game that randomly give the player 
+   money, let the player lose money, move the player forward a random step, or 
+   let the player participate in the chance card system. *)
+and 
+  lottery st : unit = 
+  ANSITerminal.(
+    print_string [blue]
+      "Boom! You have entered the lottery system! \n");
+  let lottery_num = Random.int 10 in 
+  if lottery_num = 0 then begin     (**give money case *)
+    let amt = (Random.float 500.)in 
+    let new_money = make_money 0 amt in
+    print_string("You will be given $");
+    print_float(amt); print_endline("!");
+    Card.get_lottery_pic lottery_num;
+    let curr_player = get_curr_player st in 
+    let new_player =  add_wealth curr_player new_money in 
+    change_player st new_player;
+  end
+  else if lottery_num = 1 then begin     (**lose money case *)
+    let curr_player = get_curr_player st in 
+    let amt = -.(Random.float 10.) *. 0.01 *.
+                get_player_money_specific_currency curr_player 0 in 
+    print_string("You will lose $");
+    print_float(amt); print_endline("!");
+    Card.get_lottery_pic lottery_num;
+    let new_money = make_money 0 amt in
+    let new_player =  add_wealth curr_player new_money in 
+    change_player st new_player;
+  end
+  else if lottery_num = 2 then begin     (**move forward case *)
+    print_string("You will move forward a random step.");
+    Card.get_lottery_pic lottery_num;
+    roll st;
+    if check_rent st then
+      choose_rent_or_battle st
+    else ();
+    play_round st;
+  end
+  else begin  (** this is the chance card system, players can hold multiple 
+                  chance cards with them and use one when condition satisfied.*)
+    print_string("You will be given a chance card!");
+    Card.get_lottery_pic lottery_num;
+    let curr_player = get_curr_player st in 
+    let chance_cards = ["free land"; "free escape"] in
+    let chance_num = Random.int 2 in 
+    let card = List.nth chance_cards (chance_num) in 
+    let new_player = add_player_chance curr_player card in 
+    change_player st new_player;
+    print_string "You currently hold the following chance cards: ";
+    print_strlist  (get_player_chance (get_curr_player st));
+  end
 
 (**[play state] is the function that plays the game. It is called in main to
    activate the game. *)
