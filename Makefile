@@ -5,6 +5,7 @@ MLIS=$(MODULES:=.mli)
 TEST=test.byte
 MAIN=main.byte
 OCAMLBUILD=ocamlbuild -use-ocamlfind
+PKGS=oUnit
 
 default: build
 	utop
@@ -26,7 +27,7 @@ finalcheck: check
 	bash finalcheck.sh
 
 zip:
-	zip player.zip *.ml* *.json _tags Makefile
+	zip player.zip .ml *.json _tags Makefile
 	
 docs: docs-public docs-private
 	

@@ -1,93 +1,94 @@
 ### Starting build.
-# Target: player.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:player.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules player.mli > player.mli.depends
-# Target: money.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:money.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules money.mli > money.mli.depends # cached
-# Target: weapon.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:weapon.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules weapon.mli > weapon.mli.depends
-# Target: money.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:money.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o money.cmi money.mli
-# Target: weapon.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:weapon.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o weapon.cmi weapon.mli
-# Target: player.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:player.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o player.cmi player.mli
-# Target: player.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:player.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules player.ml > player.ml.depends
-# Target: player.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o player.cmo player.ml
-# Target: country.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:country.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules country.mli > country.mli.depends # cached
-# Target: country.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:country.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o country.cmi country.mli
-# Target: country.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:country.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules country.ml > country.ml.depends # cached
-# Target: country.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:country.cmo, file:country.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o country.cmo country.ml
-# Target: place.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:place.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules place.mli > place.mli.depends # cached
-# Target: place.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:place.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o place.cmi place.mli
-# Target: place.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:place.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules place.ml > place.ml.depends # cached
-# Target: place.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:place.cmo, file:place.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o place.cmo place.ml
-# Target: gamestate.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:gamestate.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules gamestate.mli > gamestate.mli.depends # cached
-# Target: gamestate.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:gamestate.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o gamestate.cmi gamestate.mli
-# Target: gamestate.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:gamestate.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules gamestate.ml > gamestate.ml.depends # cached
-# Target: armory.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:armory.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules armory.mli > armory.mli.depends # cached
-# Target: battle_art.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:battle_art.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules battle_art.mli > battle_art.mli.depends # cached
-# Target: design.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:design.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules design.mli > design.mli.depends # cached
-# Target: armory.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:armory.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o armory.cmi armory.mli
-# Target: battle_art.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:battle_art.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o battle_art.cmi battle_art.mli
-# Target: design.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:design.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o design.cmi design.mli
-# Target: gamestate.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:gamestate.cmo, file:gamestate.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o gamestate.cmo gamestate.ml
-# Target: main.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:main.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules main.mli > main.mli.depends # cached
-# Target: main.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:main.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o main.cmi main.mli # cached
-# Target: main.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:main.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules main.ml > main.ml.depends
-# Target: card.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:card.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules card.mli > card.mli.depends # cached
-# Target: card.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:card.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o card.cmi card.mli # cached
-# Target: command.mli.depends, tags: { package(ANSITerminal), package(OUnit), extension:mli, file:command.mli, ocaml, ocamldep, quiet, traverse }
+# Target: test.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:test.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules test.ml > test.ml.depends
+# Target: command.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:command.mli, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules command.mli > command.mli.depends # cached
-# Target: command.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:mli, file:command.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o command.cmi command.mli
-# Target: main.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:main.cmo, file:main.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o main.cmo main.ml
-# Target: command.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:command.ml, ocaml, ocamldep, quiet, traverse }
+# Target: country.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:country.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules country.mli > country.mli.depends # cached
+# Target: gamestate.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:gamestate.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules gamestate.mli > gamestate.mli.depends # cached
+# Target: country.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:country.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o country.cmi country.mli
+# Target: money.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:money.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules money.mli > money.mli.depends # cached
+# Target: place.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:place.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules place.mli > place.mli.depends # cached
+# Target: player.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:player.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules player.mli > player.mli.depends # cached
+# Target: money.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:money.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o money.cmi money.mli
+# Target: weapon.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:weapon.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules weapon.mli > weapon.mli.depends # cached
+# Target: weapon.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:weapon.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o weapon.cmi weapon.mli
+# Target: place.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:place.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o place.cmi place.mli
+# Target: player.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:player.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o player.cmi player.mli
+# Target: command.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:command.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o command.cmi command.mli
+# Target: gamestate.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:gamestate.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o gamestate.cmi gamestate.mli
+# Target: test.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:test.cmo, file:test.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o test.cmo test.ml
+# Target: command.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:command.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules command.ml > command.ml.depends # cached
-# Target: command.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:command.cmo, file:command.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o command.cmo command.ml
-# Target: money.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:money.ml, ocaml, ocamldep, quiet, traverse }
+# Target: country.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:country.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules country.ml > country.ml.depends # cached
+# Target: gamestate.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:gamestate.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules gamestate.ml > gamestate.ml.depends # cached
+# Target: armory.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:armory.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules armory.mli > armory.mli.depends # cached
+# Target: battle_art.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:battle_art.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules battle_art.mli > battle_art.mli.depends # cached
+# Target: design.mli.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:mli, file:design.mli, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules design.mli > design.mli.depends # cached
+# Target: armory.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:armory.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o armory.cmi armory.mli
+# Target: battle_art.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:battle_art.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o battle_art.cmi battle_art.mli
+# Target: design.cmi, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:mli, file:design.mli, interf, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o design.cmi design.mli
+# Target: money.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:money.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules money.ml > money.ml.depends # cached
-# Target: money.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:money.cmo, file:money.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o money.cmo money.ml
-# Target: armory.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:armory.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules armory.ml > armory.ml.depends # cached
-# Target: armory.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:armory.cmo, file:armory.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o armory.cmo armory.ml
-# Target: weapon.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:weapon.ml, ocaml, ocamldep, quiet, traverse }
+# Target: place.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:place.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules place.ml > place.ml.depends # cached
+# Target: player.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:player.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules player.ml > player.ml.depends # cached
+# Target: weapon.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:weapon.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules weapon.ml > weapon.ml.depends # cached
-# Target: weapon.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:weapon.cmo, file:weapon.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o weapon.cmo weapon.ml
-# Target: design.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:design.ml, ocaml, ocamldep, quiet, traverse }
+# Target: command.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:command.cmo, file:command.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o command.cmo command.ml
+# Target: country.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:country.cmo, file:country.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o country.cmo country.ml
+# Target: gamestate.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:gamestate.cmo, file:gamestate.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o gamestate.cmo gamestate.ml
+# Target: money.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:money.cmo, file:money.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o money.cmo money.ml
+# Target: place.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:place.cmo, file:place.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o place.cmo place.ml
+# Target: player.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:player.cmo, file:player.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o player.cmo player.ml
+# Target: weapon.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:weapon.cmo, file:weapon.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o weapon.cmo weapon.ml
+# Target: armory.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:armory.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules armory.ml > armory.ml.depends # cached
+# Target: battle_art.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:battle_art.ml, ocaml, ocamldep, quiet, traverse }
+ocamlfind ocamldep -package OUnit -package ANSITerminal -modules battle_art.ml > battle_art.ml.depends # cached
+# Target: design.ml.depends, tags: { package(ANSITerminal), package(OUnit), debug, extension:ml, file:design.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -package OUnit -package ANSITerminal -modules design.ml > design.ml.depends # cached
-# Target: design.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:design.cmo, file:design.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o design.cmo design.ml
-+ ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o design.cmo design.ml
+# Target: armory.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:armory.cmo, file:armory.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o armory.cmo armory.ml
+# Target: battle_art.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:battle_art.cmo, file:battle_art.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o battle_art.cmo battle_art.ml
++ ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o battle_art.cmo battle_art.ml
+File "battle_art.ml", line 180, characters 0-2:
+180 | \###################|######################|###########|,-'`
+      ^^
+Warning 14: illegal backslash escape in string.
+# Target: design.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, debug, extension:cmo, extension:ml, file:design.cmo, file:design.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o design.cmo design.ml
++ ocamlfind ocamlc -c -g -package OUnit -package ANSITerminal -o design.cmo design.ml
 File "design.ml", line 15, characters 14-16:
 15 |           | :/\: || :/\: || :/\: || :/\: || (\/) || :(): || (\/) |
                    ^^
@@ -128,17 +129,6 @@ File "design.ml", line 25, characters 33-35:
 25 |                            //)__(\/,-` |_| O  o o O|
                                       ^^
 Warning 14: illegal backslash escape in string.
-# Target: battle_art.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:battle_art.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules battle_art.ml > battle_art.ml.depends # cached
-# Target: battle_art.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:battle_art.cmo, file:battle_art.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o battle_art.cmo battle_art.ml
-+ ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o battle_art.cmo battle_art.ml
-File "battle_art.ml", line 180, characters 0-2:
-180 | \###################|######################|###########|,-'`
-      ^^
-Warning 14: illegal backslash escape in string.
-# Target: card.ml.depends, tags: { package(ANSITerminal), package(OUnit), extension:ml, file:card.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -package OUnit -package ANSITerminal -modules card.ml > card.ml.depends # cached
-# Target: card.cmo, tags: { package(ANSITerminal), package(OUnit), byte, compile, extension:cmo, extension:ml, file:card.cmo, file:card.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -package OUnit -package ANSITerminal -o card.cmo card.ml # cached
+# Target: test.byte, tags: { package(ANSITerminal), package(OUnit), byte, debug, dont_link_with, extension:byte, file:test.byte, link, ocaml, program, quiet, traverse }
+ocamlfind ocamlc -linkpkg -g -package OUnit -package ANSITerminal command.cmo country.cmo money.cmo weapon.cmo player.cmo armory.cmo battle_art.cmo design.cmo place.cmo gamestate.cmo test.cmo -o test.byte
 # Compilation successful.
