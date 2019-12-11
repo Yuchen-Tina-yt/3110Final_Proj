@@ -6,11 +6,12 @@ type t
 (**[make_state] is the initial game board*)
 val make_state : t
 
-(**[move_player a] is [a] with the position of the
-   current player changed after a random dice roll*)
+(**[move_player a] modifies [a] to have the position of the
+   current player change after a random dice roll*)
 val move_player : t -> unit
 
-(**[purchase a] is [a] after the current player purchases the current place.
+(**[purchase a] modifies [a] for when the current player purchases the current 
+   place.
    Raises a failure if the current place is already owned. *)
 val purchase : t -> unit
 
@@ -27,7 +28,7 @@ val rent : t -> bool -> unit
 (**[turn a] modifies [a] to have the current player changed to the next player*)
 val turn : t -> unit
 
-(**[places_arr a] returns the array of places in [a] *)
+(**[places_arr a] is the array of places in [a] *)
 val places_arr: t -> Place.t array
 
 (**[get_curr_player a ] returns the current player in [a]*)
@@ -47,7 +48,8 @@ val get_curr_player_id: t -> int
    [in].*)
 val country_at_index: t -> int -> Country.t
 
-(**[trasfer_places place] chances ownership of place*)
+(**[transfer_places t receiver] modifies [t] to give ownership of all places 
+   owned by the the current player to [receiver]*)
 val transfer_places: t -> int -> unit
 
 (**[get_money_list_total_USD_equiv money_list] returns the total of 
@@ -62,28 +64,29 @@ val money_string: t -> Money.t list -> string
     the [amount] in the terms of the currency in [country].*)
 val pay: float -> t -> Player.t -> int -> Country.t -> Player.t
 
-(**[change_player t player] changes the player turn*)
+(**[change_player t player] modifies [t] to move on to the next player*)
 val change_player: t -> Player.t -> unit
 
-(**[get_free_place a] uses the chance card to get a place for free*)
+(**[get_free_place a] modifies [a] for when the current player 
+   attempts to use a chance card to get a place for free*)
 val get_free_place: t-> unit
 
 (**[check_rent t] is true if the rent needs to be paid in [t]*)
 val check_rent: t -> bool
 
-(**[battle a] modifies [a] after the current player battles the owner of the current 
-   place. If they lose, they have to pay the rent plus a fee. It modifies
-   [a]*)
+(**[battle a] modifies [a] after the current player battles the owner of the 
+   current place. *)
 val battle: t -> unit
 
 (**[player_get_weapon a] modifies [a] with the modified player
    who has bought a randomly choosen weapon.*)
 val player_get_weapon: t -> unit
 
-(**[name_players a] modifies [a] with modified player name .*)
+(**[name_players a] modifies [a] with all the modified player's names.*)
 val name_players: t -> unit
 
-(** [use_chance_card a strlist card_name] is [a] after the current player uses a 
-    card of [card_name] which will fail if [strlist] does not represent a card 
-    of [card_name] or if the current player doesn't have that card. *)
+(** [use_chance_card a strlist card_name] modifies [a] for when the current 
+    player uses a card of [card_name] which will fail if [strlist] does not 
+    represent a card of [card_name] or if the current player doesn't have that 
+    card. *)
 val use_chance_card: t -> string list -> string -> unit

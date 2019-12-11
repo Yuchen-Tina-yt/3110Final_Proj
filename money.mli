@@ -1,16 +1,14 @@
-(**The module represents the money in the game and also 
-   contains relevent functions*)
+(**This module represents the money in the game.*)
 
 (** The abstract type of values representing the money *)
 type t
 
-(**[make_money countryindex amount] create a type t based off the the 
-   index identifier and amount  *)
+(**[make_money countryindex amount] is the money of [amount] in the currency of 
+   the country with [country_index]  *)
 val make_money: int -> float -> t
 
-(**[get_country_idx money] is the index idetifier of the [money]. This
-   is the value that helps to connect the currency to the country *)
+(**[get_country_idx money] is the country index for the currency in [money]. *)
 val get_country_idx: t -> int
 
-(**[get_amount money] is the float value of [money] *)
+(**[get_amount money] is the amount of [money] *)
 val get_amount: t -> float

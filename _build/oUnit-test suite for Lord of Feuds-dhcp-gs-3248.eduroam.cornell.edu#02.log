@@ -1,0 +1,78 @@
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:1:2 USD's is 2.*.0.01 = 0.02 in country_1's currency.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:1:2 USD's is 2.*.0.01 = 0.02 in country_1's currency is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:1:2 USD's is 2.*.0.01 = 0.02 in country_1's currency.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:2:2 of the country_1's currency is 2./.0.01 = 200. in USD's.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:2:2 of the country_1's currency is 2./.0.01 = 200. in USD's is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:2:2 of the country_1's currency is 2./.0.01 = 200. in USD's.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:4:country index of five_dollars is 1.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:4:country index of five_dollars is 1 is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:4:country index of five_dollars is 1.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:7:ownerid of place_2 is 3.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:7:ownerid of place_2 is 3 is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:7:ownerid of place_2 is 3.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:8:value of place_1 is 150..
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:8:value of place_1 is 150. is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:8:value of place_1 is 150..
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:11:rent of place_4 is 75..
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:11:rent of place_4 is 75. is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:11:rent of place_4 is 75..
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:12:name of place_1 is 'place'.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:12:name of place_1 is 'place' is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:12:name of place_1 is 'place'.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:15:power of ak47 is 250.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:15:power of ak47 is 250 is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:15:power of ak47 is 250.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:16:name of bob is 'Bob'.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:16:name of bob is 'Bob' is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:16:name of bob is 'Bob'.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:19:current position of bob_move is 8.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:19:current position of bob_move is 8 is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:19:current position of bob_move is 8.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:21:bob has no weapons.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:21:bob has no weapons is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:21:bob has no weapons.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:23:bob_chance has a chance card called 'nice'.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:23:bob_chance has a chance card called 'nice' is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:23:bob_chance has a chance card called 'nice'.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:25:bob has 0. in the currency with country index 4.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:25:bob has 0. in the currency with country index 4 is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:25:bob has 0. in the currency with country index 4.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:27:Current player id of initial_state is 0.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:27:Current player id of initial_state is 0 is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:27:Current player id of initial_state is 0.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:29:No rent needs to be paid by the current player in inital_state.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:29:No rent needs to be paid by the current player in inital_state is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:29:No rent needs to be paid by the current player in inital_state.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:31:no inactive players in inital_state.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:31:no inactive players in inital_state is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:31:no inactive players in inital_state.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:33:string for five_dollars in initial_state is '5.0 SEK kr'.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:33:string for five_dollars in initial_state is '5.0 SEK kr' is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:33:string for five_dollars in initial_state is '5.0 SEK kr'.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:35:parse of 'quit' is Quit.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:35:parse of 'quit' is Quit is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:35:parse of 'quit' is Quit.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:37:parse of 'develop' is Develop.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:37:parse of 'develop' is Develop is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:37:parse of 'develop' is Develop.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:39:parse of 'chance' is Chance.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:39:parse of 'chance' is Chance is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:39:parse of 'chance' is Chance.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:41:parse of 'pay' is Pay.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:41:parse of 'pay' is Pay is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:41:parse of 'pay' is Pay.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:43:parse of 'money money' raises Malformed.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:43:parse of 'money money' raises Malformed is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:43:parse of 'money money' raises Malformed.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:45:parse of '' raises Empty.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:45:parse of '' raises Empty is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:45:parse of '' raises Empty.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:47:parse of 'asdf' raises Malformed.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:47:parse of 'asdf' raises Malformed is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:47:parse of 'asdf' raises Malformed.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:50:parse of 'pay asdf' raises Malformed.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:50:parse of 'pay asdf' raises Malformed is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:50:parse of 'pay asdf' raises Malformed.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Start test test suite for Lord of Feuds:51:parse of 'develop hifj' raises Malformed.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: Test test suite for Lord of Feuds:51:parse of 'develop hifj' raises Malformed is successful.
+2019-12-11T23:39:10+00:00 dhcp-gs-3248.eduroam.cornell.edu#02 I: End test test suite for Lord of Feuds:51:parse of 'develop hifj' raises Malformed.

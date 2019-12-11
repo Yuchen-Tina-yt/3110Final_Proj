@@ -34,7 +34,8 @@ let winornot state : bool =
   if List.length (get_inactive_players_ids state) = 3 then true else false
 
 (**[roll st] mutates the state and the player after moving the player 
-   to the place in the state that corresponds to the number of the rolled die. 
+   to the place in the state that corresponds to the number of the rolled die,
+   printing out information of how the player has moved. 
 *)
 let roll st = 
   print_endline "";
@@ -92,7 +93,8 @@ let roll st =
   end
 
 
-(**[play_round st] is the function that lets the player play a single round. *)
+(**[play_round st] is the function that lets the current player play a single 
+   round where the player doesn't land on another player's spot. *)
 let rec play_round st: unit = 
   ANSITerminal.print_string [ANSITerminal.green]
     "  My Lord, you now have the following options: \n

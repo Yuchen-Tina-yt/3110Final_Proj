@@ -1,5 +1,3 @@
-(* (countryindex, moneyamount) is the [moneyamount] tied to the currency in 
-   the country at [countryindex].*)
 type t = int * float
 
 let make_money countryindex amount = 

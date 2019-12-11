@@ -186,7 +186,8 @@ let transfer_places state receiver =
                 then change_ownership h receiver
                 else h) state.places
 
-(** [transfer_wealth] *)
+(** [transfer_wealth receiver] is [receiver] with all of the money of the 
+    current player transferred to him/her. *)
 let rec transfer_wealth receiver = function
   | [] -> receiver
   | money::t -> transfer_wealth (add_wealth receiver money) t
@@ -391,6 +392,7 @@ let get_free_place state =
     ANSITerminal.print_string [ANSITerminal.magenta] 
       "My Lord, you can only get an unowned land for free."
 
+(** [name player num state] is [player] once the user inputs a name. *)
 let rec name player num state =
   ANSITerminal.print_string [ANSITerminal.green]  
     ("Dear Lord " ^ (string_of_int num) ^ 
