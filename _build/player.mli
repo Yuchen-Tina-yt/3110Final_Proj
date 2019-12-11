@@ -36,9 +36,9 @@ val get_player_money_specific_currency: t -> int -> float
     inventory*)
 val change_player_chance: t -> string -> t
 
-(**[buy_weapon player] is the [player] after they have bought a randomly 
-   selected weapon. *)
-val buy_weapon: t -> Weapon.t -> t
+(**[add_weapon player weapon] is the [player] after adding weapon to their
+   weapon inventory. *)
+val add_weapon: t -> Weapon.t -> t
 
 (**[remove_item player item] is the player after deleting an item 
    from the player;s items list *)

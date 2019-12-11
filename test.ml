@@ -95,6 +95,7 @@ let million_dollars = make_money 3 2000000000.
 let bob = make_player "Bob" 5 3 []
 let new_name_player = mutate_player_name bob "Dave"
 let bob_million_dollars = add_wealth bob million_dollars
+let bob_ak47 = buy_weapon bob_million_dollars ak47
 let bob_move = move_player' bob 3
 let bob_chance = change_player_chance bob "nice"
 

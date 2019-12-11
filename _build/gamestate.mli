@@ -1,3 +1,5 @@
+(** This module represents the state of the game *)
+
 (**The abstract type representing the game board *)
 type t
 
@@ -68,7 +70,7 @@ val check_rent: t -> bool
 val battle: t -> unit
 
 (**[player_get_weapon a] modifies [a] with the modified player
-   who has  bought a randomly choosen weapon.*)
+   who has bought a randomly choosen weapon.*)
 val player_get_weapon: t -> unit
 
 (**[name_players a] modifies [a] with modified player name .*)

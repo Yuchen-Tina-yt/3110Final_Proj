@@ -33,11 +33,11 @@ let add_wealth (player:t) (money: Money.t) : t=
   else
     failwith ("Sorry, " ^ player.name ^ " does not have enough money. ")
 
-let buy_weapon (player:t) (weapon: Weapon.t): t = 
-  add_wealth {name = player.name; curr_pos = player.curr_pos; 
-              money = player.money;
-              weapons = weapon :: player.weapons; id = player.id; chance = player.chance}
-    (make_money 0 (-.(float_of_int (Weapon.get_power weapon))))
+let add_weapon (player:t) (weapon: Weapon.t): t = 
+  {name = player.name; curr_pos = player.curr_pos; 
+   money = player.money;
+   weapons = weapon :: player.weapons; id = player.id; 
+   chance = player.chance}
 
 let remove_weapon (player: t) (weapon: Weapon.t) : t=
   {name = player.name; curr_pos = player.curr_pos; 

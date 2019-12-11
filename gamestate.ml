@@ -351,10 +351,14 @@ let player_get_weapon state =
   let player = state.players.(player_index) in 
   let weapon = Armory.armory_get_weapon state.armory in 
   let armory' = Armory.remove_weapon state.armory weapon in 
-  let player' = Player.buy_weapon player weapon in 
+  let country_idx = get_curr_pos player in
+  let country = state.countries.(country_idx) in
+  let player_after_paying = pay (float_of_int (Weapon.get_power weapon)) state 
+      player country_idx country in
+  let player_with_weapon = add_weapon player_after_paying weapon in 
   let () = Battle_art.get_weapon_design weapon in 
   state.armory <- armory'; 
-  state.players.(player_index) <- player' 
+  state.players.(player_index) <- player_with_weapon 
 
 let get_free_place state = 
   let player_index = state.current_player in 
