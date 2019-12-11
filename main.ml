@@ -9,7 +9,7 @@ open Weapon
 
 exception Illegal 
 
-(**[print_strlist] is the function that prints the string list to the console*)
+(**[print_strlist] is prints [list] to the terminal*)
 let rec print_strlist (list : string list) = 
   match list with 
   |[] -> ()
@@ -17,7 +17,7 @@ let rec print_strlist (list : string list) =
     print_string h ; print_string "; " ; print_strlist t
 
 (**[welcome state] prints the welcome message and the player's name, and also
-   the place name that the player is currently on *)
+   the place name that the player is currently on and its ASCII art *)
 let welcome state = 
   let places_arr = places_arr(state) in 
   let player = (get_curr_player state) in 
@@ -29,11 +29,9 @@ let welcome state =
   ANSITerminal.print_string [ANSITerminal.green] "Current Country: ";
   print_endline (get_place_name place)
 
-(**[winornot player] is true if the player wins, and false otherwise. *)
+(**[winornot player] is true if the player has won, and false otherwise. *)
 let winornot state : bool = 
-  let money = state |> get_curr_player |> get_player_money in 
-  if ((get_money_list_total_USD_equiv state money) > 1500.0 
-      || (List.length (get_inactive_players_ids state)) = 3)then true else false
+  if List.length (get_inactive_players_ids state) = 3 then true else false
 
 (**[roll st] mutates the state and the player after moving the player 
    to the place in the state that corresponds to the number of the rolled die. 
