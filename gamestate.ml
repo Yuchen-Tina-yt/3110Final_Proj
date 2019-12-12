@@ -39,13 +39,16 @@ let rec get_money_list_total_USD_equiv state = function
                    (get_amount money)) +. 
                 (get_money_list_total_USD_equiv state t)
 
-let make_state = 
+(**[make_players] makes an array of [Players]*)
+let make_players = 
   let player1 = Player.make_player "Cat" 0  0 [] in 
   let player2 = Player.make_player "Bunny" 0  1 [] in 
   let player3 = Player.make_player "Dog" 0  2 [] in
   let player4 = Player.make_player "Camel" 0 3 [] in
   let player_array = [|player1; player2; player3; player4|] in 
-
+  player_array
+(**[make_places] makes an array of [Places]*)
+let make_places = 
   let place1 = Place.make_place "China" 0 700. 100. 15. in 
   let place2 = Place.make_place "Sweden" 1 950. 150. 15. in 
   let place3 = Place.make_place "Japan" 2 10800. 1600. 15. in 
@@ -56,25 +59,12 @@ let make_state =
   let place8 = Place.make_place  "Egypt" 7 1500. 225. 1. in
   let place9 = Place.make_place  "Australia" 8 150. 25. 15. in
   let place10 = Place.make_place  "Brazil" 9 400. 60. 15. in
-  (* let place7 = Place.make_place "place7" 0 100. 15. 15. in 
-     let place8 = Place.make_place "Place8" 1 100. 15. 15. in 
-     let place9 = Place.make_place "place9" 2 100. 15. 15. in 
-     let place10 = Place.make_place "place10" 3 100. 15. 15. in 
-     let place11 = Place.make_place "place11" 4 100. 15. 15. in 
-     let place12 = Place.make_place "place12" 5 100. 15. 15. in 
-     let place13 = Place.make_place "place13" 0 100. 15. 15. in 
-     let place14 = Place.make_place "place14" 1 100. 15. 15. in 
-     let place15 = Place.make_place "place15" 2 100. 15. 15. in 
-     let place16 = Place.make_place "place16" 3 100. 15. 15. in  *)
-  (* let place_array = [|place1; place2; place3; place4; place5; place6; place7;
-                      place8; place9; place10; place11; place12; place13; 
-                      place14; place15; 
-                      place16|] in  *)
+
   let place_array = [|place1; place2; place3; place4; place5; place6; place7; 
-                      place8; place9; place10|] in
-  let armory = Armory.make_armory in 
+                      place8; place9; place10|] in place_array
 
-
+(**[make_countries] makes an array of [Countries]*)
+let make_countries = 
   let country_1 = Country.make_country "CNY ¥" 7.04 0.01 in 
   let country_2 = Country.make_country "SEK kr" 9.53 0.01 in
   let country_3 = Country.make_country "JPY ¥" 108.63 0.01 in
@@ -87,11 +77,13 @@ let make_state =
   let country_10 = Country.make_country "BRL R$" 4.15 0.01 in
   let country_array = [|country_1; country_2; country_3; country_4; country_5; 
                         country_6; country_7; country_8; country_9; 
-                        country_10|] in 
+                        country_10|] in country_array
+(**[make_state] makes the state that represents the board*)
+let make_state = 
+  let armory = Armory.make_armory in  
   let c_player = 0 in 
-
-  {players = player_array; places = place_array; 
-   countries = country_array; current_player = c_player; 
+  {players = make_players; places = make_places; 
+   countries = make_countries; current_player = c_player; 
    inactive_players_ids = []; armory = armory}
 
 let move_player state = 
@@ -140,6 +132,19 @@ let pay amount state player country_idx country =
     (add_wealth player (make_money other_country_idx 
                           (-.exchange_amount -.exchange_fee)))
 
+(**[success_purchase state place' player'] prints out messages for 
+   purchase success *)
+let success_purchase state place' player'= 
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    ("Congrats my lord, you successfully purchased this previously " ^ 
+     "unowned land, " ^ (get_place_name place') ^ "!\n");
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    "You now have "; 
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    (money_string state (get_player_money player'));
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    "0.\n"
+
 let purchase state = 
   let player_index = state.current_player in 
   let player = state.players.(player_index) in 
@@ -153,27 +158,13 @@ let purchase state =
     let place' = change_ownership place (player_id)in
     state.players.(player_index) <- player'; 
     state.places.(get_curr_pos player) <- place';
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      ("Congrats my lord, you successfully purchased this previously " ^ 
-       "unowned land, " ^ (get_place_name place') ^ "!\n");
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      "You now have "; 
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      (money_string state (get_player_money player'));
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      "0.\n";
-  end
+    success_purchase state place' player' end
   else if (get_ownership place =  player_index) then 
     failwith "My Lord, you have landed on the land you purchased previously. 
     Please enter another command.\n"
   else begin
-    (* Buying the place from another player. 
-       Right now, the old owner 
-       doesn't get a choice whetheer or not they allow the current player to buy 
-       the place from them. *)
     failwith "Sorry, the land belongs to some other Lord. 
-    Therefore, the purchase cannot be completed.\n"
-  end
+    Therefore, the purchase cannot be completed.\n"end
 
 (**changes the current player *)
 let change_player state new_player = 
@@ -214,6 +205,50 @@ let check_rent state =
     true 
   end
 
+(** [success_rent_message state curr_player' paid_player'] handles printing 
+    when the player pays the rent.*)
+let success_rent_message state curr_player' paid_player'=
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    "You now have ";
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    (money_string state (get_player_money curr_player'));
+  ANSITerminal.print_string [ANSITerminal.magenta] "0.\n";
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    "Lord ";
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    (get_player_name paid_player');
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    " now has ";
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    (money_string state (get_player_money paid_player')); 
+  ANSITerminal.print_string [ANSITerminal.magenta] "\n"
+
+(**[failure_rent_message msg state paid_player curr_player owner_id] handles
+   the printing messages to the player when they cannot pay rent. It also
+   modifies [state] to make player [curr_player] inactive and updates
+   [paid_player'] *)
+let failure_rent_message msg state paid_player curr_player owner_id= 
+  print_endline msg; ANSITerminal.print_string [ANSITerminal.red]
+    "My Lord, you are bankrupt.With all due respect, please see yourself out.";
+  let paid_player_name = get_player_name paid_player in
+  print_endline 
+    ("\n All your property will now goto " ^ paid_player_name ^ 
+     "\n");
+  make_current_player_inactive state;
+  let curr_player_wealth = get_player_money curr_player in 
+  let paid_player' = transfer_wealth paid_player curr_player_wealth in
+  state.players.(owner_id) <- paid_player';
+  print_string "Player ";
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    (get_player_name paid_player');
+  ANSITerminal.print_string [ANSITerminal.magenta] " now has ";
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    (money_string state (get_player_money paid_player'));
+  ANSITerminal.print_string [ANSITerminal.magenta]  "0.\n";
+  transfer_places state owner_id
+
+(**[rent state is_higher] modifiers the [state] when the player needs to pay
+   higher rent because they lost a battle *)
 let rent state is_higher = begin
   let curr_player_id = state.current_player in 
   let curr_player = state.players.(curr_player_id) in 
@@ -224,52 +259,29 @@ let rent state is_higher = begin
   let paid_player = state.players.(owner_id) in
   let rent = if is_higher then 1.5*.(Place.get_rent place) 
     else Place.get_rent place in
-  try (* If the current player has enough money to pay the rent *)
+  try
     (let curr_player' = pay rent state curr_player country_idx country in
      let paid_player' = Player.add_wealth paid_player 
          (make_money country_idx (+. rent)) in
      state.players.(curr_player_id) <- curr_player';
      state.players.(owner_id) <- paid_player';
-     ANSITerminal.print_string [ANSITerminal.magenta] 
-       "You now have ";
-     ANSITerminal.print_string [ANSITerminal.magenta] 
-       (money_string state (get_player_money curr_player'));
-     ANSITerminal.print_string [ANSITerminal.magenta] "0.\n";
-     ANSITerminal.print_string [ANSITerminal.magenta] 
-       "Lord ";
-     ANSITerminal.print_string [ANSITerminal.magenta] 
-       (get_player_name paid_player');
-     ANSITerminal.print_string [ANSITerminal.magenta] 
-       " now has ";
-     ANSITerminal.print_string [ANSITerminal.magenta] 
-       (money_string state (get_player_money paid_player')); 
-     ANSITerminal.print_string [ANSITerminal.magenta] "\n";)
+     success_rent_message state curr_player' paid_player'; )
   with Failure msg -> 
-    (*Bankruptcy if the current player does not have enough money to pay the 
-      rent *)
-    print_endline msg;
-    ANSITerminal.print_string [ANSITerminal.red]
-      "My Lord, you are bankrupt.
-      With all due respect, please see yourself out.";
-    let paid_player_name = get_player_name paid_player in
-    print_endline 
-      ("\n All your property will now goto " ^ paid_player_name ^ 
-       "\n");
-    make_current_player_inactive state;
-    let curr_player_wealth = get_player_money curr_player in 
-    let paid_player' = transfer_wealth paid_player curr_player_wealth in
-    state.players.(owner_id) <- paid_player';
-    print_string "Player ";
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      (get_player_name paid_player');
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      " now has ";
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      (money_string state (get_player_money paid_player'));
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      "0.\n";
-    transfer_places state owner_id;
-end
+    failure_rent_message msg state paid_player curr_player owner_id end
+
+(**[success_develop_land place''' player' state] handles printing messages
+   to player when the land is successfully developed*)
+let success_develop_land place''' player' state= 
+  ANSITerminal.print_string [ANSITerminal.magenta]
+    ("Congrats My Lord, you have successfully developed this land, " ^ 
+     (get_place_name place''') ^ "!");
+  ANSITerminal.print_string [ANSITerminal.magenta] "Player ";
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    (get_player_name player');
+  ANSITerminal.print_string [ANSITerminal.magenta] " now has ";
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    (money_string state (get_player_money player'));
+  ANSITerminal.print_string [ANSITerminal.magenta] "0.\n"
 
 let develop_land state = 
   let player_index = state.current_player in 
@@ -285,28 +297,52 @@ let develop_land state =
     let place' = Place.change_ownership place (player_index)in 
     let place'' = Place.change_rent place' (1.05 *. (Place.get_rent place')) in
     let place''' = Place.change_land_value place'' 
-        (1.05 *. (Place.get_value place'')) in 
-    state.players.(player_index) <- player';
-    state.places.(get_curr_pos player) <- place''';
-    ANSITerminal.print_string [ANSITerminal.magenta]
-      ("Congrats My Lord, you have successfully developed this land, " ^ 
-       (get_place_name place''') ^ "!");
-    ANSITerminal.print_string [ANSITerminal.magenta] "Player ";
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      (get_player_name player');
-    ANSITerminal.print_string [ANSITerminal.magenta] " now has ";
-    ANSITerminal.print_string [ANSITerminal.magenta] 
-      (money_string state (get_player_money player'));
-    ANSITerminal.print_string [ANSITerminal.magenta] "0.\n";
+        (1.05 *. (Place.get_value place'')) in state.players.(player_index) <- player';
+    state.places.(get_curr_pos player) <- place''';success_develop_land place''' player' state
   else
-    failwith 
-      "My Lord, you can't develop this place, because you don't own it.\n"
+    failwith"My Lord, you can't develop this place, because you don't own it.\n"
 
 let turn state = 
   state.current_player <- ((state.current_player+1) mod 4 )
 
 let get_curr_player_id state =
   state.current_player
+
+(** [battle_fail_message state] prints out the message in the case when the
+    [owner] doesn't have a weapon and can't battle. *)
+let battle_fail_message state = 
+  ANSITerminal.print_string [ANSITerminal.magenta] 
+    "Shame! You are unarmed.";
+  ANSITerminal.print_string [ANSITerminal.magenta]
+    ("My Lord, you have lost and there is no holy ground for the loser. 
+ You lost the battle and now needs to pay a 50% higher remedy.\n");
+  rent state true
+
+
+(**[actual_battle num_weapons_1 num_weapons_2 player owner player_index 
+   owner_index place place_index state] handles the case when the 
+   [owner] and current player battle *)
+let actual_battle num_weapons_1 num_weapons_2 player owner player_index 
+    owner_index place place_index state = 
+  let random_int = Random.int num_weapons_1 in 
+  let random_int_2 = Random.int num_weapons_2 in 
+  let weapon_1 = List.nth (Player.get_weapons player) random_int in 
+  let weapon_2 = List.nth (Player.get_weapons owner) random_int_2 in
+  let player' = Player.remove_weapon player weapon_1 in 
+  let owner' = Player.remove_weapon owner weapon_2 in 
+  state.players.(player_index) <- player'; 
+  state.players.(owner_index) <- owner'; 
+  if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then begin
+    state.places.(place_index) <- change_ownership place player_index;
+    ANSITerminal.print_string [ANSITerminal.magenta] 
+      "Congrats My Lord! The battle is won. You now own the land.\n" 
+  end
+  else begin
+    ANSITerminal.print_string [ANSITerminal.magenta]
+      ("My Lord, you have lost and there is no holy ground for the loser. 
+ You lost the battle and now needs to pay a 50% higher remedy.\n");
+    rent state true;end
+
 
 let battle state = 
   let player_index = state.current_player in 
@@ -319,41 +355,16 @@ let battle state =
     let num_weapons_1 = List.length (Player.get_weapons player) in
     let num_weapons_2 = List.length (Player.get_weapons owner) in 
     if num_weapons_1 = 0 then
-      begin
-        ANSITerminal.print_string [ANSITerminal.magenta] 
-          "Shame! You are unarmed.";
-        ANSITerminal.print_string [ANSITerminal.magenta]
-          ("My Lord, you have lost and there is no holy ground for the loser. 
-          You lost the battle and now needs to pay a 50% higher remedy.\n");
-        rent state true;
-      end
+      battle_fail_message state 
     else if num_weapons_2 = 0 then begin
       state.places.(place_index) <- change_ownership place player_index;
       ANSITerminal.print_string [ANSITerminal.magenta] 
         "Congrats My Lord! The battle is won. You now own the land.\n";
     end
     else
-      let random_int = Random.int num_weapons_1 in 
-      let random_int_2 = Random.int num_weapons_2 in 
-      let weapon_1 = List.nth (Player.get_weapons player) random_int in 
-      let weapon_2 = List.nth (Player.get_weapons owner) random_int_2 in
-      let player' = Player.remove_weapon player weapon_1 in 
-      let owner' = Player.remove_weapon owner weapon_2 in 
-      state.players.(player_index) <- player'; 
-      state.players.(owner_index) <- owner';  
-      if (Weapon.get_power weapon_1 > Weapon.get_power weapon_2) then begin
-        state.places.(place_index) <- change_ownership place player_index;
-        ANSITerminal.print_string [ANSITerminal.magenta] 
-          "Congrats My Lord! The battle is won. You now own the land.\n" 
-      end
-      else begin
-        ANSITerminal.print_string [ANSITerminal.magenta]
-          ("My Lord, you have lost and there is no holy ground for the loser. 
-          You lost the battle and now needs to pay a 50% higher remedy.\n");
-        rent state true;
-      end
-  end
-  else ()
+      actual_battle num_weapons_1 num_weapons_2 player owner player_index 
+        owner_index place place_index state
+  end else ()
 
 let player_get_weapon state = 
   let player_index = state.current_player in 
