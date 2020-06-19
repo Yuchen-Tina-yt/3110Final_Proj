@@ -1,5 +1,6 @@
-# 3110Final_Proj
-Just the coolest final project in this class!
-Cornopoly(just a random name)
+# Lord of Feuds Game
 
-The international version of the Monopoly game, incluing multi-player, reputation system, and different tasks that the players can do to earn more money or gain reputation.
+The game supports multi-player, and it allows players to purchase land & weapons. Players could earn profit like what they can do in the traditional Monopoly game, but more than that--
+you, the great landlord, can fight against other landlords using the weapons you purchased. And, if you win, you get the land for free!
+Also--try our fancy lottery system! In addition to having the chance card system, we also have a randomized lottery system that could give you advantages, or, give you a "real surprise". Are you lucky enough?
+
